@@ -10,6 +10,10 @@ import org.example.eiscuno.model.deck.Deck;
 import org.example.eiscuno.model.game.GameUno;
 import org.example.eiscuno.model.player.Player;
 import org.example.eiscuno.model.table.Table;
+import org.example.eiscuno.view.GameUnoStage;
+import org.example.eiscuno.view.WelcomeUnoStage;
+
+import java.io.IOException;
 
 /**
  * Controller class for the Uno game.
@@ -136,5 +140,11 @@ public class GameUnoController {
     @FXML
     void onHandleUno(ActionEvent event) {
         // Implement logic to handle Uno event here
+    }
+
+    @FXML
+    void onHandleExitButton(ActionEvent event)throws IOException {
+        WelcomeUnoStage.getInstance();
+        GameUnoStage.deleteInstance();
     }
 }
