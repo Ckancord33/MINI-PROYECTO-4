@@ -1,63 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.ImageInput?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Ellipse?>
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.eiscuno.controller.WelcomeUnoController">
-   <center>
-      <AnchorPane prefHeight="900.0" prefWidth="1173.0" BorderPane.alignment="CENTER">
-         <children>
-            <Ellipse fx:id="ellipsePlay" fill="#ff1f1f" layoutX="379.0" layoutY="439.0" radiusX="146.0" radiusY="265.0" rotate="34.6" stroke="BLACK" strokeType="INSIDE" />
-            <Button layoutX="165.0" layoutY="319.0" mnemonicParsing="false" onAction="#onHandlePlayButton" onMouseEntered="#onHandleEnteredPlayButton" onMouseExited="#onHandleExitedPlayButton" prefHeight="241.0" prefWidth="439.0" rotate="-14.6" style="-fx-background-color: TRANSPARENT;" text="UNO">
-               <font>
-                  <Font name="Franklin Gothic Heavy" size="130.0" />
-               </font>
-               <effect>
-                  <DropShadow height="94.28" radius="42.975" spread="0.33" width="79.62" />
-               </effect>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="0.13744075829383887" startX="0.0947867298578199" startY="0.909952606635071">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.949999988079071" green="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Button>
-         </children>
-      </AnchorPane>
-   </center>
-   <left>
-      <VBox alignment="CENTER_RIGHT" prefHeight="900.0" prefWidth="410.0" spacing="50.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="232.0" style="-fx-background-color: Transparent;" text="CREDITOS" textFill="WHITE">
-               <font>
-                  <Font name="Franklin Gothic Heavy" size="36.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#onHandleExitButton" prefHeight="66.0" prefWidth="232.0" style="-fx-background-color: Transparent;" text="SALIR" textFill="WHITE">
-               <font>
-                  <Font name="Franklin Gothic Heavy" size="36.0" />
-               </font>
-            </Button>
-         </children>
-      </VBox>
-   </left>
-</BorderPane>
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.eiscuno.controller.WelcomeUnoController">
+   <children>
+      <ImageView fx:id="bgImageView" fitHeight="900.0" fitWidth="1600.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="playButton" layoutX="379.0" layoutY="485.0" mnemonicParsing="false" onAction="#onHandlePlayButton" onMouseEntered="#onHandleEnteredPlayButton" onMouseExited="#onHandleExitedPlayButton" prefHeight="78.0" prefWidth="820.0" text="sd">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/C:/Users/PC/Desktop/universidad/semestre%203/FPOE/MINI-PROYECTO-4/src/main/resources/org/example/eiscuno/playButton.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <Button layoutX="798.0" layoutY="569.0" mnemonicParsing="false" onAction="#onHandleExitButton" prefHeight="74.0" prefWidth="400.0" text="SALIR">
+         <font>
+            <Font name="Franklin Gothic Heavy" size="36.0" />
+         </font>
+      </Button>
+      <Button layoutX="379.0" layoutY="569.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="407.0" text="CREDITOS">
+         <font>
+            <Font name="Franklin Gothic Heavy" size="36.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="303.0" fitWidth="700.0" layoutX="441.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@title.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
