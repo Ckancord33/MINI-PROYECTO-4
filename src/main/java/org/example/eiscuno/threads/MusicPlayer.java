@@ -11,6 +11,8 @@ public class MusicPlayer extends Thread {
     private FloatControl volumeControl;
     private boolean isPaused;
     private int pausePosition = 0;
+    private boolean running = true;
+    private static MusicPlayer instance;
 
     String t1 = "src/main/resources/org/example/eiscuno/sounds/1-03.-Subwoofer-Lullaby.wav";
     String t2 = "src/main/resources/org/example/eiscuno/sounds/1-05.-Living-Mice.wav";
@@ -18,38 +20,69 @@ public class MusicPlayer extends Thread {
     String t4 = "src/main/resources/org/example/eiscuno/sounds/1-07.-Haggstrom.wav";
     String t5 = "src/main/resources/org/example/eiscuno/sounds/1-08.-Minecraft.wav";
 
-    public MusicPlayer() {
+    public MusicPlayer() {}
+
+    public static MusicPlayer getInstance() {
+        if (instance == null) {
+            instance = new MusicPlayer();
+        }
+        return instance;
     }
-    public void startMusic(String filename) {
+    public static void deleteInstance() {
+        if (instance != null) {
+            instance.stopMusic();  // Detiene la música antes de eliminar la instancia
+            instance = null;
+        }
+    }
+    @Override
+    public void run() {
+        while (running) {
+            synchronized (this) {
+                if (isPaused) {
+                    try {
+                        wait();  // Pausa el hilo
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    public synchronized void startMusic(String filename) {
         if (!isPlaying) {
             isPlaying = true;
             isPaused = false;
             playTrack(filename, 0.0f);
+            if(isInterrupted()) {
+                start();  // Iniciar el hilo
+            }
         }
     }
 
-    public void stopMusic() {
+    public synchronized void stopMusic() {
         if (isPlaying) {
             isPlaying = false;
             isPaused = false;
+            running = false;
             clip.stop();
         }
     }
 
-    public void pauseMusic() {
+    public synchronized void pauseMusic() {
         if (isPlaying && !isPaused) {
-            pausePosition = clip.getFramePosition();  // Guardar la posición actual
-            clip.stop();  // Detener la reproducción
+            pausePosition = clip.getFramePosition();
+            clip.stop();
             isPaused = true;
         }
     }
 
-    public void resumeMusic() {
+    public synchronized void resumeMusic() {
         if (isPaused) {
-            clip.setFramePosition(pausePosition);  // Volver a la posición guardada
-            clip.start();  // Reanudar la reproducción
+            clip.setFramePosition(pausePosition);
+            clip.start();
             isPaused = false;
-            isPlaying = true;
+            notify();  // Reanuda el hilo
         }
     }
     public void setTrack(int track){

@@ -29,7 +29,7 @@ public class WelcomeUnoController {
     @FXML
     private Label message;
 
-    MusicPlayer musicPlayer = new MusicPlayer();
+    MusicPlayer musicPlayer = MusicPlayer.getInstance();
 
 
 
@@ -94,7 +94,6 @@ public class WelcomeUnoController {
         zoomIn.setAutoReverse(true);
         zoomIn.setCycleCount(Timeline.INDEFINITE);
         zoomIn.play();
-
     }
 
 
@@ -108,6 +107,7 @@ public class WelcomeUnoController {
     @FXML
     void onHandleExitButton(ActionEvent event) {
         WelcomeUnoStage.deleteInstance();
+        MusicPlayer.deleteInstance();
     }
 
 
