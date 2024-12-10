@@ -23,6 +23,7 @@ public class WelcomeUnoStage extends Stage {
         Scene scene = new Scene(root);
         setResizable(false);
         getIcons().add(new Image(getClass().getResourceAsStream("/org/example/eiscuno/favicon3.png")));
+        scene.getStylesheets().add(getClass().getResource("/org/example/eiscuno/styles/welcomeStyles.css").toExternalForm());
         setTitle("UNO!");
         setScene(scene);
         show();
