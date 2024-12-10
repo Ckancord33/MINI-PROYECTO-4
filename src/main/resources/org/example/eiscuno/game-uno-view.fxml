@@ -29,7 +29,7 @@
    <center>
       <Pane prefHeight="627.0" prefWidth="1097.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="tableImageView" fitHeight="149.0" fitWidth="100.0" layoutX="50.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="tableImageView" fitHeight="298.0" fitWidth="200.0" layoutX="500.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
    </center>
@@ -41,7 +41,7 @@
                   <Font name="Berlin Sans FB Bold" size="18.0" />
                </font>
             </Label>
-            <GridPane fx:id="gridPaneCardsMachine" prefHeight="284.0" prefWidth="872.0">
+            <GridPane fx:id="gridPaneCardsMachine" prefHeight="262.0" prefWidth="892.0">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

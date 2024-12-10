@@ -90,13 +90,13 @@ public class GameUno implements IGameUno {
      * @return An array of cards visible to the human player.
      */
     @Override
-    public Card[] getCurrentVisibleCardsHumanPlayer(int posInitCardToShow) {
-        int totalCards = this.humanPlayer.getCardsPlayer().size();
+    public Card[] getCurrentVisibleCards(int posInitCardToShow, Player player) {
+        int totalCards = player.getCardsPlayer().size();
         int numVisibleCards = Math.min(4, totalCards - posInitCardToShow);
         Card[] cards = new Card[numVisibleCards];
 
         for (int i = 0; i < numVisibleCards; i++) {
-            cards[i] = this.humanPlayer.getCard(posInitCardToShow + i);
+            cards[i] = player.getCard(posInitCardToShow + i);
         }
 
         return cards;

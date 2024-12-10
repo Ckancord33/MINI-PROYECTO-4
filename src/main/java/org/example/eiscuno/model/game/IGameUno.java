@@ -41,7 +41,7 @@ public interface IGameUno {
      * @param posInitCardToShow the starting position of the cards to be shown
      * @return an array of cards that are currently visible to the human player
      */
-    Card[] getCurrentVisibleCardsHumanPlayer(int posInitCardToShow);
+    Card[] getCurrentVisibleCards(int posInitCardToShow, Player player);
 
     /**
      * Checks if the game is over.

@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+.button:hover{
+    -fx-cursor: hand;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-effect: dropshadow(gaussian, rgba(255, 241, 216, 0.5), 15, 0.7, 0, 0);
+}
+
+.button{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.buttonPlay{
+    -fx-background-image: url('../playButton.png');
+    -fx-cursor: pointer;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-padding: 0;
+    -fx-background-size: 820,78;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+.button2{
+    -fx-background-image: url('../creditsButton.png');
+    -fx-cursor: pointer;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-padding: 0;
+    -fx-background-size: 408,74;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.button3{
+    -fx-background-image: url('../exitButton.png');
+    -fx-cursor: pointer;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-padding: 0;
+    -fx-background-size: 408,74;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+#subtitle{
+    -fx-background-image: url('../subtitle.png');
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+#title{
+    -fx-background-image: url('../title.png');
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+#message{
+    -fx-font-size: 30;
+    -fx-font-family: 'VT323', monospace;
+    -fx-text-fill: yellow;
+}

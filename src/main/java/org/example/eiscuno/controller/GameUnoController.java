@@ -1,10 +1,12 @@
 package org.example.eiscuno.controller;
 
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.util.Duration;
 import org.example.eiscuno.model.card.Card;
 import org.example.eiscuno.model.deck.Deck;
 import org.example.eiscuno.model.game.GameUno;
@@ -12,6 +14,7 @@ import org.example.eiscuno.model.machine.ThreadPlayMachine;
 import org.example.eiscuno.model.machine.ThreadSingUNOMachine;
 import org.example.eiscuno.model.player.Player;
 import org.example.eiscuno.model.table.Table;
+import org.example.eiscuno.model.unoenum.EISCUnoEnum;
 import org.example.eiscuno.view.GameUnoStage;
 import org.example.eiscuno.view.WelcomeUnoStage;
 
@@ -37,7 +40,6 @@ public class GameUnoController {
     private Table table;
     private GameUno gameUno;
     private int posInitCardToShow;
-
     private ThreadSingUNOMachine threadSingUNOMachine;
     private ThreadPlayMachine threadPlayMachine;
 
@@ -45,16 +47,17 @@ public class GameUnoController {
      * Initializes the controller.
      */
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException{
         initVariables();
         this.gameUno.startGame();
         printCardsHumanPlayer();
+        printCardsMachinePlayer();
 
         threadSingUNOMachine = new ThreadSingUNOMachine(this.humanPlayer.getCardsPlayer());
         Thread t = new Thread(threadSingUNOMachine, "ThreadSingUNO");
         t.start();
 
-        threadPlayMachine = new ThreadPlayMachine(this.table, this.machinePlayer, this.tableImageView);
+        threadPlayMachine = new ThreadPlayMachine(this.table, this.machinePlayer, this.tableImageView, this);
         threadPlayMachine.start();
     }
 
@@ -75,7 +78,7 @@ public class GameUnoController {
      */
     private void printCardsHumanPlayer() {
         this.gridPaneCardsPlayer.getChildren().clear();
-        Card[] currentVisibleCardsHumanPlayer = this.gameUno.getCurrentVisibleCardsHumanPlayer(this.posInitCardToShow);
+        Card[] currentVisibleCardsHumanPlayer = this.gameUno.getCurrentVisibleCards(this.posInitCardToShow, humanPlayer);
 
         for (int i = 0; i < currentVisibleCardsHumanPlayer.length; i++) {
             Card card = currentVisibleCardsHumanPlayer[i];
@@ -88,9 +91,43 @@ public class GameUnoController {
                 humanPlayer.removeCard(findPosCardsHumanPlayer(card));
                 threadPlayMachine.setHasPlayerPlayed(true);
                 printCardsHumanPlayer();
+                disableHumanCards();
+                PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                pause.setOnFinished(e -> enableHumanCards());
+                pause.play();
             });
 
             this.gridPaneCardsPlayer.add(cardImageView, i, 0);
+        }
+    }
+
+    public void disableHumanCards(){
+        for (int i = 0; i < this.humanPlayer.getCardsPlayer().size(); i++) {
+            ImageView cardImageView = (ImageView) this.gridPaneCardsPlayer.getChildren().get(i);
+            cardImageView.setDisable(true);
+        }
+    }
+
+    public void enableHumanCards(){
+        for (int i = 0; i < this.humanPlayer.getCardsPlayer().size(); i++) {
+            ImageView cardImageView = (ImageView) this.gridPaneCardsPlayer.getChildren().get(i);
+            cardImageView.setDisable(false);
+        }
+    }
+
+    public void printCardsMachinePlayer() {
+        this.gridPaneCardsMachine.getChildren().clear();
+        Card[] currentVisibleCardsMachinePlayer = this.gameUno.getCurrentVisibleCards(0, machinePlayer);
+
+        for (int i = 0; i < currentVisibleCardsMachinePlayer.length; i++) {
+            Card card = currentVisibleCardsMachinePlayer[i];
+            EISCUnoEnum cardUno = EISCUnoEnum.CARD_UNO;
+            ImageView cardImageView = new ImageView(String.valueOf(getClass().getResource(cardUno.getFilePath())));
+            cardImageView.setY(16);
+            cardImageView.setFitHeight(90*2);
+            cardImageView.setFitWidth(70*2);
+
+            this.gridPaneCardsMachine.add(cardImageView, i, 0);
         }
     }
 
@@ -100,7 +137,7 @@ public class GameUnoController {
      * @param card the card to find
      * @return the position of the card, or -1 if not found
      */
-    private Integer findPosCardsHumanPlayer(Card card) {
+    public Integer findPosCardsHumanPlayer(Card card) {
         for (int i = 0; i < this.humanPlayer.getCardsPlayer().size(); i++) {
             if (this.humanPlayer.getCardsPlayer().get(i).equals(card)) {
                 return i;
