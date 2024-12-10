@@ -79,6 +79,7 @@ public class MusicPlayer extends Thread {
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
 
             volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 
