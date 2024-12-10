@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 /**
  * Represents a card in the Uno game.
  */
-public class Card {
+public class Card implements ICard {
     private String url;
     private String value;
     private String color;
@@ -32,7 +32,8 @@ public class Card {
      *
      * @return the configured ImageView of the card
      */
-    private ImageView createCardImageView() {
+    @Override
+    public ImageView createCardImageView() {
         ImageView card = new ImageView(this.image);
         card.setY(16);
         card.setFitHeight(90*2);
@@ -45,6 +46,7 @@ public class Card {
      *
      * @return the ImageView of the card
      */
+    @Override
     public ImageView getCard() {
         return cardImageView;
     }
@@ -54,14 +56,22 @@ public class Card {
      *
      * @return the Image of the card
      */
+    @Override
     public Image getImage() {
         return image;
     }
 
+    @Override
     public String getValue() {
         return value;
     }
 
+    @Override
+    public boolean isPlayable(ICard card) {
+        return false;
+    }
+
+    @Override
     public String getColor() {
         return color;
     }
