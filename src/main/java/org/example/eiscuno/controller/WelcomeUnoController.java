@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import org.example.eiscuno.threads.MusicPlayer;
 import org.example.eiscuno.view.GameUnoStage;
 import org.example.eiscuno.view.WelcomeUnoStage;
 
@@ -27,6 +28,8 @@ public class WelcomeUnoController {
     private ImageView title;
     @FXML
     private Label message;
+
+    MusicPlayer musicPlayer = new MusicPlayer();
 
 
 
@@ -52,6 +55,7 @@ public class WelcomeUnoController {
     };
 
     public void initialize(){
+        musicPlayer.startMusic("src/main/resources/org/example/eiscuno/sounds/1-08.-Minecraft.wav");
 
         imageChange(bgImageView);
         messageChange(message);
@@ -169,6 +173,23 @@ public class WelcomeUnoController {
 
         // Cambiar al siguiente índice
         indiceImagen = (indiceImagen + 1) % imagenes.length;
+    }
+
+    public void handleMusicCange(){
+        musicPlayer.changeTrack(musicPlayer.getTrack());
+        musicPlayer.setTrack((musicPlayer.getTrack()+1)%4);
+    }
+    public void increaseVolume(){
+        musicPlayer.increaseVolume();
+    }
+    public void decreaseVolume(){
+        musicPlayer.decreaseVolume();
+    }
+    public void playMusic(){
+       musicPlayer.resumeMusic();
+    }
+    public void pauseMusic(){
+        musicPlayer.pauseMusic();
     }
 
 }

@@ -36,5 +36,10 @@
             <Font size="33.0" />
          </font>
       </Label>
+      <Button fx:id="muicChange" layoutX="55.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleMusicCange" text="cambiar" />
+      <Button layoutX="1478.0" layoutY="61.0" mnemonicParsing="false" onAction="#increaseVolume" text="subir" />
+      <Button layoutX="1478.0" layoutY="154.0" mnemonicParsing="false" onAction="#decreaseVolume" text="bajar" />
+      <Button layoutX="1464.0" layoutY="93.0" mnemonicParsing="false" onAction="#playMusic" text="Play music" />
+      <Button layoutX="1460.0" layoutY="121.0" mnemonicParsing="false" onAction="#pauseMusic" text="Pause music" />
    </children>
 </AnchorPane>
