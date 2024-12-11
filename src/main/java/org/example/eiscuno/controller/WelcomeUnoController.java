@@ -28,6 +28,27 @@ public class WelcomeUnoController {
     private ImageView title;
     @FXML
     private Label message;
+    @FXML
+    private Label optionsLabel;
+    @FXML
+    private Label optionsLabel2;
+    @FXML
+    private Button musicChange;
+    @FXML
+    private Button increase;
+    @FXML
+    private Button playMusic;
+    @FXML
+    private Button pauseMusic;
+    @FXML
+    private Button decrease;
+    @FXML
+    private ImageView optionsImageView;
+    @FXML
+    private Label musicLabel;
+
+    int controlSonido = 0;
+
 
     MusicPlayer musicPlayer = MusicPlayer.getInstance();
 
@@ -39,6 +60,7 @@ public class WelcomeUnoController {
     Image bg2 = new Image(getClass().getResource("/org/example/eiscuno/images/bg2.jpg").toExternalForm());
     Image bg3 = new Image(getClass().getResource("/org/example/eiscuno/images/bg3.jpg").toExternalForm());
     Image bg4 = new Image(getClass().getResource("/org/example/eiscuno/images/bg4.jpg").toExternalForm());
+    Image bgOpt = new Image(getClass().getResource("/org/example/eiscuno/images/bgOpt.jpg").toExternalForm());
     private final String[] imagenes = {
             "",
             "",
@@ -55,6 +77,9 @@ public class WelcomeUnoController {
     };
 
     public void initialize(){
+        handleMusicRev();
+        optionsImageView.setImage(bgOpt);
+
         musicPlayer.startMusic("src/main/resources/org/example/eiscuno/sounds/1-08.-Minecraft.wav");
 
         imageChange(bgImageView);
@@ -110,6 +135,61 @@ public class WelcomeUnoController {
         MusicPlayer.deleteInstance();
     }
 
+    public void handleMusic(){
+        optionsLabel.setVisible(true);
+
+        optionsLabel2.setVisible(true);
+
+        musicChange.setVisible(true);
+        musicChange.setDisable(false);
+
+        increase.setVisible(true);
+        increase.setDisable(false);
+
+        playMusic.setVisible(true);
+        playMusic.setDisable(false);
+
+        pauseMusic.setVisible(true);
+        pauseMusic.setDisable(false);
+
+        decrease.setVisible(true);
+        decrease.setDisable(false);
+
+        optionsImageView.setVisible(true);
+        optionsImageView.setMouseTransparent(false);
+
+        musicLabel.setVisible(true);
+    }
+
+    public void handleMusicRev(){
+        if(controlSonido > 0) {
+            clickSound();
+        }
+        controlSonido++;
+        optionsLabel.setVisible(false);
+
+        optionsLabel2.setVisible(false);
+
+        musicChange.setVisible(false);
+        musicChange.setDisable(true);
+
+        increase.setVisible(false);
+        increase.setDisable(true);
+
+        playMusic.setVisible(false);
+        playMusic.setDisable(true);
+
+        pauseMusic.setVisible(false);
+        pauseMusic.setDisable(true);
+
+        decrease.setVisible(false);
+        decrease.setDisable(true);
+
+        optionsImageView.setVisible(false);
+        optionsImageView.setMouseTransparent(true);
+
+        musicLabel.setVisible(false);
+    }
 
     public void playSound(String nombreSonido, float volumen){
         try {
