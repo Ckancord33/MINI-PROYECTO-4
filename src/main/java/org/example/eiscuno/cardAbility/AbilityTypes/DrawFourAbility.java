@@ -14,6 +14,8 @@ public class DrawFourAbility extends CardAbility {
     public void execute() {
         gameUno.eatCard(gameUno.getVictimPlayer(), 4);
         gameUno.setColorToCardPlayed("RED");
+        gameUnoController.printCardsMachinePlayer();
+        gameUnoController.printCardsMachinePlayer();
         gameUno.changeTurn();
     }
 }

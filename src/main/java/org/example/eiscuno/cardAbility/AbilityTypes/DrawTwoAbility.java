@@ -15,6 +15,8 @@ public class DrawTwoAbility extends CardAbility {
     @Override
     public void execute() {
         gameUno.eatCard(gameUno.getVictimPlayer(), 2);
+        gameUnoController.printCardsMachinePlayer();
+        gameUnoController.printCardsMachinePlayer();
         gameUno.changeTurn();
     }
 
