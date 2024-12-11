@@ -1,6 +1,8 @@
 package org.example.eiscuno.model.deck;
 
+import org.example.eiscuno.controller.GameUnoController;
 import org.example.eiscuno.model.card.cardFactory.CardFactory;
+import org.example.eiscuno.model.game.GameUno;
 import org.example.eiscuno.model.unoenum.EISCUnoEnum;
 import org.example.eiscuno.model.card.Card;
 
@@ -18,13 +20,12 @@ public class Deck {
      */
     public Deck() {
         deckOfCards = new Stack<>();
-        initializeDeck();
     }
 
     /**
      * Initializes the deck with cards based on the EISCUnoEnum values.
      */
-    private void initializeDeck() {
+    public void initializeDeck(GameUno gameUno, GameUnoController gameUnoController) {
         for (EISCUnoEnum cardEnum : EISCUnoEnum.values()) {
             if (cardEnum.name().startsWith("GREEN_") ||
                     cardEnum.name().startsWith("YELLOW_") ||
@@ -35,7 +36,7 @@ public class Deck {
                     cardEnum.name().startsWith("TWO_WILD_DRAW_") ||
                     cardEnum.name().equals("FOUR_WILD_DRAW") ||
                     cardEnum.name().equals("WILD")) {
-                Card card = CardFactory.createCard(cardEnum.getFilePath(), getCardValue(cardEnum.name()), getCardColor(cardEnum.name()));
+                Card card = CardFactory.createCard(cardEnum.getFilePath(), getCardValue(cardEnum.name()), getCardColor(cardEnum.name()), gameUno, gameUnoController);
                 deckOfCards.push(card);
             }
         }
