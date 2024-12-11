@@ -1,5 +1,6 @@
 package org.example.eiscuno.model.game;
 
+import org.example.eiscuno.cardAbility.AbilityInvoker;
 import org.example.eiscuno.model.card.Card;
 import org.example.eiscuno.model.deck.Deck;
 import org.example.eiscuno.model.player.Player;
@@ -13,9 +14,13 @@ public class GameUno implements IGameUno {
 
     private Player humanPlayer;
     private Player machinePlayer;
+    private Player victimPlayer;
+    private Player actualPlayer;
     private Deck deck;
     private Table table;
     private boolean isMachineTurn;
+    private AbilityInvoker abilityInvoker;
+    private Card cardPlayed;
 
     /**
      * Constructs a new GameUno instance.
@@ -31,6 +36,7 @@ public class GameUno implements IGameUno {
         this.deck = deck;
         this.table = table;
         this.isMachineTurn = false;
+        this.abilityInvoker = new AbilityInvoker();
     }
 
     /**
@@ -75,8 +81,35 @@ public class GameUno implements IGameUno {
         }catch (IndexOutOfBoundsException e){
             System.out.println(e.getMessage());
         }
+        cardPlayed = card;
+        updateActualPlayer();
+        actualPlayer.removeCard(findPosCardsHumanPlayer(cardPlayed));
+        abilityInvoker.setAbility(cardPlayed.getAbility());
+        abilityInvoker.execute();
+        addCardOnTheTable(cardPlayed);
+        return cardPlayed;
+
+    }
+
+    public void setColorToCardPlayed(String color){
+        cardPlayed.setColor(color);
+    }
+
+    public void changeTurn(){
+        isMachineTurn = !isMachineTurn;
+    }
+
+    public Integer findPosCardsHumanPlayer(Card card) {
+        for (int i = 0; i < this.actualPlayer.getCardsPlayer().size(); i++) {
+            if (this.actualPlayer.getCardsPlayer().get(i).equals(card)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void addCardOnTheTable(Card card){
         this.table.addCardOnTheTable(card);
-        return card;
     }
 
     /**
@@ -121,4 +154,34 @@ public class GameUno implements IGameUno {
     public Boolean isGameOver() {
         return null;
     }
+
+    public Player getVictimPlayer(){
+        if(isMachineTurn){
+            this.victimPlayer = humanPlayer;
+        }else{
+            this.victimPlayer = machinePlayer;
+        }
+        return victimPlayer;
+    }
+
+    public boolean getIsMachineTurn(){
+        return isMachineTurn;
+    }
+
+    public void setIsMachineTurn(boolean isMachineTurn){
+        this.isMachineTurn = isMachineTurn;
+    }
+
+    public void updateActualPlayer(){
+        if(isMachineTurn){
+            this.actualPlayer = machinePlayer;
+        }else{
+            this.actualPlayer = humanPlayer;
+        }
+    }
+
+    public Player getActualPlayer(){
+        return actualPlayer;
+    }
+
 }

@@ -2,6 +2,7 @@ package org.example.eiscuno.model.card;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.example.eiscuno.cardAbility.ICardAbility;
 
 public interface ICard {
     ImageView createCardImageView();
@@ -10,6 +11,8 @@ public interface ICard {
     String getColor();
     String getValue();
     boolean isPlayable(ICard card);
+    ICardAbility getAbility();
+    void setColor(String color);
 
 
 

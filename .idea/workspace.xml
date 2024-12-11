@@ -4,14 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ee8ff40-bbdd-4aec-a3d2-cf5cc45130ec" name="Changes" comment="Implementacion del patron Factory Method para la creacion de cartas. Esta la implementamos para saber si la carta es valida segun la carta actual a travez de la funcion isPlayable">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/DrawTwoAbility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/ICardAbility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="1ee8ff40-bbdd-4aec-a3d2-cf5cc45130ec" name="Changes" comment="Skeleton de la implementacion de los comandos">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityInvoker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/DrawFourAbility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/DrawTwoAbility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/NumberCardAbility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/SkipAbility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/WildAbility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/CardAbility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/decreaseButton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/images/bgOpt.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/images/bgOpt.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/increaseButton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/musicChangeButton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/musicOptButton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/pauseButton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/playMusicButton.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/DrawTwoAbility.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/ICardAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/ICardAbility.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/controller/GameUnoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/controller/GameUnoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/controller/WelcomeUnoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/controller/WelcomeUnoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/ICard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/ICard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardFactory/CardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardFactory/CardFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/NumberCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/NumberCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/SpecialCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/SpecialCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/SpecialColorCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/SpecialColorCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/deck/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/deck/Deck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/game/GameUno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/game/GameUno.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/game/IGameUno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/game/IGameUno.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/machine/ThreadPlayMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/machine/ThreadPlayMachine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/styles/welcomeStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/styles/welcomeStyles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/welcome-uno-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/welcome-uno-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +48,8 @@
         <option value="JavaFXApplication" />
         <option value="Enum" />
         <option value="CSS File" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -62,28 +86,28 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;NDC&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC/Desktop/universidad/semestre 3/FPOE/MINI-PROYECTO-4&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.HelloApplication.executor": "Run",
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "Merging NDC",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/PC/Desktop/universidad/semestre 3/FPOE/MINI-PROYECTO-4",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\fsvc1\Coding\eisc-uno\src\main\resources\org\example\eiscuno" />
@@ -170,10 +194,33 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Ahora se pueden ver facilmente las cartas de la maquina (Ahora se ve la parte de atras de la carta para la maquina pero tambien se pueden ver las cartas de la maquina)" />
     <MESSAGE value="Merge del codigo de miguel con el mio" />
     <MESSAGE value="Implementacion del patron Factory Method para la creacion de cartas. Esta la implementamos para saber si la carta es valida segun la carta actual a travez de la funcion isPlayable" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementacion del patron Factory Method para la creacion de cartas. Esta la implementamos para saber si la carta es valida segun la carta actual a travez de la funcion isPlayable" />
+    <MESSAGE value="Skeleton de la implementacion de los comandos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Skeleton de la implementacion de los comandos" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/machine/ThreadPlayMachine.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -61,7 +61,7 @@ public class GameUnoController {
         Thread t = new Thread(threadSingUNOMachine, "ThreadSingUNO");
         t.start();
 
-        threadPlayMachine = new ThreadPlayMachine(this.table, this.machinePlayer, this.tableImageView, this);
+        threadPlayMachine = new ThreadPlayMachine(this.table, this.machinePlayer, this.tableImageView, this, this.gameUno);
         threadPlayMachine.start();
     }
 
@@ -71,9 +71,10 @@ public class GameUnoController {
     private void initVariables() {
         this.humanPlayer = new Player("HUMAN_PLAYER");
         this.machinePlayer = new Player("MACHINE_PLAYER");
-        this.deck = new Deck();
         this.table = new Table();
+        this.deck = new Deck();
         this.gameUno = new GameUno(this.humanPlayer, this.machinePlayer, this.deck, this.table);
+        deck.initializeDeck(gameUno, this);
         this.posInitCardToShow = 0;
     }
 
@@ -95,37 +96,15 @@ public class GameUnoController {
     }
 
     public void onHandlePlayCard(Card card){
+        if(gameUno.getIsMachineTurn()){
+            return;
+        }
         card = gameUno.playCard(card);
         if(card != null) {
             tableImageView.setImage(card.getImage());
-            humanPlayer.removeCard(findPosCardsHumanPlayer(card));
-            threadPlayMachine.setHasPlayerPlayed(true);
             printCardsHumanPlayer();
-            pauseForMachinePlayer();
         }
-    }
 
-    public void pauseForMachinePlayer(){
-        disableHumanCards();
-        PauseTransition pause = new PauseTransition(Duration.seconds(1));
-        pause.setOnFinished(e -> enableHumanCards());
-        pause.play();
-    }
-
-    public void disableHumanCards(){
-        for (int i = 0; i < this.gridPaneCardsPlayer.getChildren().size(); i++) {
-            ImageView cardImageView = (ImageView) this.gridPaneCardsPlayer.getChildren().get(i);
-            cardImageView.setDisable(true);
-        }
-        deckButton.setDisable(true);
-    }
-
-    public void enableHumanCards(){
-        for (int i = 0; i < this.gridPaneCardsPlayer.getChildren().size(); i++) {
-            ImageView cardImageView = (ImageView) this.gridPaneCardsPlayer.getChildren().get(i);
-            cardImageView.setDisable(false);
-        }
-        deckButton.setDisable(false);
     }
 
     public void printCardsMachinePlayer() {
@@ -142,21 +121,6 @@ public class GameUnoController {
 
             this.gridPaneCardsMachine.add(cardImageView, i, 0);
         }
-    }
-
-    /**
-     * Finds the position of a specific card in the human player's hand.
-     *
-     * @param card the card to find
-     * @return the position of the card, or -1 if not found
-     */
-    public Integer findPosCardsHumanPlayer(Card card) {
-        for (int i = 0; i < this.humanPlayer.getCardsPlayer().size(); i++) {
-            if (this.humanPlayer.getCardsPlayer().get(i).equals(card)) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     /**
@@ -192,11 +156,12 @@ public class GameUnoController {
      */
     @FXML
     void onHandleTakeCard(ActionEvent event) {
+        if(gameUno.getIsMachineTurn()){
+            return;
+        }
         gameUno.eatCard(humanPlayer, 1);
         printCardsHumanPlayer();
-        threadPlayMachine.setHasPlayerPlayed(true);
-        pauseForMachinePlayer();
-
+        gameUno.setIsMachineTurn(true);
     }
 
     /**
