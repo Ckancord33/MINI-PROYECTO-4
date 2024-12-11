@@ -15,6 +15,7 @@ public class GameUno implements IGameUno {
     private Player machinePlayer;
     private Deck deck;
     private Table table;
+    private boolean isMachineTurn;
 
     /**
      * Constructs a new GameUno instance.
@@ -29,6 +30,7 @@ public class GameUno implements IGameUno {
         this.machinePlayer = machinePlayer;
         this.deck = deck;
         this.table = table;
+        this.isMachineTurn = false;
     }
 
     /**
@@ -65,8 +67,16 @@ public class GameUno implements IGameUno {
      * @param card The card to be placed on the table.
      */
     @Override
-    public void playCard(Card card) {
+    public Card playCard(Card card) {
+        try {
+            if(!card.isPlayable(this.table.getCurrentCardOnTheTable())){
+                return null;
+            }
+        }catch (IndexOutOfBoundsException e){
+            System.out.println(e.getMessage());
+        }
         this.table.addCardOnTheTable(card);
+        return card;
     }
 
     /**

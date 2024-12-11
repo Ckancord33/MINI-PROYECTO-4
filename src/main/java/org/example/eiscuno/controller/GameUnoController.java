@@ -95,19 +95,14 @@ public class GameUnoController {
     }
 
     public void onHandlePlayCard(Card card){
-        try {
-            if(!card.isPlayable(this.table.getCurrentCardOnTheTable())){
-                return;
-            }
-        }catch (IndexOutOfBoundsException e){
-            System.out.println(e.getMessage());
+        card = gameUno.playCard(card);
+        if(card != null) {
+            tableImageView.setImage(card.getImage());
+            humanPlayer.removeCard(findPosCardsHumanPlayer(card));
+            threadPlayMachine.setHasPlayerPlayed(true);
+            printCardsHumanPlayer();
+            pauseForMachinePlayer();
         }
-        gameUno.playCard(card);
-        tableImageView.setImage(card.getImage());
-        humanPlayer.removeCard(findPosCardsHumanPlayer(card));
-        threadPlayMachine.setHasPlayerPlayed(true);
-        printCardsHumanPlayer();
-        pauseForMachinePlayer();
     }
 
     public void pauseForMachinePlayer(){

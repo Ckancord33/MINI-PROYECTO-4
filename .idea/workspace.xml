@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ee8ff40-bbdd-4aec-a3d2-cf5cc45130ec" name="Changes" comment="Merge del codigo de miguel con el mio">
+    <list default="true" id="1ee8ff40-bbdd-4aec-a3d2-cf5cc45130ec" name="Changes" comment="Implementacion del patron Factory Method para la creacion de cartas. Esta la implementamos para saber si la carta es valida segun la carta actual a travez de la funcion isPlayable">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/DrawTwoAbility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/ICardAbility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/controller/GameUnoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/controller/GameUnoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/game/GameUno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/game/GameUno.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/game/IGameUno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/game/IGameUno.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +24,8 @@
         <option value="JavaFXApplication" />
         <option value="Enum" />
         <option value="CSS File" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -167,6 +173,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Ahora se pueden ver facilmente las cartas de la maquina (Ahora se ve la parte de atras de la carta para la maquina pero tambien se pueden ver las cartas de la maquina)" />
     <MESSAGE value="Merge del codigo de miguel con el mio" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge del codigo de miguel con el mio" />
+    <MESSAGE value="Implementacion del patron Factory Method para la creacion de cartas. Esta la implementamos para saber si la carta es valida segun la carta actual a travez de la funcion isPlayable" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementacion del patron Factory Method para la creacion de cartas. Esta la implementamos para saber si la carta es valida segun la carta actual a travez de la funcion isPlayable" />
   </component>
 </project>
