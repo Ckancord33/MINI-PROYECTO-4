@@ -13,6 +13,12 @@ public class Card {
     private Image image;
     private ImageView cardImageView;
 
+    private static boolean testMode = false;
+
+    public static void setTestMode(boolean testMode) {
+        Card.testMode = testMode;
+    }
+
     /**
      * Constructs a Card with the specified image URL and name.
      *
@@ -20,11 +26,13 @@ public class Card {
      * @param value of the card
      */
     public Card(String url, String value, String color) {
-        this.url = url;
-        this.value = value;
-        this.color = color;
-        this.image = new Image(String.valueOf(getClass().getResource(url)));
-        this.cardImageView = createCardImageView();
+        if (!testMode) {
+            this.url = url;
+            this.value = value;
+            this.color = color;
+            this.image = new Image(String.valueOf(getClass().getResource(url)));
+            this.cardImageView = createCardImageView();
+        }
     }
 
     /**
@@ -33,6 +41,7 @@ public class Card {
      * @return the configured ImageView of the card
      */
     private ImageView createCardImageView() {
+
         ImageView card = new ImageView(this.image);
         card.setY(16);
         card.setFitHeight(90*2);
