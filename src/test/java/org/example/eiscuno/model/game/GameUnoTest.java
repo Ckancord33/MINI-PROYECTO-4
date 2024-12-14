@@ -32,4 +32,18 @@ class GameUnoTest {
         int machineInitialCards = machinePlayer.getCardsPlayer().size();
         Assertions.assertEquals(playerInitialCards, machineInitialCards);
     }
+
+    @Test
+    public void testGameOverReturnsNullAtStart() {
+
+        Player humanPlayer = new Player("HUMAN_PLAYER");
+        Player machinePlayer = new Player("MACHINE_PLAYER");
+        Deck deck = new Deck();
+        Table table = new Table();
+        GameUno myGameUno = new GameUno(humanPlayer, machinePlayer, deck, table);
+
+        Assertions.assertNull(myGameUno.isGameOver());
+    }
+
+
 }
