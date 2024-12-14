@@ -45,5 +45,24 @@ class GameUnoTest {
         Assertions.assertNull(myGameUno.isGameOver());
     }
 
+    @Test
+    public void testHaveSungOne() {
+
+        Player humanPlayer = new Player("HUMAN_PLAYER");
+        Player machinePlayer = new Player("MACHINE_PLAYER");
+        Deck deck = new Deck();
+        Table table = new Table();
+        GameUno myGameUno = new GameUno(humanPlayer, machinePlayer, deck, table);
+
+        // Obtiene la cantidad inicial de cartas de la máquina
+        int initialMachineCards = machinePlayer.getCardsPlayer().size();
+
+        // Simula que el jugador humano canta "Uno"
+        myGameUno.haveSungOne("HUMAN_PLAYER");
+
+        // Verifica que las cartas de la máquina hayan incrementado en 1
+        Assertions.assertTrue(machinePlayer.getCardsPlayer().size() == initialMachineCards+1);
+    }
+
 
 }
