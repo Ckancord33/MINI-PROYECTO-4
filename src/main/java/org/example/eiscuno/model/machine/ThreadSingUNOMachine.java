@@ -23,6 +23,7 @@ public class ThreadSingUNOMachine implements Runnable{
         }
     }
 
+
     private void hasOneCardTheHumanPlayer(){
         if(cardsPlayer.size() == 1){
             System.out.println("UNO");

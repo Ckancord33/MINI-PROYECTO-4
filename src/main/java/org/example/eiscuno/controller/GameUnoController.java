@@ -1,13 +1,16 @@
 package org.example.eiscuno.controller;
 
-import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.util.Duration;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import org.example.eiscuno.model.card.Card;
 import org.example.eiscuno.model.deck.Deck;
 import org.example.eiscuno.model.game.GameUno;
@@ -27,16 +30,44 @@ import java.io.IOException;
 public class GameUnoController {
 
     @FXML
+    private Button blueButton;
+
+    @FXML
+    private Button deckButton;
+
+    @FXML
+    private Pane gamePane;
+
+    @FXML
+    private Button greenButton;
+
+    @FXML
     private GridPane gridPaneCardsMachine;
 
     @FXML
     private GridPane gridPaneCardsPlayer;
 
     @FXML
+    private Button redButton;
+
+    @FXML
     private ImageView tableImageView;
 
     @FXML
-    private Button deckButton;
+    private VBox vBoxColorButtons;
+
+    @FXML
+    private Button yelowButton;
+
+    @FXML
+    private Rectangle rectangleColor;
+
+    @FXML
+    private Label winLabel;
+
+    @FXML
+    private Label turnLabel;
+
 
     private Player humanPlayer;
     private Player machinePlayer;
@@ -56,6 +87,8 @@ public class GameUnoController {
         this.gameUno.startGame();
         printCardsHumanPlayer();
         printCardsMachinePlayer();
+        startColorVBoxButtons();
+        updateTurnLabel();
 
         threadSingUNOMachine = new ThreadSingUNOMachine(this.humanPlayer.getCardsPlayer());
         Thread t = new Thread(threadSingUNOMachine, "ThreadSingUNO");
@@ -63,6 +96,10 @@ public class GameUnoController {
 
         threadPlayMachine = new ThreadPlayMachine(this.table, this.machinePlayer, this.tableImageView, this, this.gameUno);
         threadPlayMachine.start();
+
+        Card card = deck.takeCard();
+        table.addCardOnTheTable(card);
+        tableImageView.setImage(card.getImage());
     }
 
     /**
@@ -76,12 +113,13 @@ public class GameUnoController {
         this.gameUno = new GameUno(this.humanPlayer, this.machinePlayer, this.deck, this.table);
         deck.initializeDeck(gameUno, this);
         this.posInitCardToShow = 0;
+        this.winLabel.setVisible(false);
     }
 
     /**
      * Prints the human player's cards on the grid pane.
      */
-    private void printCardsHumanPlayer() {
+    public void printCardsHumanPlayer() {
         this.gridPaneCardsPlayer.getChildren().clear();
         Card[] currentVisibleCardsHumanPlayer = this.gameUno.getCurrentVisibleCards(this.posInitCardToShow, humanPlayer);
 
@@ -95,20 +133,43 @@ public class GameUnoController {
         }
     }
 
+    public void setVisibleRectangleColor(String color){
+        this.rectangleColor.setVisible(true);
+        if(color.equals("RED")){
+            this.rectangleColor.setFill(javafx.scene.paint.Color.RED);
+        } else if(color.equals("BLUE")){
+            this.rectangleColor.setFill(javafx.scene.paint.Color.BLUE);
+        } else if(color.equals("GREEN")){
+            this.rectangleColor.setFill(javafx.scene.paint.Color.GREEN);
+        } else if(color.equals("YELLOW")){
+            this.rectangleColor.setFill(javafx.scene.paint.Color.YELLOW);
+        }
+    }
+
     public void onHandlePlayCard(Card card){
-        if(gameUno.getIsMachineTurn()){
+        handleGameOver();
+        if(gameUno.getIsMachineTurn() || gameUno.checkIsGameOver()){
             return;
         }
         card = gameUno.playCard(card);
         if(card != null) {
             tableImageView.setImage(card.getImage());
             printCardsHumanPlayer();
+            setRectangleColorVisibility(card);
+            handleGameOver();
+            updateTurnLabel();
         }
+    }
 
+    public void setRectangleColorVisibility(Card card){
+        if(!(card.getValue().equals("WILD") || card.getValue().equals("FOUR_WILD_DRAW"))){
+            this.rectangleColor.setVisible(false);
+        }
     }
 
     public void printCardsMachinePlayer() {
         this.gridPaneCardsMachine.getChildren().clear();
+
         Card[] currentVisibleCardsMachinePlayer = this.gameUno.getCurrentVisibleCards(0, machinePlayer);
 
         for (int i = 0; i < currentVisibleCardsMachinePlayer.length; i++) {
@@ -123,6 +184,32 @@ public class GameUnoController {
         }
     }
 
+
+    void startColorVBoxButtons(){
+        redButton.setOnAction(event -> chooseColor("RED"));
+        blueButton.setOnAction(event -> chooseColor("BLUE"));
+        greenButton.setOnAction(event -> chooseColor("GREEN"));
+        yelowButton.setOnAction(event -> chooseColor("YELLOW"));
+        this.vBoxColorButtons.setVisible(false);
+        this.rectangleColor.setVisible(false);
+    }
+
+    public void chooseColor(String color){
+        gameUno.setColorToCardPlayed(color);
+        this.vBoxColorButtons.setVisible(false);
+        if(color.equals("RED")){
+            this.rectangleColor.setFill(javafx.scene.paint.Color.RED);
+        } else if(color.equals("BLUE")){
+            this.rectangleColor.setFill(javafx.scene.paint.Color.BLUE);
+        } else if(color.equals("GREEN")){
+            this.rectangleColor.setFill(javafx.scene.paint.Color.GREEN);
+        } else if(color.equals("YELLOW")){
+            this.rectangleColor.setFill(javafx.scene.paint.Color.YELLOW);
+        }
+        printCardsHumanPlayer();
+        printCardsMachinePlayer();
+    }
+
     /**
      * Handles the "Back" button action to show the previous set of cards.
      *
@@ -133,6 +220,14 @@ public class GameUnoController {
         if (this.posInitCardToShow > 0) {
             this.posInitCardToShow--;
             printCardsHumanPlayer();
+        }
+    }
+
+    public void updateTurnLabel(){
+        if(gameUno.getIsMachineTurn()){
+            turnLabel.setText("Turno de la maquina");
+        }else{
+            turnLabel.setText("Tu turno");
         }
     }
 
@@ -156,12 +251,19 @@ public class GameUnoController {
      */
     @FXML
     void onHandleTakeCard(ActionEvent event) {
-        if(gameUno.getIsMachineTurn()){
+        if(gameUno.getIsMachineTurn() || gameUno.getIsPlayerSelectingColor() || gameUno.checkIsGameOver()){
             return;
         }
         gameUno.eatCard(humanPlayer, 1);
         printCardsHumanPlayer();
         gameUno.setIsMachineTurn(true);
+        updateTurnLabel();
+    }
+
+    public void showColorButtons(){
+        this.vBoxColorButtons.setVisible(true);
+        this.rectangleColor.setVisible(true);
+        this.rectangleColor.setFill(Color.TRANSPARENT);
     }
 
     /**
@@ -179,4 +281,19 @@ public class GameUnoController {
         WelcomeUnoStage.getInstance();
         GameUnoStage.deleteInstance();
     }
+
+    public void handleGameOver(){
+        if(gameUno.checkIsGameOver()) {
+            winLabel.setVisible(true);
+            if(gameUno.getWinner().equals("HUMAN_PLAYER")){
+                winLabel.setText("GANASTE FIERA!");
+            }else {
+                winLabel.setText("PERDISTE JAJAJA");
+            }
+            turnLabel.setText("");
+            threadPlayMachine.interrupt();
+        }
+
+    }
+
 }

@@ -12,6 +12,6 @@ public class SpecialColorCard  extends Card {
 
     @Override
     public boolean isPlayable(ICard card) {
-        return card.getColor().equals(this.getColor());
+        return card.getColor().equals(this.getColor()) || card.getValue().equals(this.getValue());
     }
 }

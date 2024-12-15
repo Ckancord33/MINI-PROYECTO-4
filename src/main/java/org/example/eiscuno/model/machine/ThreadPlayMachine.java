@@ -16,6 +16,7 @@ public class ThreadPlayMachine extends Thread {
     private ImageView tableImageView;
     private volatile GameUnoController controller;
     private volatile GameUno gameUno;
+    private final String[] colors = {"RED", "BLUE", "GREEN", "YELLOW"};
 
     public ThreadPlayMachine(Table table, Player machinePlayer, ImageView tableImageView, GameUnoController controller, GameUno gameUno)throws IOException {
         this.table = table;
@@ -27,14 +28,22 @@ public class ThreadPlayMachine extends Thread {
 
     public void run() {
         while (true){
-            if(gameUno.getIsMachineTurn()){
+            if(gameUno.checkIsGameOver()){
+                Platform.runLater(() -> controller.handleGameOver());
+                break;
+            }
+            if(gameUno.getIsMachineTurn() && !gameUno.getIsPlayerSelectingColor()){
                 try{
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 putCardOnTheTable();
-                Platform.runLater(() -> controller.printCardsMachinePlayer());
+                Platform.runLater(() ->{
+                    controller.printCardsMachinePlayer();
+                    controller.updateTurnLabel();
+                    controller.handleGameOver();
+                });
             }
         }
     }
@@ -44,20 +53,17 @@ public class ThreadPlayMachine extends Thread {
             if(gameUno.playCard(card) != null){
                 table.addCardOnTheTable(card);
                 tableImageView.setImage(card.getImage());
+                if(gameUno.getIsPlayerSelectingColor()){
+                    String color = colors[(int)(Math.random() * 4)];
+                    gameUno.setColorToCardPlayed(color);
+                    controller.setVisibleRectangleColor(color);
+                }
+                Platform.runLater(() -> controller.setRectangleColorVisibility(card));
                 return;
             }
         }
         gameUno.eatCard(machinePlayer, 1);
         gameUno.setIsMachineTurn(false);
 
-    }
-
-    public Integer findPosCardsMachinePlayer(Card card) {
-        for (int i = 0; i < this.machinePlayer.getCardsPlayer().size(); i++) {
-            if (this.machinePlayer.getCardsPlayer().get(i).equals(card)) {
-                return i;
-            }
-        }
-        return -1;
     }
 }
