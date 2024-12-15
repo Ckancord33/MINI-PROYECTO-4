@@ -3,6 +3,7 @@ package org.example.eiscuno.cardAbility.AbilityTypes;
 import org.example.eiscuno.cardAbility.CardAbility;
 import org.example.eiscuno.controller.GameUnoController;
 import org.example.eiscuno.model.game.GameUno;
+import org.example.eiscuno.model.player.Player;
 
 public class WildAbility extends CardAbility {
 
@@ -12,7 +13,11 @@ public class WildAbility extends CardAbility {
 
     @Override
     public void execute() {
-        gameUno.setColorToCardPlayed("RED");
+        gameUno.setIsPlayerSelectingColor(true);
+        Player player = gameUno.getActualPlayer();
+        if(player.getTypePlayer().equals("HUMAN_PLAYER")) {
+            gameUnoController.showColorButtons();
+        }
         gameUno.changeTurn();
     }
 }

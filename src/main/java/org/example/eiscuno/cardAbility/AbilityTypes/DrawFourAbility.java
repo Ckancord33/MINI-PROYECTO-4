@@ -1,8 +1,10 @@
 package org.example.eiscuno.cardAbility.AbilityTypes;
 
+import javafx.application.Platform;
 import org.example.eiscuno.cardAbility.CardAbility;
 import org.example.eiscuno.controller.GameUnoController;
 import org.example.eiscuno.model.game.GameUno;
+import org.example.eiscuno.model.player.Player;
 
 public class DrawFourAbility extends CardAbility {
 
@@ -13,9 +15,14 @@ public class DrawFourAbility extends CardAbility {
     @Override
     public void execute() {
         gameUno.eatCard(gameUno.getVictimPlayer(), 4);
-        gameUno.setColorToCardPlayed("RED");
-        gameUnoController.printCardsMachinePlayer();
-        gameUnoController.printCardsMachinePlayer();
-        gameUno.changeTurn();
+        gameUno.setIsPlayerSelectingColor(true);
+        Player player = gameUno.getActualPlayer();
+        if(player.getTypePlayer().equals("HUMAN_PLAYER")) {
+            gameUnoController.showColorButtons();
+        }
+        Platform.runLater(() -> {
+            gameUnoController.printCardsMachinePlayer();
+            gameUnoController.printCardsHumanPlayer();}
+        );
     }
 }

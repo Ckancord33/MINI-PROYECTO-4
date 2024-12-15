@@ -1,5 +1,6 @@
 package org.example.eiscuno.cardAbility.AbilityTypes;
 
+import javafx.application.Platform;
 import org.example.eiscuno.cardAbility.CardAbility;
 import org.example.eiscuno.cardAbility.ICardAbility;
 import org.example.eiscuno.controller.GameUnoController;
@@ -15,9 +16,10 @@ public class DrawTwoAbility extends CardAbility {
     @Override
     public void execute() {
         gameUno.eatCard(gameUno.getVictimPlayer(), 2);
-        gameUnoController.printCardsMachinePlayer();
-        gameUnoController.printCardsMachinePlayer();
-        gameUno.changeTurn();
+        Platform.runLater(() -> {
+            gameUnoController.printCardsMachinePlayer();
+            gameUnoController.printCardsHumanPlayer();}
+        );
     }
 
 }

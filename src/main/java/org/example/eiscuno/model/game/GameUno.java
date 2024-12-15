@@ -16,11 +16,13 @@ public class GameUno implements IGameUno {
     private Player machinePlayer;
     private Player victimPlayer;
     private Player actualPlayer;
+    private String winner;
     private Deck deck;
     private Table table;
     private boolean isMachineTurn;
     private AbilityInvoker abilityInvoker;
     private Card cardPlayed;
+    private boolean isPlayerSelectingColor;
 
     /**
      * Constructs a new GameUno instance.
@@ -37,6 +39,7 @@ public class GameUno implements IGameUno {
         this.table = table;
         this.isMachineTurn = false;
         this.abilityInvoker = new AbilityInvoker();
+        this.isPlayerSelectingColor = false;
     }
 
     /**
@@ -75,7 +78,10 @@ public class GameUno implements IGameUno {
     @Override
     public Card playCard(Card card) {
         try {
-            if(!card.isPlayable(this.table.getCurrentCardOnTheTable())){
+            if(isPlayerSelectingColor){
+                return null;
+            }
+            else if(!card.isPlayable(this.table.getCurrentCardOnTheTable())){
                 return null;
             }
         }catch (IndexOutOfBoundsException e){
@@ -93,6 +99,11 @@ public class GameUno implements IGameUno {
 
     public void setColorToCardPlayed(String color){
         cardPlayed.setColor(color);
+        isPlayerSelectingColor = false;
+    }
+
+    public void setIsPlayerSelectingColor(boolean isPlayerSelectingColor){
+        this.isPlayerSelectingColor = isPlayerSelectingColor;
     }
 
     public void changeTurn(){
@@ -182,6 +193,26 @@ public class GameUno implements IGameUno {
 
     public Player getActualPlayer(){
         return actualPlayer;
+    }
+
+    public boolean getIsPlayerSelectingColor(){
+        return isPlayerSelectingColor;
+    }
+
+    public boolean checkIsGameOver(){
+        if(humanPlayer.getCardsPlayer().size() == 0){
+            System.out.println("Human player wins");
+            winner = "HUMAN_PLAYER";
+            return true;
+        }else if(machinePlayer.getCardsPlayer().size() == 0){
+            System.out.println("Machine player wins");
+            winner = "MACHINE_PLAYER";
+            return true;
+        }
+        return false;
+    }
+    public String getWinner(){
+        return winner;
     }
 
 }
