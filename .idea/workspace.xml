@@ -7,6 +7,7 @@
     <list default="true" id="1ee8ff40-bbdd-4aec-a3d2-cf5cc45130ec" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/controller/WelcomeUnoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/controller/WelcomeUnoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/threads/MusicPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/threads/MusicPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/styles/welcomeStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/styles/welcomeStyles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/welcome-uno-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/welcome-uno-view.fxml" afterDir="false" />
     </list>
@@ -149,6 +150,9 @@
       <workItem from="1733711682922" duration="8104000" />
       <workItem from="1733798891382" duration="24701000" />
       <workItem from="1733880198110" duration="7526000" />
+      <workItem from="1733970856891" duration="1070000" />
+      <workItem from="1734213973750" duration="3764000" />
+      <workItem from="1734287851709" duration="16633000" />
     </task>
     <servers />
   </component>

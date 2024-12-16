@@ -5,8 +5,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import org.example.eiscuno.threads.MusicPlayer;
 import org.example.eiscuno.view.GameUnoStage;
@@ -46,8 +50,18 @@ public class WelcomeUnoController {
     private ImageView optionsImageView;
     @FXML
     private Label musicLabel;
-
+    @FXML
+    private Circle biomeCircle;
+    @FXML
+    private Circle characterCircle;
+    @FXML
+    private HBox hBox;
     int controlSonido = 0;
+    int character = 0;
+    int biome = 0;
+    ImageView characterImageView = new ImageView();
+    ImageView biomeImageView = new ImageView();
+
 
 
     MusicPlayer musicPlayer = MusicPlayer.getInstance();
@@ -61,6 +75,14 @@ public class WelcomeUnoController {
     Image bg3 = new Image(getClass().getResource("/org/example/eiscuno/images/bg3.jpg").toExternalForm());
     Image bg4 = new Image(getClass().getResource("/org/example/eiscuno/images/bg4.jpg").toExternalForm());
     Image bgOpt = new Image(getClass().getResource("/org/example/eiscuno/images/bgOpt.jpg").toExternalForm());
+    Image c1 = new Image(getClass().getResource("/org/example/eiscuno/images/steve.png").toExternalForm());
+    Image c2 = new Image(getClass().getResource("/org/example/eiscuno/images/chicken.png").toExternalForm());
+    Image c3 = new Image(getClass().getResource("/org/example/eiscuno/images/enderman.png").toExternalForm());
+    Image c4 = new Image(getClass().getResource("/org/example/eiscuno/images/piglin.png").toExternalForm());
+    Image b1 = new Image(getClass().getResource("/org/example/eiscuno/images/overworld.png").toExternalForm());
+    Image b2 = new Image(getClass().getResource("/org/example/eiscuno/images/nether.png").toExternalForm());
+    Image b3 = new Image(getClass().getResource("/org/example/eiscuno/images/end.png").toExternalForm());
+
     private final String[] imagenes = {
             "",
             "",
@@ -77,6 +99,12 @@ public class WelcomeUnoController {
     };
 
     public void initialize(){
+        characterChange(c1);
+        hBox.setMouseTransparent(true);
+        hBox.setVisible(false);
+        biomeChange(b1);
+
+
         handleMusicRev();
         optionsImageView.setImage(bgOpt);
 
@@ -105,6 +133,205 @@ public class WelcomeUnoController {
 
 
     }
+
+    public int getBiome(){
+        return biome;
+    }
+    public int getCharacter(){
+        return character;
+    }
+
+    public void characterChange(Image image){
+
+        characterImageView.setImage(image);
+
+        // Crear un ImageView y ajustar el tamaño
+        double radius = characterCircle.getRadius();
+        characterImageView.setFitWidth(radius * 2);
+        characterImageView.setFitHeight(radius * 2);
+
+        // Crear un círculo para recortar
+        Circle clip = new Circle(radius);
+        clip.setCenterX(radius);
+        clip.setCenterY(radius);
+
+        // Aplicar el clip
+        characterImageView.setClip(clip);
+
+        // Centrar la imagen en el contenedor
+        characterImageView.setLayoutX(characterCircle.getLayoutX() - radius);
+        characterImageView.setLayoutY(characterCircle.getLayoutY() - radius);
+
+        // Agregar al contenedor
+        Pane parent = (Pane) characterCircle.getParent();
+        int circleIndex = parent.getChildren().indexOf(characterCircle);
+        if(!parent.getChildren().isEmpty()){
+        parent.getChildren().remove(characterImageView);
+        }
+        parent.getChildren().add(circleIndex + 1, characterImageView);
+
+    }
+    public void biomeChange(Image image){
+
+        biomeImageView.setImage(image);
+
+        // Crear un ImageView y ajustar el tamaño
+        double radius = biomeCircle.getRadius();
+        biomeImageView.setFitWidth(radius * 2);
+        biomeImageView.setFitHeight(radius * 2);
+
+        // Crear un círculo para recortar
+        Circle clip = new Circle(radius);
+        clip.setCenterX(radius);
+        clip.setCenterY(radius);
+
+            // Aplicar el clip
+        biomeImageView.setClip(clip);
+
+        // Centrar la imagen en el contenedor
+        biomeImageView.setLayoutX(biomeCircle.getLayoutX() - radius);
+        biomeImageView.setLayoutY(biomeCircle.getLayoutY() - radius);
+
+        // Agregar al contenedor
+        Pane parent = (Pane) biomeCircle.getParent();
+        int circleIndex = parent.getChildren().indexOf(biomeCircle);
+        if(!parent.getChildren().isEmpty()){
+        parent.getChildren().remove(biomeImageView);
+        }
+        parent.getChildren().add(circleIndex + 1, biomeImageView);
+
+    }
+
+    public void hBoxTransition(){
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1),hBox);
+        if(hBox.isVisible()) {
+            transition.setFromY(0);
+            transition.setToY(-optionsImageView.getFitHeight());
+            transition.setOnFinished(actionEvent -> {
+                hBox.setVisible(false);
+                hBox.setMouseTransparent(true);
+                optionsImageView.setMouseTransparent(true);
+                optionsImageView.setVisible(false);
+                optionsLabel.setVisible(false);
+                optionsLabel2.setVisible(false);
+                hBox.getChildren().clear();
+            });
+        } else if (!hBox.isVisible()) {
+            transition.setFromY(-optionsImageView.getFitHeight());
+            transition.setToY(0);
+
+        }
+        transition.play();
+    }
+
+    public void handleCharacter(){
+        hBoxTransition();
+
+        ImageView CI1 = new ImageView(c1);
+        CI1.setFitHeight(hBox.getHeight());
+        CI1.setFitWidth(hBox.getWidth()/4);
+        CI1.setOnMousePressed(mouseEvent -> {
+            characterChange(c1);
+            hBoxTransition();
+            character = 1;
+        });
+        CI1.getStyleClass().add("imageView1");
+
+        ImageView CI2 = new ImageView(c2);
+        CI2.setFitHeight(hBox.getHeight());
+        CI2.setFitWidth(hBox.getWidth()/4);
+        CI2.setOnMousePressed(mouseEvent -> {
+            characterChange(c2);
+            hBoxTransition();
+            character = 2;
+        });
+        CI2.getStyleClass().add("imageView1");
+
+
+        ImageView CI3 = new ImageView(c3);
+        CI3.setFitHeight(hBox.getHeight());
+        CI3.setFitWidth(hBox.getWidth()/4);
+        CI3.setOnMousePressed(mouseEvent -> {
+            characterChange(c3);
+            hBoxTransition();
+            character = 3;
+        });
+        CI3.getStyleClass().add("imageView1");
+
+
+        ImageView CI4 = new ImageView(c4);
+        CI4.setFitHeight(hBox.getHeight());
+        CI4.setFitWidth(hBox.getWidth()/4);
+        CI4.setOnMousePressed(mouseEvent -> {
+            characterChange(c4);
+            hBoxTransition();
+            character = 4;
+        });
+        CI4.getStyleClass().add("imageView1");
+
+
+
+        hBox.getChildren().addAll(CI1,CI2,CI3,CI4);
+
+        optionsLabel.setText("SELECCIONA TU PERSONAJE");
+        optionsLabel2.setText("SELECCIONA TU PERSONAJE");
+        optionsLabel.setVisible(true);
+        optionsLabel2.setVisible(true);
+
+        hBox.setVisible(true);
+        hBox.setMouseTransparent(false);
+        optionsImageView.setMouseTransparent(false);
+        optionsImageView.setVisible(true);
+    }
+
+public void handleBiome(){
+        hBoxTransition();
+
+    ImageView BI1 = new ImageView(b1);
+    BI1.setFitHeight(hBox.getHeight());
+    BI1.setFitWidth(hBox.getWidth()/3);
+    BI1.setOnMousePressed(mouseEvent -> {
+            biomeChange(b1);
+            hBoxTransition();
+            biome = 1;
+        });
+    BI1.getStyleClass().add("imageView1");
+
+    ImageView BI2 = new ImageView(b2);
+    BI2.setFitHeight(hBox.getHeight());
+    BI2.setFitWidth(hBox.getWidth()/3);
+    BI2.setOnMousePressed(mouseEvent -> {
+        biomeChange(b2);
+        hBoxTransition();
+        biome = 1;
+    });
+    BI2.getStyleClass().add("imageView1");
+
+    ImageView BI3 = new ImageView(b3);
+    BI3.setFitHeight(hBox.getHeight());
+    BI3.setFitWidth(hBox.getWidth()/3);
+    BI3.setOnMousePressed(mouseEvent -> {
+        biomeChange(b2);
+        hBoxTransition();
+        biome = 1;
+    });
+    BI3.getStyleClass().add("imageView1");
+
+
+    hBox.getChildren().addAll(BI1,BI2,BI3);
+
+        optionsLabel.setText("SELECCIONA TU PERSONAJE");
+        optionsLabel2.setText("SELECCIONA TU PERSONAJE");
+        optionsLabel.setVisible(true);
+        optionsLabel2.setVisible(true);
+
+        hBox.setVisible(true);
+        hBox.setMouseTransparent(false);
+        optionsImageView.setMouseTransparent(false);
+        optionsImageView.setVisible(true);
+    }
+
+
 
     private void messageChange(Label message) {
             message.setText(mensajes[indiceMensaje]);
@@ -159,6 +386,9 @@ public class WelcomeUnoController {
         optionsImageView.setMouseTransparent(false);
 
         musicLabel.setVisible(true);
+
+        optionsLabel.setText("MUSIC OPTIONS");
+        optionsLabel2.setText("MUSIC OPTIONS");
     }
 
     public void handleMusicRev(){
