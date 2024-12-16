@@ -3,6 +3,7 @@ package org.example.eiscuno.controller;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -33,6 +34,9 @@ public class GameUnoController {
 
     @FXML
     private ImageView tableImageView;
+
+    @FXML
+    private Button deckButton;
 
     private Player humanPlayer;
     private Player machinePlayer;
@@ -84,35 +88,49 @@ public class GameUnoController {
             Card card = currentVisibleCardsHumanPlayer[i];
             ImageView cardImageView = card.getCard();
 
-            cardImageView.setOnMouseClicked((MouseEvent event) -> {
-                // Aqui deberian verificar si pueden en la tabla jugar esa carta
-                gameUno.playCard(card);
-                tableImageView.setImage(card.getImage());
-                humanPlayer.removeCard(findPosCardsHumanPlayer(card));
-                threadPlayMachine.setHasPlayerPlayed(true);
-                printCardsHumanPlayer();
-                disableHumanCards();
-                PauseTransition pause = new PauseTransition(Duration.seconds(1));
-                pause.setOnFinished(e -> enableHumanCards());
-                pause.play();
-            });
+            cardImageView.setOnMouseClicked((MouseEvent event) -> onHandlePlayCard(card));
 
             this.gridPaneCardsPlayer.add(cardImageView, i, 0);
         }
     }
 
+    public void onHandlePlayCard(Card card){
+        try {
+            if(!card.isPlayable(this.table.getCurrentCardOnTheTable())){
+                return;
+            }
+        }catch (IndexOutOfBoundsException e){
+            System.out.println(e.getMessage());
+        }
+        gameUno.playCard(card);
+        tableImageView.setImage(card.getImage());
+        humanPlayer.removeCard(findPosCardsHumanPlayer(card));
+        threadPlayMachine.setHasPlayerPlayed(true);
+        printCardsHumanPlayer();
+        pauseForMachinePlayer();
+    }
+
+    public void pauseForMachinePlayer(){
+        disableHumanCards();
+        PauseTransition pause = new PauseTransition(Duration.seconds(1));
+        pause.setOnFinished(e -> enableHumanCards());
+        pause.play();
+    }
+
     public void disableHumanCards(){
-        for (int i = 0; i < this.humanPlayer.getCardsPlayer().size(); i++) {
+        for (int i = 0; i < this.gridPaneCardsPlayer.getChildren().size(); i++) {
             ImageView cardImageView = (ImageView) this.gridPaneCardsPlayer.getChildren().get(i);
             cardImageView.setDisable(true);
         }
+        deckButton.setDisable(true);
     }
 
     public void enableHumanCards(){
-        for (int i = 0; i < this.humanPlayer.getCardsPlayer().size(); i++) {
+        for (int i = 0; i < this.gridPaneCardsPlayer.getChildren().size(); i++) {
             ImageView cardImageView = (ImageView) this.gridPaneCardsPlayer.getChildren().get(i);
             cardImageView.setDisable(false);
         }
+        deckButton.setDisable(false);
     }
 
     public void printCardsMachinePlayer() {
@@ -179,7 +197,11 @@ public class GameUnoController {
      */
     @FXML
     void onHandleTakeCard(ActionEvent event) {
-        // Implement logic to take a card here
+        gameUno.eatCard(humanPlayer, 1);
+        printCardsHumanPlayer();
+        threadPlayMachine.setHasPlayerPlayed(true);
+        pauseForMachinePlayer();
+
     }
 
     /**

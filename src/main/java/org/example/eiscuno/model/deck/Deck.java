@@ -1,5 +1,6 @@
 package org.example.eiscuno.model.deck;
 
+import org.example.eiscuno.model.card.cardFactory.CardFactory;
 import org.example.eiscuno.model.unoenum.EISCUnoEnum;
 import org.example.eiscuno.model.card.Card;
 
@@ -34,7 +35,7 @@ public class Deck {
                     cardEnum.name().startsWith("TWO_WILD_DRAW_") ||
                     cardEnum.name().equals("FOUR_WILD_DRAW") ||
                     cardEnum.name().equals("WILD")) {
-                Card card = new Card(cardEnum.getFilePath(), getCardValue(cardEnum.name()), getCardColor(cardEnum.name()));
+                Card card = CardFactory.createCard(cardEnum.getFilePath(), getCardValue(cardEnum.name()), getCardColor(cardEnum.name()));
                 deckOfCards.push(card);
             }
         }
@@ -62,6 +63,16 @@ public class Deck {
             return "8";
         } else if (name.endsWith("9")){
             return "9";
+        } else if (name.endsWith("SKIP")){
+            return "SKIP";
+        } else if(name.endsWith("RESERVE")){
+            return "RESERVE";
+        } else if(name.endsWith("TWO_WILD_DRAW")){
+            return "TWO_WILD_DRAW";
+        } else if(name.equals("FOUR_WILD_DRAW")){
+            return "FOUR_WILD_DRAW";
+        } else if(name.equals("WILD")){
+            return "WILD";
         } else {
             return null;
         }
@@ -78,7 +89,7 @@ public class Deck {
         } else if(name.startsWith("RED")){
             return "RED";
         } else {
-            return null;
+            return "ESPECIAL";
         }
     }
 

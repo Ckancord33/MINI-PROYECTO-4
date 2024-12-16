@@ -15,7 +15,7 @@
    <left>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="25.0" layoutY="78.0" mnemonicParsing="false" onAction="#onHandleTakeCard" prefHeight="250.0" prefWidth="157.0" text="Baraja" />
+            <Button fx:id="deckButton" layoutX="25.0" layoutY="78.0" mnemonicParsing="false" onAction="#onHandleTakeCard" prefHeight="250.0" prefWidth="157.0" text="Baraja" />
          </children>
       </Pane>
    </left>
