@@ -102,6 +102,10 @@ public class GameUnoController {
     private Rectangle rect;
     @FXML
     private Label turnLabel1;
+    @FXML
+    private Label winLabel1;
+    @FXML
+    private Button exitButton1;
 
     int indice = 0;
     private Player humanPlayer;
@@ -153,6 +157,8 @@ public class GameUnoController {
     @FXML
     public void initialize() throws IOException{
 
+        exitButton1.setDisable(true);
+        exitButton1.setVisible(false);
         rect.setVisible(false);
         deckButton.setEffect(new ImageInput(new Image(getClass().getResource("/org/example/eiscuno/cards-uno/card_uno.png").toExternalForm())));
         deckCard1.setImage(new Image(getClass().getResource("/org/example/eiscuno/cards-uno/card_uno.png").toExternalForm()));
@@ -615,13 +621,22 @@ public class GameUnoController {
         if(gameUno.checkIsGameOver()) {
             winLabel.setVisible(true);
             if(gameUno.getWinner().equals("HUMAN_PLAYER")){
-                winLabel.setText("GANASTE FIERA!");
+                rect.setVisible(true);
+                rect.setFill(Color.ALICEBLUE);
+                rect.setOpacity(0.3);
+                winLabel.setText("HEROBRINE WAS SLAYED BY PLAYER");
+                winLabel1.setText("HEROBRINE WAS SLAYED BY PLAYER");
                 playSound("src/main/resources/org/example/eiscuno/sounds/experienceSound.wav",0);
+                exitButton1.setDisable(false);
+                exitButton1.setVisible(true);
                 createExperience(gamePane,gamePane.getLayoutX(),gamePane.getLayoutY());
             }else {
-                winLabel.setText("PERDISTE JAJAJA");
+                winLabel.setText("PLAYER WAS SLAYED BY HEROBRINE");
+                winLabel1.setText("PLAYER WAS SLAYED BY HEROBRINE");
                 rect.setVisible(true);
                 rect.setMouseTransparent(false);
+                exitButton1.setDisable(false);
+                exitButton1.setVisible(true);
             }
             turnLabel.setText("");
             threadPlayMachine.interrupt();

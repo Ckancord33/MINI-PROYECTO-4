@@ -21,7 +21,7 @@
             <Font name="Franklin Gothic Heavy" size="36.0" />
          </font>
       </Button>
-      <Button layoutX="379.0" layoutY="644.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#hoverSound" onMousePressed="#clickSound" prefHeight="74.0" prefWidth="408.0" styleClass="button2">
+      <Button layoutX="379.0" layoutY="644.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCredits" onMouseEntered="#hoverSound" onMousePressed="#clickSound" prefHeight="74.0" prefWidth="408.0" styleClass="button2">
          <font>
             <Font name="Franklin Gothic Heavy" size="36.0" />
          </font>

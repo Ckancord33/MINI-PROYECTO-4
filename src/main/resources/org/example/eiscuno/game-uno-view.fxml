@@ -48,11 +48,6 @@
       <ImageView fx:id="tableImageView" fitHeight="298.0" fitWidth="200.0" layoutX="695.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="deckCard2" fitHeight="164.0" fitWidth="118.0" layoutX="1410.0" layoutY="658.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="deckButton" layoutX="159.0" layoutY="345.0" mnemonicParsing="false" onAction="#onHandleTakeCard" prefHeight="250.0" prefWidth="157.0" styleClass="deckCards" />
-      <Label fx:id="winLabel" alignment="CENTER" layoutX="678.0" layoutY="240.0" prefHeight="53.0" prefWidth="236.0" text="WIN LABEL">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
       <Label fx:id="turnLabel1" alignment="CENTER" layoutX="362.0" layoutY="290.0" prefHeight="34.0" prefWidth="300.0">
          <font>
             <Font size="20.0" />
@@ -121,6 +116,17 @@
          </children>
       </Group>
       <ImageView fx:id="deckCard12" fitHeight="164.0" fitWidth="118.0" layoutX="37.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
-      <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f43" height="900.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" width="1600.0" />
+      <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="#ff21217d" height="900.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" width="1600.0" />
+      <Label fx:id="winLabel1" alignment="CENTER" layoutX="296.0" layoutY="248.0" prefHeight="88.0" prefWidth="1012.0">
+         <font>
+            <Font size="60.0" />
+         </font>
+      </Label>
+      <Label fx:id="winLabel" alignment="CENTER" layoutX="290.0" layoutY="247.0" prefHeight="88.0" prefWidth="1012.0">
+         <font>
+            <Font size="60.0" />
+         </font>
+      </Label>
+      <Button fx:id="exitButton1" layoutX="390.0" layoutY="454.0" mnemonicParsing="false" onAction="#onHandleExitButton" prefHeight="74.0" prefWidth="815.0" />
    </children>
 </AnchorPane>

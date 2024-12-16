@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 
+.button{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
 .deckCards{
     -fx-background-size: 118,164;
     -fx-background-image: url('../cards-uno/card_uno.png');
@@ -53,4 +58,16 @@
      -fx-font-size: 36;
      -fx-font-family: 'VT323', monospace;
      -fx-text-fill: black;
+ }
+#winLabel{
+    -fx-font-size: 60;
+    -fx-font-family: 'VT323', monospace;
+    -fx-text-fill: white;
+}#winLabel1{
+     -fx-font-size: 60;
+     -fx-font-family: 'VT323', monospace;
+     -fx-text-fill: black;
+ }
+ #exitButton1{
+     -fx-background-image: url('../images/exit2.png');
  }

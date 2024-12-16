@@ -539,4 +539,14 @@ public void handleBiome(){
         musicPlayer.pauseMusic();
     }
 
+    public void handleCredits(){
+        optionsImageView.setVisible(true);
+        optionsImageView.setMouseTransparent(false);
+        optionsLabel.setVisible(true);
+        optionsLabel.setText("CRÉDITOS");
+        optionsLabel2.setVisible(true);
+        optionsLabel2.setText("CRÉDITOS");
+        musicLabel.setVisible(true);
+    }
+
 }
