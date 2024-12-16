@@ -59,6 +59,7 @@ public class ThreadPlayMachine extends Thread {
                     controller.setVisibleRectangleColor(color);
                 }
                 Platform.runLater(() -> controller.setRectangleColorVisibility(card));
+                Platform.runLater(() -> controller.tableEffect(card.getColor()));
                 return;
             }
         }

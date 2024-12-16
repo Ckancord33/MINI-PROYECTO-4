@@ -17,6 +17,10 @@ public class DrawFourAbility extends CardAbility {
         gameUno.eatCard(gameUno.getVictimPlayer(), 4);
         gameUno.setIsPlayerSelectingColor(true);
         Player player = gameUno.getActualPlayer();
+        Player player2 = gameUno.getVictimPlayer();
+        Platform.runLater(()->{
+            gameUnoController.eatCardAnimation(player2.getTypePlayer(), 4);
+                });
         if(player.getTypePlayer().equals("HUMAN_PLAYER")) {
             gameUnoController.showColorButtons();
         }

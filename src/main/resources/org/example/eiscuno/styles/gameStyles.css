@@ -10,3 +10,21 @@
     -fx-background-color: transparent;
     /*-fx-effect: dropshadow(gaussian, rgba(255, 241, 216, 0.5), 15, 0.7, 0,0);*/
 }
+.c1:hover{
+    -fx-effect: dropshadow(gaussian, rgba(225,180,0,0.5), 15, 0.7, 0, 0);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}.c2:hover{
+     -fx-effect: dropshadow(gaussian, rgba(41,225,0,0.5), 15, 0.7, 0, 0);
+     -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}.c3:hover{
+    -fx-effect: dropshadow(gaussian, rgba(225,0,0,0.5), 15, 0.7, 0, 0);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}.c4:hover{
+     -fx-effect: dropshadow(gaussian, rgba(0,30,225,0.5), 15, 0.7, 0, 0);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+

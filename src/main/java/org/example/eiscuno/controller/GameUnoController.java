@@ -3,8 +3,10 @@ package org.example.eiscuno.controller;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Glow;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,6 +28,7 @@ import org.example.eiscuno.model.machine.ThreadSingUNOMachine;
 import org.example.eiscuno.model.player.Player;
 import org.example.eiscuno.model.table.Table;
 import org.example.eiscuno.model.unoenum.EISCUnoEnum;
+import org.example.eiscuno.threads.MusicPlayer;
 import org.example.eiscuno.view.GameUnoStage;
 import org.example.eiscuno.view.WelcomeUnoStage;
 
@@ -37,7 +40,7 @@ import java.io.IOException;
 public class GameUnoController {
 
     @FXML
-    private Button blueButton;
+    private ImageView blueButton;
 
     @FXML
     private Button deckButton;
@@ -46,7 +49,7 @@ public class GameUnoController {
     private Pane gamePane;
 
     @FXML
-    private Button greenButton;
+    private ImageView greenButton;
 
     @FXML
     private GridPane gridPaneCardsMachine;
@@ -55,16 +58,14 @@ public class GameUnoController {
     private GridPane gridPaneCardsPlayer;
 
     @FXML
-    private Button redButton;
+    private ImageView redButton;
 
     @FXML
     private ImageView tableImageView;
 
-    @FXML
-    private VBox vBoxColorButtons;
 
     @FXML
-    private Button yelowButton;
+    private ImageView yelowButton;
 
     @FXML
     private Rectangle rectangleColor;
@@ -88,7 +89,16 @@ public class GameUnoController {
     private ImageView deckCard21;
     @FXML
     private ImageView deckCard1;
-
+    @FXML
+    private Circle c;
+    @FXML
+    private Group group;
+    @FXML
+    private Button nextButton;
+    @FXML
+    private Button backButton;
+    @FXML
+    private ImageView deckCard12;
 
 
     int indice = 0;
@@ -140,8 +150,10 @@ public class GameUnoController {
      */
     @FXML
     public void initialize() throws IOException{
+
         deckButton.setEffect(new ImageInput(new Image(getClass().getResource("/org/example/eiscuno/cards-uno/card_uno.png").toExternalForm())));
         deckCard1.setImage(new Image(getClass().getResource("/org/example/eiscuno/cards-uno/card_uno.png").toExternalForm()));
+        deckCard12.setImage(new Image(getClass().getResource("/org/example/eiscuno/cards-uno/card_uno.png").toExternalForm()));
         bgChange();
         deckCard.setImage(new Image(getClass().getResource("/org/example/eiscuno/cards-uno/card_uno.png").toExternalForm()));
         initVariables();
@@ -338,10 +350,6 @@ public class GameUnoController {
 
         }
 
-    public void deckDrawTransition(){
-
-
-    }
 
     /**
      * Prints the human player's cards on the grid pane.
@@ -383,6 +391,7 @@ public class GameUnoController {
             tableImageView.setImage(card.getImage());
             printCardsHumanPlayer();
             setRectangleColorVisibility(card);
+            tableEffect(card.getColor());
             handleGameOver();
             updateTurnLabel();
         }
@@ -411,27 +420,59 @@ public class GameUnoController {
         }
     }
 
+    public void colorButtonsVisible(boolean visible){
+        group.setVisible(visible);
+        c.setVisible(false);
+    }
+
 
     void startColorVBoxButtons(){
-        redButton.setOnAction(event -> chooseColor("RED"));
-        blueButton.setOnAction(event -> chooseColor("BLUE"));
-        greenButton.setOnAction(event -> chooseColor("GREEN"));
-        yelowButton.setOnAction(event -> chooseColor("YELLOW"));
-        this.vBoxColorButtons.setVisible(false);
+        redButton.setOnMousePressed(event -> chooseColor("RED"));
+        redButton.setOnMouseEntered(mouseEvent -> redButton.toFront());
+        blueButton.setOnMousePressed(event -> chooseColor("BLUE"));
+        blueButton.setOnMouseEntered(mouseEvent -> blueButton.toFront());
+        greenButton.setOnMousePressed(event -> chooseColor("GREEN"));
+        greenButton.setOnMouseEntered(mouseEvent -> greenButton.toFront());
+        yelowButton.setOnMousePressed(event -> chooseColor("YELLOW"));
+        yelowButton.setOnMouseEntered(mouseEvent -> yelowButton.toFront());
+        colorButtonsVisible(false);
         this.rectangleColor.setVisible(false);
+    }
+
+    public void tableEffect(String color){
+        if(color.equals("RED")){
+
+            tableImageView.setStyle(" -fx-effect: dropshadow(gaussian, rgba(225,0,0,0.5), 15, 0.7, 0, 0);");
+        } else if(color.equals("BLUE")){
+
+            tableImageView.setStyle(" -fx-effect: dropshadow(gaussian, rgba(0,30,225,0.5), 15, 0.7, 0, 0);");
+        } else if(color.equals("GREEN")){
+
+            tableImageView.setStyle(" -fx-effect: dropshadow(gaussian, rgba(41,225,0,0.5), 15, 0.7, 0, 0);");
+        } else if(color.equals("YELLOW")){
+
+            tableImageView.setStyle(" -fx-effect: dropshadow(gaussian, rgba(225,180,0,0.5), 15, 0.7, 0, 0);");
+        } else if (color.equals("TRANSPARENT")){
+
+            tableImageView.setStyle(" -fx-effect: dropshadow(gaussian, rgba(225,180,0,0), 15, 0.7, 0, 0);");
+        }
     }
 
     public void chooseColor(String color){
         gameUno.setColorToCardPlayed(color);
-        this.vBoxColorButtons.setVisible(false);
+        colorButtonsVisible(false);
         if(color.equals("RED")){
             this.rectangleColor.setFill(javafx.scene.paint.Color.RED);
+            tableImageView.setStyle(" -fx-effect: dropshadow(gaussian, rgba(225,0,0,0.5), 15, 0.7, 0, 0);");
         } else if(color.equals("BLUE")){
             this.rectangleColor.setFill(javafx.scene.paint.Color.BLUE);
+            tableImageView.setStyle(" -fx-effect: dropshadow(gaussian, rgba(0,30,225,0.5), 15, 0.7, 0, 0);");
         } else if(color.equals("GREEN")){
             this.rectangleColor.setFill(javafx.scene.paint.Color.GREEN);
+            tableImageView.setStyle(" -fx-effect: dropshadow(gaussian, rgba(41,225,0,0.5), 15, 0.7, 0, 0);");
         } else if(color.equals("YELLOW")){
             this.rectangleColor.setFill(javafx.scene.paint.Color.YELLOW);
+            tableImageView.setStyle(" -fx-effect: dropshadow(gaussian, rgba(225,180,0,0.5), 15, 0.7, 0, 0);");
         }
         printCardsHumanPlayer();
         printCardsMachinePlayer();
@@ -445,8 +486,18 @@ public class GameUnoController {
     @FXML
     void onHandleBack(ActionEvent event) {
         if (this.posInitCardToShow > 0) {
-            this.posInitCardToShow--;
-            printCardsHumanPlayer();
+            TranslateTransition back = new TranslateTransition(Duration.millis(500),deckCard2);
+            backButton.setDisable(true);
+            deckCard2.setImage(new Image(getClass().getResource("/org/example/eiscuno/cards-uno/card_uno.png").toExternalForm()));
+            back.setToX(0);
+            back.setFromX(-400);
+            back.setOnFinished(actionEvent -> {
+                backButton.setDisable(false);
+                deckCard2.setImage(new Image(getClass().getResource("").toExternalForm()));
+                this.posInitCardToShow--;
+                printCardsHumanPlayer();
+            });
+            back.play();
         }
     }
 
@@ -467,11 +518,13 @@ public class GameUnoController {
     void onHandleNext(ActionEvent event) {
         if (this.posInitCardToShow < this.humanPlayer.getCardsPlayer().size() - 4) {
             if(posInitCardToShow !=humanPlayer.getCardsPlayer().size() || posInitCardToShow != humanPlayer.getCardsPlayer().size()-1|| posInitCardToShow != humanPlayer.getCardsPlayer().size()-2|| posInitCardToShow != humanPlayer.getCardsPlayer().size()-3){
-                TranslateTransition next = new TranslateTransition(Duration.seconds(2),deckCard2);
+                TranslateTransition next = new TranslateTransition(Duration.millis(500),deckCard2);
+                nextButton.setDisable(true);
                 deckCard2.setImage(new Image(getClass().getResource("/org/example/eiscuno/cards-uno/card_uno.png").toExternalForm()));
                 next.setFromX(0);
                 next.setToX(-400);
                 next.setOnFinished(actionEvent -> {
+                    nextButton.setDisable(false);
                     deckCard2.setImage(new Image(getClass().getResource("").toExternalForm()));
                     this.posInitCardToShow++;
                     printCardsHumanPlayer();
@@ -492,16 +545,19 @@ public class GameUnoController {
         if(gameUno.getIsMachineTurn() || gameUno.getIsPlayerSelectingColor() || gameUno.checkIsGameOver()){
             return;
         }
-        TranslateTransition deckMove = new TranslateTransition(Duration.seconds(2), deckCard);
+        TranslateTransition deckMove = new TranslateTransition(Duration.millis(500), deckCard);
 
         deckMove.setFromX(0);
         deckMove.setFromY(0);
 
-//        deckMove.setByY(20);
-
         deckMove.setToX(1241);
         deckMove.setToY(300);
-        deckMove.play();
+        RotateTransition rotation = new RotateTransition(Duration.millis(500), deckCard);
+        rotation.setFromAngle(0);
+        rotation.setToAngle(720);
+
+        ParallelTransition parallel = new ParallelTransition(deckMove,rotation);
+        parallel.play();
         deckMove.setOnFinished(actionEvent -> {
             gameUno.eatCard(humanPlayer, 1);
             printCardsHumanPlayer();
@@ -513,9 +569,23 @@ public class GameUnoController {
     }
 
     public void showColorButtons(){
-        this.vBoxColorButtons.setVisible(true);
-        this.rectangleColor.setVisible(true);
-        this.rectangleColor.setFill(Color.TRANSPARENT);
+        colorButtonsVisible(true);
+        tableEffect("TRANSPARENT");
+        RotateTransition rotation = new RotateTransition(Duration.seconds(1),group);
+        rotation.setFromAngle(0);
+        rotation.setToAngle(360);
+        ScaleTransition scale = new ScaleTransition(Duration.seconds(1),group);
+        scale.setFromX(0);
+        scale.setFromY(0);
+        scale.setToX(1);
+        scale.setToY(1);
+        ParallelTransition transition = new ParallelTransition(rotation,scale);
+        transition.play();
+        transition.setOnFinished(actionEvent -> {
+            this.rectangleColor.setVisible(true);
+            this.rectangleColor.setFill(Color.TRANSPARENT);
+        });
+
     }
 
     /**
@@ -548,4 +618,37 @@ public class GameUnoController {
 
     }
 
+    public void eatCardAnimation(String typePlayer, int cardsNumber) {
+        if(typePlayer == "HUMAN_PLAYER") {
+            TranslateTransition deckMove = new TranslateTransition(Duration.millis(500), deckCard);
+
+            deckMove.setFromX(0);
+            deckMove.setFromY(0);
+
+            deckMove.setToX(1241);
+            deckMove.setToY(300);
+            RotateTransition rotation = new RotateTransition(Duration.millis(500), deckCard);
+            rotation.setFromAngle(0);
+            rotation.setToAngle(720);
+
+            ParallelTransition parallel = new ParallelTransition(deckMove, rotation);
+            parallel.setCycleCount(cardsNumber);
+            parallel.play();
+        } else if (typePlayer == "MACHINE_PLAYER") {
+            TranslateTransition deckMove = new TranslateTransition(Duration.millis(500), deckCard);
+
+            deckMove.setFromX(0);
+            deckMove.setFromY(0);
+
+            deckMove.setToX(-125);
+            deckMove.setToY(-310);
+            RotateTransition rotation = new RotateTransition(Duration.millis(500), deckCard);
+            rotation.setFromAngle(0);
+            rotation.setToAngle(720);
+
+            ParallelTransition parallel = new ParallelTransition(deckMove, rotation);
+            parallel.setCycleCount(cardsNumber);
+            parallel.play();
+        }
+    }
 }
