@@ -98,9 +98,8 @@ public class GameUnoController {
         // Inicializar el temporizador dinámico para "UNO"
         unoTimer = new PauseTransition();
         unoTimer.setOnFinished(event -> {
-            if (!unoButtonPressed) {
+            if (!unoButtonPressed)
                 penalizeForNotSingingUno();
-            }
         });
 
         this.gameUno.startGame();
@@ -157,16 +156,18 @@ public class GameUnoController {
     }
 
     /**
-     * Adds to cards to the human player when this does not click the UNO button on time
-     */
-    /**
      * Adds a penalty card to the human player if they do not say "UNO" in time.
      */
     public void penalizeForNotSingingUno() {
+        if (unoButtonPressed) {
+            System.out.println("El jugador cantó UNO a tiempo. No hay penalización.");
+            return; // No penalizar si el jugador presionó el botón
+        }
         System.out.println("El jugador no cantó UNO a tiempo. Comiendo una carta...");
         gameUno.eatCard(humanPlayer, 1);
         printCardsHumanPlayer();
     }
+
 
     /**
      * Checks if the human player has one card and starts the UNO timer if necessary.
@@ -213,6 +214,11 @@ public class GameUnoController {
             setRectangleColorVisibility(card);
             handleGameOver();
             updateTurnLabel();
+
+            // Reinicia el flag si el jugador tiene más de una carta
+            if (humanPlayer.getCardsPlayer().size() > 1) {
+                unoButtonPressed = false;
+            }
         }
     }
 
@@ -321,11 +327,7 @@ public class GameUnoController {
         this.rectangleColor.setFill(Color.TRANSPARENT);
     }
 
-    /**
-     * Handles the action of saying "Uno".
-     *
-     * @param event the action event
-     */
+
     /**
      * Handles the action of saying "Uno".
      *
