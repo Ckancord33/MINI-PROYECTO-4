@@ -1,6 +1,8 @@
 package org.example.eiscuno.model.deck;
 
+import org.example.eiscuno.controller.GameUnoController;
 import org.example.eiscuno.model.card.cardFactory.CardFactory;
+import org.example.eiscuno.model.game.GameUno;
 import org.example.eiscuno.model.unoenum.EISCUnoEnum;
 import org.example.eiscuno.model.card.Card;
 
@@ -18,25 +20,32 @@ public class Deck {
      */
     public Deck() {
         deckOfCards = new Stack<>();
-        initializeDeck();
     }
 
     /**
      * Initializes the deck with cards based on the EISCUnoEnum values.
      */
-    private void initializeDeck() {
-        for (EISCUnoEnum cardEnum : EISCUnoEnum.values()) {
-            if (cardEnum.name().startsWith("GREEN_") ||
-                    cardEnum.name().startsWith("YELLOW_") ||
-                    cardEnum.name().startsWith("BLUE_") ||
-                    cardEnum.name().startsWith("RED_") ||
-                    cardEnum.name().startsWith("SKIP_") ||
-                    cardEnum.name().startsWith("RESERVE_") ||
-                    cardEnum.name().startsWith("TWO_WILD_DRAW_") ||
-                    cardEnum.name().equals("FOUR_WILD_DRAW") ||
-                    cardEnum.name().equals("WILD")) {
-                Card card = CardFactory.createCard(cardEnum.getFilePath(), getCardValue(cardEnum.name()), getCardColor(cardEnum.name()));
-                deckOfCards.push(card);
+    public void initializeDeck(GameUno gameUno, GameUnoController gameUnoController) {
+        for(int j = 0;j < 2;j++ ) {
+            for (EISCUnoEnum cardEnum : EISCUnoEnum.values()) {
+                if (cardEnum.name().startsWith("GREEN_") ||
+                        cardEnum.name().startsWith("YELLOW_") ||
+                        cardEnum.name().startsWith("BLUE_") ||
+                        cardEnum.name().startsWith("RED_") ||
+                        cardEnum.name().startsWith("SKIP_") ||
+                        cardEnum.name().startsWith("RESERVE_") ||
+                        cardEnum.name().startsWith("TWO_WILD_DRAW_") ||
+                        cardEnum.name().equals("FOUR_WILD_DRAW") ||
+                        cardEnum.name().equals("WILD")) {
+                    if (cardEnum.name().equals("WILD") || cardEnum.name().equals("FOUR_WILD_DRAW")) {
+                        for (int i = 0; i < 4; i++) {
+                            Card card = CardFactory.createCard(cardEnum.getFilePath(), getCardValue(cardEnum.name()), getCardColor(cardEnum.name()), gameUno, gameUnoController);
+                            deckOfCards.push(card);
+                        }
+                    }
+                    Card card = CardFactory.createCard(cardEnum.getFilePath(), getCardValue(cardEnum.name()), getCardColor(cardEnum.name()), gameUno, gameUnoController);
+                    deckOfCards.push(card);
+                }
             }
         }
         Collections.shuffle(deckOfCards);

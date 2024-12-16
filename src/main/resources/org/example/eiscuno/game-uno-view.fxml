@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: orange;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.eiscuno.controller.GameUnoController">
@@ -27,9 +29,27 @@
       </Pane>
    </right>
    <center>
-      <Pane prefHeight="627.0" prefWidth="1097.0" BorderPane.alignment="CENTER">
+      <Pane fx:id="gamePane" prefHeight="627.0" prefWidth="1097.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="tableImageView" fitHeight="298.0" fitWidth="200.0" layoutX="500.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="tableImageView" fitHeight="298.0" fitWidth="200.0" layoutX="511.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+            <VBox fx:id="vBoxColorButtons" layoutX="234.0" layoutY="57.0" prefHeight="143.0" prefWidth="71.0" spacing="10.0">
+               <children>
+                  <Button fx:id="redButton" mnemonicParsing="false" text="RED" />
+                  <Button fx:id="blueButton" mnemonicParsing="false" text="BLUE" />
+                  <Button fx:id="yelowButton" mnemonicParsing="false" text="YELLOW" />
+                  <Button fx:id="greenButton" mnemonicParsing="false" text="GREEN" />
+               </children></VBox>
+            <Rectangle fx:id="rectangleColor" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="63.0" layoutX="410.0" layoutY="57.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="72.0" />
+            <Label fx:id="winLabel" layoutX="35.0" layoutY="248.0" prefHeight="53.0" prefWidth="462.0" text="WIN LABEL">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="turnLabel" layoutX="25.0" layoutY="89.0" prefHeight="34.0" prefWidth="197.0" text="TURNO LABEL">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </center>

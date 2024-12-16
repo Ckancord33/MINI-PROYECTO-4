@@ -2,16 +2,18 @@ package org.example.eiscuno.model.card;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.example.eiscuno.cardAbility.ICardAbility;
 
 /**
  * Represents a card in the Uno game.
  */
 public class Card implements ICard {
-    private String url;
-    private String value;
-    private String color;
-    private Image image;
-    private ImageView cardImageView;
+    protected String url;
+    protected String value;
+    protected String color;
+    protected Image image;
+    protected ImageView cardImageView;
+    protected ICardAbility ability;
 
     private static boolean testMode = false;
 
@@ -32,6 +34,7 @@ public class Card implements ICard {
             this.color = color;
             this.image = new Image(String.valueOf(getClass().getResource(url)));
             this.cardImageView = createCardImageView();
+            this.ability = ability;
         }
     }
 
@@ -82,5 +85,14 @@ public class Card implements ICard {
     @Override
     public String getColor() {
         return color;
+    }
+
+    @Override
+    public ICardAbility getAbility() {
+        return ability;
+    }
+
+    @Override
+    public void setColor(String color) {
     }
 }
