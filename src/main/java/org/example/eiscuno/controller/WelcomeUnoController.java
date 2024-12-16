@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
+import org.example.eiscuno.fileManager.FileManager;
 import org.example.eiscuno.threads.MusicPlayer;
 import org.example.eiscuno.view.GameUnoStage;
 import org.example.eiscuno.view.WelcomeUnoStage;
@@ -57,8 +58,8 @@ public class WelcomeUnoController {
     @FXML
     private HBox hBox;
     int controlSonido = 0;
-    int character = 0;
-    int biome = 0;
+    int character = 1;
+    int biome = 1;
     ImageView characterImageView = new ImageView();
     ImageView biomeImageView = new ImageView();
 
@@ -99,10 +100,29 @@ public class WelcomeUnoController {
     };
 
     public void initialize(){
-        characterChange(c1);
+
+        if (FileManager.loadCharacter()==1){
+            characterChange(c1);
+        }else if (FileManager.loadCharacter()==2){
+            characterChange(c2);
+        } else if (FileManager.loadCharacter()==3) {
+            characterChange(c3);
+        } else if (FileManager.loadCharacter()==4) {
+            characterChange(c4);
+        }
+
+        if(FileManager.loadBiome() == 1){
+            biomeChange(b1);
+        } else if (FileManager.loadBiome() == 2) {
+            biomeChange(b2);
+        }else if (FileManager.loadBiome() == 3) {
+            biomeChange(b3);
+        }
+
+
         hBox.setMouseTransparent(true);
         hBox.setVisible(false);
-        biomeChange(b1);
+
 
 
         handleMusicRev();
@@ -234,6 +254,9 @@ public class WelcomeUnoController {
             characterChange(c1);
             hBoxTransition();
             character = 1;
+            FileManager.updateLine(0, String.valueOf(character));
+            System.out.println(character);
+            System.out.println(getCharacter());
         });
         CI1.getStyleClass().add("imageView1");
 
@@ -244,6 +267,9 @@ public class WelcomeUnoController {
             characterChange(c2);
             hBoxTransition();
             character = 2;
+            System.out.println(character);
+            FileManager.updateLine(0, String.valueOf(character));
+            System.out.println(getCharacter());
         });
         CI2.getStyleClass().add("imageView1");
 
@@ -255,6 +281,9 @@ public class WelcomeUnoController {
             characterChange(c3);
             hBoxTransition();
             character = 3;
+            System.out.println(character);
+            FileManager.updateLine(0, String.valueOf(character));
+            System.out.println(getCharacter());
         });
         CI3.getStyleClass().add("imageView1");
 
@@ -266,6 +295,9 @@ public class WelcomeUnoController {
             characterChange(c4);
             hBoxTransition();
             character = 4;
+            System.out.println(character);
+            FileManager.updateLine(0, String.valueOf(character));
+            System.out.println(getCharacter());
         });
         CI4.getStyleClass().add("imageView1");
 
@@ -282,6 +314,7 @@ public class WelcomeUnoController {
         hBox.setMouseTransparent(false);
         optionsImageView.setMouseTransparent(false);
         optionsImageView.setVisible(true);
+
     }
 
 public void handleBiome(){
@@ -294,6 +327,7 @@ public void handleBiome(){
             biomeChange(b1);
             hBoxTransition();
             biome = 1;
+        FileManager.updateLine(1, String.valueOf(biome));
         });
     BI1.getStyleClass().add("imageView1");
 
@@ -303,7 +337,8 @@ public void handleBiome(){
     BI2.setOnMousePressed(mouseEvent -> {
         biomeChange(b2);
         hBoxTransition();
-        biome = 1;
+        biome = 2;
+        FileManager.updateLine(1, String.valueOf(biome));
     });
     BI2.getStyleClass().add("imageView1");
 
@@ -311,9 +346,11 @@ public void handleBiome(){
     BI3.setFitHeight(hBox.getHeight());
     BI3.setFitWidth(hBox.getWidth()/3);
     BI3.setOnMousePressed(mouseEvent -> {
-        biomeChange(b2);
+        biomeChange(b3);
         hBoxTransition();
-        biome = 1;
+        biome = 3;
+        FileManager.updateLine(1, String.valueOf(biome));
+        System.out.println(String.valueOf(biome));
     });
     BI3.getStyleClass().add("imageView1");
 

@@ -1,0 +1,12 @@
+.deckCards{
+    -fx-background-size: 118,164;
+    -fx-background-image: url('../cards-uno/card_uno.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+.deckCards:hover{
+    -fx-background-image: url('../cards-uno/card_uno.png');
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+    /*-fx-effect: dropshadow(gaussian, rgba(255, 241, 216, 0.5), 15, 0.7, 0,0);*/
+}

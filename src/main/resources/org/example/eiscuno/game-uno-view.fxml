@@ -1,60 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: orange;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.eiscuno.controller.GameUnoController">
-   <left>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="deckButton" layoutX="25.0" layoutY="78.0" mnemonicParsing="false" onAction="#onHandleTakeCard" prefHeight="250.0" prefWidth="157.0" text="Baraja" />
-         </children>
-      </Pane>
-   </left>
-   <right>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button layoutX="55.0" layoutY="141.0" mnemonicParsing="false" onAction="#onHandleUno" prefHeight="50.0" prefWidth="100.0" text="UNO" />
-         </children>
-      </Pane>
-   </right>
-   <center>
-      <Pane fx:id="gamePane" prefHeight="627.0" prefWidth="1097.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fx:id="tableImageView" fitHeight="298.0" fitWidth="200.0" layoutX="511.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-            <VBox fx:id="vBoxColorButtons" layoutX="234.0" layoutY="57.0" prefHeight="143.0" prefWidth="71.0" spacing="10.0">
-               <children>
-                  <Button fx:id="redButton" mnemonicParsing="false" text="RED" />
-                  <Button fx:id="blueButton" mnemonicParsing="false" text="BLUE" />
-                  <Button fx:id="yelowButton" mnemonicParsing="false" text="YELLOW" />
-                  <Button fx:id="greenButton" mnemonicParsing="false" text="GREEN" />
-               </children></VBox>
-            <Rectangle fx:id="rectangleColor" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="63.0" layoutX="410.0" layoutY="57.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="72.0" />
-            <Label fx:id="winLabel" layoutX="35.0" layoutY="248.0" prefHeight="53.0" prefWidth="462.0" text="WIN LABEL">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Label>
-            <Label fx:id="turnLabel" layoutX="25.0" layoutY="89.0" prefHeight="34.0" prefWidth="197.0" text="TURNO LABEL">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-   </center>
-   <top>
-      <HBox alignment="CENTER" prefHeight="284.0" prefWidth="1600.0" spacing="10.0" BorderPane.alignment="CENTER">
+
+<AnchorPane minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.eiscuno.controller.GameUnoController">
+   <children>
+      <ImageView fx:id="bg" fitHeight="900.0" fitWidth="1600.0" pickOnBounds="true" preserveRatio="true" />
+      <HBox alignment="CENTER" prefHeight="284.0" prefWidth="1600.0" spacing="10.0">
          <children>
             <Label text="UNO!" textFill="RED">
                <font>
@@ -72,18 +36,50 @@
                   <RowConstraints />
                </rowConstraints>
             </GridPane>
-            <Button mnemonicParsing="false" onAction="#onHandleExitButton" text="Salir" />
+            <Circle fx:id="machineCircle" fill="#1f93ff00" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
          </children>
       </HBox>
-   </top>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="262.0" prefWidth="1600.0" BorderPane.alignment="CENTER">
+      <ImageView fx:id="deckCard21" fitHeight="250.0" fitWidth="157.0" layoutX="140.0" layoutY="344.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="-8.0" styleClass="deckCards" />
+      <ImageView fx:id="deckCard" fitHeight="164.0" fitWidth="118.0" layoutX="159.0" layoutY="347.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="deckCards" />
+      <ImageView fx:id="tableImageView" fitHeight="298.0" fitWidth="200.0" layoutX="695.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="deckCard2" fitHeight="164.0" fitWidth="118.0" layoutX="1410.0" layoutY="658.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="deckButton" layoutX="159.0" layoutY="345.0" mnemonicParsing="false" onAction="#onHandleTakeCard" prefHeight="250.0" prefWidth="157.0" styleClass="deckCards" />
+      <VBox fx:id="vBoxColorButtons" layoutX="434.0" layoutY="408.0" prefHeight="143.0" prefWidth="71.0" spacing="10.0">
          <children>
+            <Button fx:id="redButton" mnemonicParsing="false" text="RED" />
+            <Button fx:id="blueButton" mnemonicParsing="false" text="BLUE" />
+            <Button fx:id="yelowButton" mnemonicParsing="false" text="YELLOW" />
+            <Button fx:id="greenButton" mnemonicParsing="false" text="GREEN" />
+         </children>
+      </VBox>
+      <Rectangle fx:id="rectangleColor" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="63.0" layoutX="513.0" layoutY="334.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="72.0" />
+      <Label fx:id="winLabel" layoutX="1355.0" layoutY="298.0" prefHeight="53.0" prefWidth="219.0" text="WIN LABEL">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="turnLabel" layoutX="359.0" layoutY="290.0" prefHeight="34.0" prefWidth="197.0" text="TURNO LABEL">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="1421.0" layoutY="429.0" mnemonicParsing="false" onAction="#onHandleUno" prefHeight="50.0" prefWidth="100.0" text="UNO" />
+      <HBox alignment="CENTER" layoutX="-1.0" layoutY="638.0" prefHeight="262.0" prefWidth="1600.0">
+         <children>
+            <Circle fx:id="playerCircle" fill="#1f93ff00" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+               <HBox.margin>
+                  <Insets right="-400.0" />
+               </HBox.margin>
+            </Circle>
             <Button mnemonicParsing="false" onAction="#onHandleBack" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: red;" text="Anterior" textFill="WHITE">
                <font>
                   <Font name="Berlin Sans FB" size="12.0" />
-               </font></Button>
-            <GridPane fx:id="gridPaneCardsPlayer" prefHeight="262.0" prefWidth="892.0">
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+            <GridPane fx:id="gridPaneCardsPlayer" prefHeight="262.0" prefWidth="645.0">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -97,5 +93,7 @@
             <Button mnemonicParsing="false" onAction="#onHandleNext" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: RED;" text="Siguiente" textFill="WHITE" />
          </children>
       </HBox>
-   </bottom>
-</BorderPane>
+      <Button layoutX="1254.0" layoutY="278.0" mnemonicParsing="false" onAction="#onHandleExitButton" text="Salir" />
+      <ImageView fx:id="deckCard1" fitHeight="164.0" fitWidth="118.0" layoutX="1403.0" layoutY="651.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
