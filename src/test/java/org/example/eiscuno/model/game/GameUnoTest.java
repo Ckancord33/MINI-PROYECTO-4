@@ -39,7 +39,7 @@ class GameUnoTest {
 
 
     /**
-     *
+     * Test to check that the game over status returns null at the start of the game
      */
     @Test
     public void testGameOverReturnsNullAtStart() {
@@ -55,6 +55,9 @@ class GameUnoTest {
         Assertions.assertNull(myGameUno.isGameOver());
     }
 
+    /**
+     * Test to check that the turn changes to the machine correctly at the start of the game
+     */
     @Test
     public void testChangeTurnAtStartChangesToMachineTurn() {
         Player humanPlayer = new Player("HUMAN_PLAYER");
@@ -65,9 +68,7 @@ class GameUnoTest {
         deck.initializeDeck(myGameUno, new GameUnoController());
         myGameUno.startGame();
 
-        // Change turn starting the game
         myGameUno.changeTurn();
-
         Assertions.assertTrue(myGameUno.getIsMachineTurn());
     }
 }
