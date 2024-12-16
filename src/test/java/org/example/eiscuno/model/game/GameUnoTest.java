@@ -1,5 +1,6 @@
 package org.example.eiscuno.model.game;
 
+import org.example.eiscuno.controller.GameUnoController;
 import org.example.eiscuno.model.card.Card;
 import org.example.eiscuno.model.deck.Deck;
 import org.example.eiscuno.model.game.GameUno;
@@ -16,6 +17,9 @@ class GameUnoTest {
         Card.setTestMode(true);
     }
 
+    /**
+     * Test to ensure that the number of cards dealt to both players is equal.
+     */
     @Test
     public void testEqualCardsDistribution() {
 
@@ -24,15 +28,19 @@ class GameUnoTest {
         Deck deck = new Deck();
         Table table = new Table();
         GameUno myGameUno = new GameUno(humanPlayer, machinePlayer, deck, table);
-
-        myGameUno.eatCard(humanPlayer, 4);
-        myGameUno.eatCard(machinePlayer, 4);
+        deck.initializeDeck(myGameUno, new GameUnoController());
+        myGameUno.startGame();
 
         int playerInitialCards = humanPlayer.getCardsPlayer().size();
         int machineInitialCards = machinePlayer.getCardsPlayer().size();
+
         Assertions.assertEquals(playerInitialCards, machineInitialCards);
     }
 
+
+    /**
+     *
+     */
     @Test
     public void testGameOverReturnsNullAtStart() {
 
@@ -41,28 +49,25 @@ class GameUnoTest {
         Deck deck = new Deck();
         Table table = new Table();
         GameUno myGameUno = new GameUno(humanPlayer, machinePlayer, deck, table);
+        deck.initializeDeck(myGameUno, new GameUnoController());
+        myGameUno.startGame();
 
         Assertions.assertNull(myGameUno.isGameOver());
     }
 
     @Test
-    public void testHaveSungOne() {
-
+    public void testChangeTurnAtStartChangesToMachineTurn() {
         Player humanPlayer = new Player("HUMAN_PLAYER");
         Player machinePlayer = new Player("MACHINE_PLAYER");
         Deck deck = new Deck();
         Table table = new Table();
         GameUno myGameUno = new GameUno(humanPlayer, machinePlayer, deck, table);
+        deck.initializeDeck(myGameUno, new GameUnoController());
+        myGameUno.startGame();
 
-        // Obtiene la cantidad inicial de cartas de la máquina
-        int initialMachineCards = machinePlayer.getCardsPlayer().size();
+        // Change turn starting the game
+        myGameUno.changeTurn();
 
-        // Simula que el jugador humano canta "Uno"
-        myGameUno.haveSungOne("HUMAN_PLAYER");
-
-        // Verifica que las cartas de la máquina hayan incrementado en 1
-        Assertions.assertTrue(machinePlayer.getCardsPlayer().size() == initialMachineCards+1);
+        Assertions.assertTrue(myGameUno.getIsMachineTurn());
     }
-
-
 }

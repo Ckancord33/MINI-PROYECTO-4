@@ -27,7 +27,7 @@ public class Card implements ICard {
      * @param url the URL of the card image
      * @param value of the card
      */
-    public Card(String url, String value, String color) {
+    public Card(String url, String value, String color, ICardAbility ability) {
         if (!testMode) {
             this.url = url;
             this.value = value;

@@ -5,17 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ee8ff40-bbdd-4aec-a3d2-cf5cc45130ec" name="Changes" comment="Merge del menu de configuracion de sonido con codigo que contiene el patron command, ahora la maquina sigue las reglas y el skip y el reverse funcionan. Falta arreglar unos bugs">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/DrawFourAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/DrawFourAbility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/DrawTwoAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/DrawTwoAbility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/WildAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/WildAbility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/controller/GameUnoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/controller/GameUnoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/SpecialColorCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/SpecialColorCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/deck/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/deck/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/game/GameUno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/game/GameUno.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/machine/ThreadPlayMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/machine/ThreadPlayMachine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/machine/ThreadSingUNOMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/machine/ThreadSingUNOMachine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/game-uno-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/game-uno-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/eiscuno/model/game/GameUnoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/eiscuno/model/game/GameUnoTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +72,7 @@
     "Application.HelloApplication.executor": "Run",
     "Application.Main.executor": "Run",
     "JUnit.GameUnoTest.executor": "Run",
+    "JUnit.GameUnoTest.testEqualCardsDistribution.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -85,7 +80,6 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "CCPC",
-    "git-widget-placeholder": "NDC",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/PC/Desktop/universidad/semestre 3/FPOE/MINI-PROYECTO-4",
@@ -118,7 +112,7 @@
       <recent name="org.example.eiscuno.view" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.GameUnoTest">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.eiscuno.Main" />
       <module name="eisc-uno" />
@@ -147,9 +141,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GameUnoTest.testEqualCardsDistribution" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="eisc-uno" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.eiscuno.model.game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.eiscuno.model.game" />
+      <option name="MAIN_CLASS_NAME" value="org.example.eiscuno.model.game.GameUnoTest" />
+      <option name="METHOD_NAME" value="testEqualCardsDistribution" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.GameUnoTest" />
+        <item itemvalue="JUnit.GameUnoTest.testEqualCardsDistribution" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -227,15 +238,6 @@
       <updated>1733945228730</updated>
     </task>
     <option name="localTasksCounter" value="4" />
-    <task id="LOCAL-00001" summary="Merge del codigo de miguel con el mio">
-      <option name="closed" value="true" />
-      <created>1733836990211</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1733836990212</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,8 +261,7 @@
     <MESSAGE value="Skeleton de la implementacion de los comandos" />
     <MESSAGE value="Merge del menu de configuracion de sonido con codigo que contiene el patron command, ahora la maquina sigue las reglas y el skip y el reverse funcionan. Falta arreglar unos bugs" />
     <MESSAGE value="un arreglito ;D" />
-    <option name="LAST_COMMIT_MESSAGE" value="un arreglito ;D" />
     <MESSAGE value="Merge del codigo de miguel con el mio" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge del codigo de miguel con el mio" />
+    <option name="LAST_COMMIT_MESSAGE" value="un arreglito ;D" />
   </component>
 </project>
