@@ -1,5 +1,7 @@
 package org.example.eiscuno.controller;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,6 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import org.example.eiscuno.model.card.Card;
 import org.example.eiscuno.model.deck.Deck;
 import org.example.eiscuno.model.game.GameUno;
@@ -60,6 +63,9 @@ public class GameUnoController {
     private Button yelowButton;
 
     @FXML
+    private Button ButtonUno;
+
+    @FXML
     private Rectangle rectangleColor;
 
     @FXML
@@ -78,12 +84,25 @@ public class GameUnoController {
     private ThreadSingUNOMachine threadSingUNOMachine;
     private ThreadPlayMachine threadPlayMachine;
 
+    private boolean unoButtonPressed = false;
+    private PauseTransition unoTimer;
+
+
     /**
      * Initializes the controller.
      */
     @FXML
     public void initialize() throws IOException{
         initVariables();
+
+        // Inicializar el temporizador dinámico para "UNO"
+        unoTimer = new PauseTransition();
+        unoTimer.setOnFinished(event -> {
+            if (!unoButtonPressed) {
+                penalizeForNotSingingUno();
+            }
+        });
+
         this.gameUno.startGame();
         printCardsHumanPlayer();
         printCardsMachinePlayer();
@@ -100,6 +119,7 @@ public class GameUnoController {
         Card card = deck.takeCard();
         table.addCardOnTheTable(card);
         tableImageView.setImage(card.getImage());
+
     }
 
     /**
@@ -131,7 +151,42 @@ public class GameUnoController {
 
             this.gridPaneCardsPlayer.add(cardImageView, i, 0);
         }
+
+        // Comprobar si se debe iniciar el temporizador "UNO"
+        checkStartUnoTimer();
     }
+
+    /**
+     * Adds to cards to the human player when this does not click the UNO button on time
+     */
+    /**
+     * Adds a penalty card to the human player if they do not say "UNO" in time.
+     */
+    public void penalizeForNotSingingUno() {
+        System.out.println("El jugador no cantó UNO a tiempo. Comiendo una carta...");
+        gameUno.eatCard(humanPlayer, 1);
+        printCardsHumanPlayer();
+    }
+
+    /**
+     * Checks if the human player has one card and starts the UNO timer if necessary.
+     */
+    private void checkStartUnoTimer() {
+        if (unoTimer == null) {
+            System.out.println("Error: el temporizador UNO no está inicializado.");
+            return;
+        }
+
+        if (humanPlayer.getCardsPlayer().size() == 1 && !unoButtonPressed) {
+            int delay = 2 + (int) (Math.random() * 3); // Generar # aleatorio entre 2 y 4 segundos
+            System.out.println("Iniciando temporizador UNO: " + delay + " segundos.");
+            unoTimer.setDuration(Duration.seconds(delay));
+            unoTimer.playFromStart();
+        } else {
+            unoTimer.stop();
+        }
+    }
+
 
     public void setVisibleRectangleColor(String color){
         this.rectangleColor.setVisible(true);
@@ -271,9 +326,18 @@ public class GameUnoController {
      *
      * @param event the action event
      */
+    /**
+     * Handles the action of saying "Uno".
+     *
+     * @param event el evento de acción
+     */
     @FXML
     void onHandleUno(ActionEvent event) {
-        // Implement logic to handle Uno event here
+        if (humanPlayer.getCardsPlayer().size() == 1) {
+            unoButtonPressed = true;
+            System.out.println("UNO presionado a tiempo.");
+            unoTimer.stop();
+        }
     }
 
     @FXML
