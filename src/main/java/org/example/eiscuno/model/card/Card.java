@@ -15,6 +15,12 @@ public class Card implements ICard {
     protected ImageView cardImageView;
     protected ICardAbility ability;
 
+    private static boolean testMode = false;
+
+    public static void setTestMode(boolean testMode) {
+        Card.testMode = testMode;
+    }
+
     /**
      * Constructs a Card with the specified image URL and name.
      *
@@ -22,12 +28,14 @@ public class Card implements ICard {
      * @param value of the card
      */
     public Card(String url, String value, String color, ICardAbility ability) {
-        this.url = url;
-        this.value = value;
-        this.color = color;
-        this.image = new Image(String.valueOf(getClass().getResource(url)));
-        this.cardImageView = createCardImageView();
-        this.ability = ability;
+        if (!testMode) {
+            this.url = url;
+            this.value = value;
+            this.color = color;
+            this.image = new Image(String.valueOf(getClass().getResource(url)));
+            this.cardImageView = createCardImageView();
+            this.ability = ability;
+        }
     }
 
     /**
