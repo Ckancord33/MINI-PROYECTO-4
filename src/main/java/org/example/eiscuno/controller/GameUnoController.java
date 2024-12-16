@@ -11,10 +11,7 @@ import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -32,7 +29,10 @@ import org.example.eiscuno.threads.MusicPlayer;
 import org.example.eiscuno.view.GameUnoStage;
 import org.example.eiscuno.view.WelcomeUnoStage;
 
+import javax.sound.sampled.*;
+import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 /**
  * Controller class for the Uno game.
@@ -46,7 +46,7 @@ public class GameUnoController {
     private Button deckButton;
 
     @FXML
-    private Pane gamePane;
+    private AnchorPane gamePane;
 
     @FXML
     private ImageView greenButton;
@@ -66,9 +66,6 @@ public class GameUnoController {
 
     @FXML
     private ImageView yelowButton;
-
-    @FXML
-    private Rectangle rectangleColor;
 
     @FXML
     private Label winLabel;
@@ -99,7 +96,12 @@ public class GameUnoController {
     private Button backButton;
     @FXML
     private ImageView deckCard12;
-
+    @FXML
+    private Button exitButton;
+    @FXML
+    private Rectangle rect;
+    @FXML
+    private Label turnLabel1;
 
     int indice = 0;
     private Player humanPlayer;
@@ -151,6 +153,7 @@ public class GameUnoController {
     @FXML
     public void initialize() throws IOException{
 
+        rect.setVisible(false);
         deckButton.setEffect(new ImageInput(new Image(getClass().getResource("/org/example/eiscuno/cards-uno/card_uno.png").toExternalForm())));
         deckCard1.setImage(new Image(getClass().getResource("/org/example/eiscuno/cards-uno/card_uno.png").toExternalForm()));
         deckCard12.setImage(new Image(getClass().getResource("/org/example/eiscuno/cards-uno/card_uno.png").toExternalForm()));
@@ -368,18 +371,31 @@ public class GameUnoController {
         }
     }
 
-    public void setVisibleRectangleColor(String color){
-        this.rectangleColor.setVisible(true);
-        if(color.equals("RED")){
-            this.rectangleColor.setFill(javafx.scene.paint.Color.RED);
-        } else if(color.equals("BLUE")){
-            this.rectangleColor.setFill(javafx.scene.paint.Color.BLUE);
-        } else if(color.equals("GREEN")){
-            this.rectangleColor.setFill(javafx.scene.paint.Color.GREEN);
-        } else if(color.equals("YELLOW")){
-            this.rectangleColor.setFill(javafx.scene.paint.Color.YELLOW);
+    private void createExperience(Pane pane, double startX, double startY) {
+        for(int i = 0; i < 500; i++) {
+            Random random = new Random();
+            Circle experience = new Circle(random.nextInt(5) + 2);
+
+            experience.setLayoutX(startX + random.nextInt(1600)); // Posición inicial cercana al TextField
+            experience.setLayoutY(startY);
+            experience.setStroke(Color.GREENYELLOW);
+            experience.setStrokeWidth(2);
+            experience.setFill(Color.LIMEGREEN);
+
+            pane.getChildren().add(experience);
+
+            double paneHeight = pane.getHeight();
+
+            TranslateTransition transition = new TranslateTransition(Duration.seconds(random.nextDouble(7) + 2), experience);
+            transition.setByY(paneHeight - startY); // Caída hasta el final de la pantalla
+            transition.setByX(random.nextInt(200) - 25); // Movimiento lateral aleatorio
+            transition.setInterpolator(Interpolator.LINEAR); // Movimiento suave y constante
+            //transition.setOnFinished(e -> pane.getChildren().remove(experience)); // Eliminar confeti cuando caiga
+            transition.play();
         }
     }
+
+
 
     public void onHandlePlayCard(Card card){
         handleGameOver();
@@ -390,18 +406,13 @@ public class GameUnoController {
         if(card != null) {
             tableImageView.setImage(card.getImage());
             printCardsHumanPlayer();
-            setRectangleColorVisibility(card);
             tableEffect(card.getColor());
             handleGameOver();
             updateTurnLabel();
         }
     }
 
-    public void setRectangleColorVisibility(Card card){
-        if(!(card.getValue().equals("WILD") || card.getValue().equals("FOUR_WILD_DRAW"))){
-            this.rectangleColor.setVisible(false);
-        }
-    }
+
 
     public void printCardsMachinePlayer() {
         this.gridPaneCardsMachine.getChildren().clear();
@@ -436,7 +447,7 @@ public class GameUnoController {
         yelowButton.setOnMousePressed(event -> chooseColor("YELLOW"));
         yelowButton.setOnMouseEntered(mouseEvent -> yelowButton.toFront());
         colorButtonsVisible(false);
-        this.rectangleColor.setVisible(false);
+
     }
 
     public void tableEffect(String color){
@@ -462,16 +473,12 @@ public class GameUnoController {
         gameUno.setColorToCardPlayed(color);
         colorButtonsVisible(false);
         if(color.equals("RED")){
-            this.rectangleColor.setFill(javafx.scene.paint.Color.RED);
             tableImageView.setStyle(" -fx-effect: dropshadow(gaussian, rgba(225,0,0,0.5), 15, 0.7, 0, 0);");
         } else if(color.equals("BLUE")){
-            this.rectangleColor.setFill(javafx.scene.paint.Color.BLUE);
             tableImageView.setStyle(" -fx-effect: dropshadow(gaussian, rgba(0,30,225,0.5), 15, 0.7, 0, 0);");
         } else if(color.equals("GREEN")){
-            this.rectangleColor.setFill(javafx.scene.paint.Color.GREEN);
             tableImageView.setStyle(" -fx-effect: dropshadow(gaussian, rgba(41,225,0,0.5), 15, 0.7, 0, 0);");
         } else if(color.equals("YELLOW")){
-            this.rectangleColor.setFill(javafx.scene.paint.Color.YELLOW);
             tableImageView.setStyle(" -fx-effect: dropshadow(gaussian, rgba(225,180,0,0.5), 15, 0.7, 0, 0);");
         }
         printCardsHumanPlayer();
@@ -504,8 +511,10 @@ public class GameUnoController {
     public void updateTurnLabel(){
         if(gameUno.getIsMachineTurn()){
             turnLabel.setText("Turno de la maquina");
+            turnLabel1.setText("Turno de la maquina");
         }else{
             turnLabel.setText("Tu turno");
+            turnLabel1.setText("Tu turno");
         }
     }
 
@@ -582,8 +591,6 @@ public class GameUnoController {
         ParallelTransition transition = new ParallelTransition(rotation,scale);
         transition.play();
         transition.setOnFinished(actionEvent -> {
-            this.rectangleColor.setVisible(true);
-            this.rectangleColor.setFill(Color.TRANSPARENT);
         });
 
     }
@@ -609,8 +616,12 @@ public class GameUnoController {
             winLabel.setVisible(true);
             if(gameUno.getWinner().equals("HUMAN_PLAYER")){
                 winLabel.setText("GANASTE FIERA!");
+                playSound("src/main/resources/org/example/eiscuno/sounds/experienceSound.wav",0);
+                createExperience(gamePane,gamePane.getLayoutX(),gamePane.getLayoutY());
             }else {
                 winLabel.setText("PERDISTE JAJAJA");
+                rect.setVisible(true);
+                rect.setMouseTransparent(false);
             }
             turnLabel.setText("");
             threadPlayMachine.interrupt();
@@ -649,6 +660,25 @@ public class GameUnoController {
             ParallelTransition parallel = new ParallelTransition(deckMove, rotation);
             parallel.setCycleCount(cardsNumber);
             parallel.play();
+        }
+    }
+
+
+    public void playSound(String nombreSonido, float volumen){
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(nombreSonido).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+
+            FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+
+            if (volume != null) {
+                volume.setValue(volumen);
+            }
+
+        } catch(UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            System.out.println("Error al reproducir el sonido.");
         }
     }
 }

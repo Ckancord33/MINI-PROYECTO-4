@@ -56,9 +56,7 @@ public class ThreadPlayMachine extends Thread {
                 if(gameUno.getIsPlayerSelectingColor()){
                     String color = colors[(int)(Math.random() * 4)];
                     gameUno.setColorToCardPlayed(color);
-                    controller.setVisibleRectangleColor(color);
                 }
-                Platform.runLater(() -> controller.setRectangleColorVisibility(card));
                 Platform.runLater(() -> controller.tableEffect(card.getColor()));
                 return;
             }

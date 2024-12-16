@@ -38,7 +38,7 @@ public class Deck {
                         cardEnum.name().equals("FOUR_WILD_DRAW") ||
                         cardEnum.name().equals("WILD")) {
                     if (cardEnum.name().equals("WILD") || cardEnum.name().equals("FOUR_WILD_DRAW")) {
-                        for (int i = 0; i < 30; i++) {
+                        for (int i = 0; i < 4; i++) {
                             Card card = CardFactory.createCard(cardEnum.getFilePath(), getCardValue(cardEnum.name()), getCardColor(cardEnum.name()), gameUno, gameUnoController);
                             deckOfCards.push(card);
                         }

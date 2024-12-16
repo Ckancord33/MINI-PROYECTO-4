@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+
 .deckCards{
     -fx-background-size: 118,164;
     -fx-background-image: url('../cards-uno/card_uno.png');
@@ -27,4 +30,27 @@
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
 }
-
+ #exitButton{
+     -fx-background-image: url('../images/exit.png');
+ }
+ #nextButton{
+     -fx-background-image: url('../images/next.png');
+ }
+ #backButton{
+     -fx-background-image: url('../images/back.png');
+ }
+ .button:hover{
+     -fx-cursor: hand;
+     -fx-scale-x: 1.1;
+     -fx-scale-y: 1.1;
+     -fx-effect: dropshadow(gaussian, rgba(255, 241, 216, 0.5), 15, 0.7, 0, 0);
+ }
+#turnLabel{
+    -fx-font-size: 36;
+    -fx-font-family: 'VT323', monospace;
+    -fx-text-fill: white;
+}#turnLabel1{
+     -fx-font-size: 36;
+     -fx-font-family: 'VT323', monospace;
+     -fx-text-fill: black;
+ }
