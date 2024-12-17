@@ -1,5 +1,8 @@
 package org.example.eiscuno.model.machine;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.util.Duration;
 import org.example.eiscuno.controller.GameUnoController;
 import org.example.eiscuno.model.card.Card;
 
@@ -7,14 +10,14 @@ import java.util.ArrayList;
 
 public class ThreadSingUNOMachine implements Runnable{
     private ArrayList<Card> cardsPlayer;
-    private volatile boolean unoAnnounced;
-
+    private boolean machineRealized;
+    private boolean unoAnnounced;
     private volatile boolean running;
     private GameUnoController controller;
 
-    public ThreadSingUNOMachine(ArrayList<Card> cardsPlayer){
+    public ThreadSingUNOMachine(ArrayList<Card> cardsPlayer, GameUnoController controller) {
         this.cardsPlayer = cardsPlayer;
-        this.unoAnnounced = false;
+        this.machineRealized = false;
         this.running = true; // Variable para controlar la ejecución del hilo
         this.controller = controller;
     }
@@ -29,18 +32,31 @@ public class ThreadSingUNOMachine implements Runnable{
                 break;
             }
             hasOneCardTheHumanPlayer();
+            hasOneCardTheMachinePlayer();
         }
     }
 
+    private void hasOneCardTheMachinePlayer() {
+
+    }
+
     private void hasOneCardTheHumanPlayer() {
-        if (cardsPlayer.size() == 1 && !unoAnnounced) {
-            System.out.println("UNO PARA USUARIO");
-            unoAnnounced = true;
-            controller.penalizeForNotSingingUno();
-        } else if (cardsPlayer.size() != 1 && unoAnnounced) {
+        if (cardsPlayer.size() != 1 && machineRealized) {
+            machineRealized = false;
             unoAnnounced = false;
+        }else if( cardsPlayer.size() == 1 && machineRealized && !unoAnnounced){
+            Platform.runLater(() -> controller.penalizeForNotSingingUno());
+            unoAnnounced = true;
+        }else if (cardsPlayer.size() == 1 && !machineRealized) {
+            System.out.println("LA MAQUINA SE DIO CUENTA QUE EL JUGADOR TIENE UNA CARTA");
+            machineRealized = true;
         }
     }
+    public void setUnoAnnounced(boolean unoAnnounced) {
+        this.unoAnnounced = unoAnnounced;
+    }
+
+
     public void stop() {
         running = false; // Detener la ejecución del hilo
     }

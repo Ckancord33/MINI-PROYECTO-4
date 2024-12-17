@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ee8ff40-bbdd-4aec-a3d2-cf5cc45130ec" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/eiscuno/model/game/GameUnoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="1ee8ff40-bbdd-4aec-a3d2-cf5cc45130ec" name="Changes" comment="Merge codigo de miguel con el de pinzon">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/controller/GameUnoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/controller/GameUnoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/machine/ThreadSingUNOMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/machine/ThreadSingUNOMachine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/game-uno-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/game-uno-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +65,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Merging NDC",
+    "git-widget-placeholder": "NDC",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/PC/Desktop/universidad/semestre 3/FPOE/MINI-PROYECTO-4",
     "list.type.of.created.stylesheet": "CSS",
@@ -155,9 +153,22 @@
       <workItem from="1734213973750" duration="3764000" />
       <workItem from="1734287851709" duration="16633000" />
     </task>
+    <task id="LOCAL-00001" summary="Merge codigo de miguel con el de pinzon">
+      <option name="closed" value="true" />
+      <created>1734391681995</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1734391681995</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merge codigo de miguel con el de pinzon" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge codigo de miguel con el de pinzon" />
   </component>
 </project>

@@ -15,8 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="gamePane" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.eiscuno.controller.GameUnoController">
+<AnchorPane fx:id="gamePane" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.eiscuno.controller.GameUnoController">
    <children>
       <ImageView fx:id="bg" fitHeight="900.0" fitWidth="1600.0" pickOnBounds="true" preserveRatio="true" />
       <HBox alignment="CENTER" prefHeight="284.0" prefWidth="1600.0" spacing="10.0">
@@ -88,7 +87,6 @@
             <Button fx:id="nextButton" mnemonicParsing="false" onAction="#onHandleNext" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: RED;" textFill="WHITE" />
          </children>
       </HBox>
-      <Button fx:id="exitButton" layoutX="1159.0" layoutY="278.0" mnemonicParsing="false" onAction="#onHandleExitButton" prefHeight="50.0" prefWidth="150.0" />
       <ImageView fx:id="deckCard1" fitHeight="164.0" fitWidth="118.0" layoutX="1403.0" layoutY="651.0" pickOnBounds="true" preserveRatio="true" />
       <Circle fx:id="c" fill="WHITE" layoutX="795.0" layoutY="448.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
       <Group fx:id="group">
@@ -116,6 +114,7 @@
          </children>
       </Group>
       <ImageView fx:id="deckCard12" fitHeight="164.0" fitWidth="118.0" layoutX="37.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="exitButton" layoutX="1219.0" layoutY="348.0" mnemonicParsing="false" onAction="#onHandleExitButton" prefHeight="50.0" prefWidth="150.0" />
       <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="#ff21217d" height="900.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" width="1600.0" />
       <Label fx:id="winLabel1" alignment="CENTER" layoutX="296.0" layoutY="248.0" prefHeight="88.0" prefWidth="1012.0">
          <font>

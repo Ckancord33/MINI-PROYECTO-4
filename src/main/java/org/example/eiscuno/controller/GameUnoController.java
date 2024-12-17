@@ -158,9 +158,6 @@ public class GameUnoController {
     };
 
 
-    private boolean unoButtonPressed = false;
-    private PauseTransition unoTimer;
-
 
     /**
      * Initializes the controller.
@@ -178,20 +175,13 @@ public class GameUnoController {
         deckCard.setImage(new Image(getClass().getResource("/org/example/eiscuno/cards-uno/card_uno.png").toExternalForm()));
         initVariables();
 
-        // Inicializar el temporizador dinámico para "UNO"
-        unoTimer = new PauseTransition();
-        unoTimer.setOnFinished(event -> {
-            if (!unoButtonPressed)
-                penalizeForNotSingingUno();
-        });
-
         this.gameUno.startGame();
         printCardsHumanPlayer();
         printCardsMachinePlayer();
         startColorVBoxButtons();
         updateTurnLabel();
 
-        threadSingUNOMachine = new ThreadSingUNOMachine(this.humanPlayer.getCardsPlayer());
+        threadSingUNOMachine = new ThreadSingUNOMachine(this.humanPlayer.getCardsPlayer(), this);
         Thread t = new Thread(threadSingUNOMachine, "ThreadSingUNO");
         t.start();
 
@@ -349,7 +339,7 @@ public class GameUnoController {
     }
     public void machineChange(){
 
-            machineImageView.setImage(new Image(getClass().getResource("/org/example/eiscuno/images/herobrine.jpg").toExternalForm()));
+        machineImageView.setImage(new Image(getClass().getResource("/org/example/eiscuno/images/herobrine.jpg").toExternalForm()));
 
             // Crear un ImageView y ajustar el tamaño
             double radius = machineCircle.getRadius();
@@ -396,42 +386,23 @@ public class GameUnoController {
             this.gridPaneCardsPlayer.add(cardImageView, i, 0);
         }
 
-        // Comprobar si se debe iniciar el temporizador "UNO"
-        checkStartUnoTimer();
     }
 
     /**
      * Adds a penalty card to the human player if they do not say "UNO" in time.
      */
     public void penalizeForNotSingingUno() {
-        if (unoButtonPressed) {
-            System.out.println("El jugador cantó UNO a tiempo. No hay penalización.");
-            return; // No penalizar si el jugador presionó el botón
-        }
         System.out.println("El jugador no cantó UNO a tiempo. Comiendo una carta...");
         gameUno.eatCard(humanPlayer, 1);
         printCardsHumanPlayer();
+        unoAnnuncedAnimation();
     }
 
 
     /**
      * Checks if the human player has one card and starts the UNO timer if necessary.
      */
-    private void checkStartUnoTimer() {
-        if (unoTimer == null) {
-            System.out.println("Error: el temporizador UNO no está inicializado.");
-            return;
-        }
 
-        if (humanPlayer.getCardsPlayer().size() == 1 && !unoButtonPressed) {
-            int delay = 2 + (int) (Math.random() * 3); // Generar # aleatorio entre 2 y 4 segundos
-            System.out.println("Iniciando temporizador UNO: " + delay + " segundos.");
-            unoTimer.setDuration(Duration.seconds(delay));
-            unoTimer.playFromStart();
-        } else {
-            unoTimer.stop();
-        }
-    }
 
 
     private void createExperience(Pane pane, double startX, double startY) {
@@ -472,11 +443,6 @@ public class GameUnoController {
             tableEffect(card.getColor());
             handleGameOver();
             updateTurnLabel();
-
-            // Reinicia el flag si el jugador tiene más de una carta
-            if (humanPlayer.getCardsPlayer().size() > 1) {
-                unoButtonPressed = false;
-            }
         }
     }
 
@@ -672,9 +638,8 @@ public class GameUnoController {
     @FXML
     void onHandleUno(ActionEvent event) {
         if (humanPlayer.getCardsPlayer().size() == 1) {
-            unoButtonPressed = true;
-            System.out.println("UNO presionado a tiempo.");
-            unoTimer.stop();
+            threadSingUNOMachine.setUnoAnnounced(true);
+            unoAnnuncedAnimation();
         }
     }
 
@@ -762,5 +727,32 @@ public class GameUnoController {
         } catch(UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
             System.out.println("Error al reproducir el sonido.");
         }
+    }
+
+    public void unoAnnuncedAnimation(){
+        Image image = new Image(getClass().getResource("/org/example/eiscuno/favicon3.png").toExternalForm());
+        ImageView unoAnuncedImageView = new ImageView(image);
+        unoAnuncedImageView.setFitWidth(200);
+        unoAnuncedImageView.setFitHeight(200);
+        unoAnuncedImageView.setPreserveRatio(true);
+        unoAnuncedImageView.setLayoutX((gamePane.getWidth() - unoAnuncedImageView.getFitWidth()) / 2);
+        unoAnuncedImageView.setLayoutY((gamePane.getHeight() - unoAnuncedImageView.getFitHeight()) / 2);
+
+        // Crear una transición de escala para agrandar la ImageView
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(2), unoAnuncedImageView);
+        scaleTransition.setFromX(1.0);
+        scaleTransition.setFromY(1.0);
+        scaleTransition.setToX(1.2);
+        scaleTransition.setToY(1.2);
+
+        // Crear una transición de desvanecimiento para hacer que la ImageView se vuelva transparente
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), unoAnuncedImageView);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+
+        // Combinar ambas transiciones en una transición paralela
+        ParallelTransition parallelTransition = new ParallelTransition(scaleTransition, fadeTransition);
+        parallelTransition.setOnFinished(event -> gamePane.getChildren().remove(unoAnuncedImageView));
+        parallelTransition.play();
     }
 }
