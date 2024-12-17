@@ -1,6 +1,7 @@
 package org.example.eiscuno.model.game;
 
 import org.example.eiscuno.cardAbility.AbilityInvoker;
+import org.example.eiscuno.exceptions.StarterSpecialCard;
 import org.example.eiscuno.model.card.Card;
 import org.example.eiscuno.model.deck.Deck;
 import org.example.eiscuno.model.player.Player;
@@ -64,10 +65,18 @@ public class GameUno implements IGameUno {
      */
     @Override
     public void chooseFirstCard() {
-        Card card = this.deck.takeCard();
-        while (card.getValue().equals("WILD") || card.getValue().equals("WILD_DRAW_FOUR")) {
-            this.deck.takeCard();
-            card = this.deck.takeCard();
+        Card card;
+        while (true) {
+            try {
+                card = this.deck.takeCard();
+                if(card.getValue().equals("WILD") || card.getValue().equals("FOUR_WILD_DRAW")){
+                    throw new StarterSpecialCard("The first card can't be a special card");
+                }
+                break;
+            }catch(StarterSpecialCard e){
+                System.out.println(e.getMessage());
+                this.deck.takeCard();
+            }
         }
         this.table.addCardOnTheTable(card);
     }

@@ -4,26 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ee8ff40-bbdd-4aec-a3d2-cf5cc45130ec" name="Changes" comment="se implemento el boton de uno y que la maquina se pueda proteger, asi como el jugador cuando le queda una carta">
+    <list default="true" id="1ee8ff40-bbdd-4aec-a3d2-cf5cc45130ec" name="Changes" comment="arreglo de musica y pequenos ajustes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/exceptions/StarterSpecialCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityInvoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityInvoker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/DrawFourAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/DrawFourAbility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/DrawTwoAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/DrawTwoAbility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/NumberCardAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/NumberCardAbility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/SkipAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/SkipAbility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/WildAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/WildAbility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/CardAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/CardAbility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/ICardAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/ICardAbility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/fileManager/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/fileManager/FileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/ICard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/ICard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardFactory/CardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardFactory/CardFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/NumberCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/NumberCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/SpecialCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/SpecialCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/SpecialColorCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/SpecialColorCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/deck/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/deck/Deck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/game/GameUno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/game/GameUno.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/game/IGameUno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/game/IGameUno.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/saves/saves.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/saves/saves.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +23,7 @@
         <option value="Interface" />
         <option value="CSS File" />
         <option value="Class" />
+        <option value="Exception" />
       </list>
     </option>
   </component>
@@ -76,13 +62,15 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Application.HelloApplication.executor": "Run",
     "Application.Main.executor": "Run",
-    "JUnit.GameUnoTest.executor": "Run",
+    "JUnit.GameUnoTest.testChangeTurnAtStartChangesToMachineTurn.executor": "Run",
+    "JUnit.GameUnoTest.testEqualCardsDistribution.executor": "Run",
+    "JUnit.GameUnoTest.testGameOverReturnsNullAtStart.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "CCPC",
+    "git-widget-placeholder": "NDC",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/PC/Desktop/universidad/semestre 3/FPOE/MINI-PROYECTO-4",
     "list.type.of.created.stylesheet": "CSS",
@@ -105,7 +93,7 @@
       <recent name="org.example.eiscuno.view" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameUnoTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.eiscuno.Main" />
       <module name="eisc-uno" />
@@ -119,7 +107,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameUnoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameUnoTest.testChangeTurnAtStartChangesToMachineTurn" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="eisc-uno" />
       <extension name="coverage">
         <pattern>
@@ -129,15 +117,50 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.example.eiscuno.model.game" />
       <option name="MAIN_CLASS_NAME" value="org.example.eiscuno.model.game.GameUnoTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="testChangeTurnAtStartChangesToMachineTurn" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameUnoTest.testEqualCardsDistribution" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="eisc-uno" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.eiscuno.model.game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.eiscuno.model.game" />
+      <option name="MAIN_CLASS_NAME" value="org.example.eiscuno.model.game.GameUnoTest" />
+      <option name="METHOD_NAME" value="testEqualCardsDistribution" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameUnoTest.testGameOverReturnsNullAtStart" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="eisc-uno" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.eiscuno.model.game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.eiscuno.model.game" />
+      <option name="MAIN_CLASS_NAME" value="org.example.eiscuno.model.game.GameUnoTest" />
+      <option name="METHOD_NAME" value="testGameOverReturnsNullAtStart" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GameUnoTest" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.GameUnoTest.testChangeTurnAtStartChangesToMachineTurn" />
+        <item itemvalue="JUnit.GameUnoTest.testGameOverReturnsNullAtStart" />
+        <item itemvalue="JUnit.GameUnoTest.testEqualCardsDistribution" />
       </list>
     </recent_temporary>
   </component>
@@ -210,7 +233,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734404475097</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="arreglo de musica y pequenos ajustes">
+      <option name="closed" value="true" />
+      <created>1734406135485</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1734406135485</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,6 +251,7 @@
     <MESSAGE value="Merge codigo de miguel con el de pinzon" />
     <MESSAGE value="Avance (tengo miedo de que se me valla la luz)" />
     <MESSAGE value="se implemento el boton de uno y que la maquina se pueda proteger, asi como el jugador cuando le queda una carta" />
-    <option name="LAST_COMMIT_MESSAGE" value="se implemento el boton de uno y que la maquina se pueda proteger, asi como el jugador cuando le queda una carta" />
+    <MESSAGE value="arreglo de musica y pequenos ajustes" />
+    <option name="LAST_COMMIT_MESSAGE" value="arreglo de musica y pequenos ajustes" />
   </component>
 </project>
