@@ -51,6 +51,11 @@ public class Deck {
         Collections.shuffle(deckOfCards);
     }
 
+    /**
+     * This method is used to determine the value of the card based on its enum name.
+     * @param name The name of the card from EISCUnoEnum
+     * @return A string representing the value of the card
+     */
     private String getCardValue(String name) {
         if (name.endsWith("0")){
             return "0";
@@ -88,6 +93,11 @@ public class Deck {
 
     }
 
+    /**
+     * This method determines the color of the card based on the prefix of the card's enum name
+     * @param name The name of the card from EISCUnoEnum
+     * @return A string representing the color of the card
+     */
     private String getCardColor(String name){
         if(name.startsWith("GREEN")){
             return "GREEN";

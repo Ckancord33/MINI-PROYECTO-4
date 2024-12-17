@@ -58,6 +58,10 @@ public class GameUno implements IGameUno {
         machinePlayer.addCard(this.deck.takeCard());
     }
 
+    /**
+     * Chooses the first card to be placed on the table at the beginning of the game
+     * Ensures that the chosen card is not a Wild or Wild Draw Four card
+     */
     @Override
     public void chooseFirstCard() {
         Card card = this.deck.takeCard();
@@ -109,22 +113,39 @@ public class GameUno implements IGameUno {
 
     }
 
+    /**
+     * Sets the color of a played card when it's a Wild or Wild Draw Four card
+     * @param color The color to assign
+     */
     @Override
     public void setColorToCardPlayed(String color){
         cardPlayed.setColor(color);
         isPlayerSelectingColor = false;
     }
 
+    /**
+     * Allows the player to select a color when playing a Wild card.
+     * @param isPlayerSelectingColor true if the player is selecting a color; false otherwise.
+     */
     @Override
     public void setIsPlayerSelectingColor(boolean isPlayerSelectingColor){
         this.isPlayerSelectingColor = isPlayerSelectingColor;
     }
 
+    /**
+     * Changes the turn between both players
+     * Updates the current player to the next turn
+     */
     @Override
     public void changeTurn(){
         isMachineTurn = !isMachineTurn;
     }
 
+    /**
+     * Finds the position of a specific card in the current player's hand.
+     * @param card The card to find
+     * @return The index of the card in the player's hand, or -1 if not found.
+     */
     @Override
     public Integer findPosCardsHumanPlayer(Card card) {
         for (int i = 0; i < this.actualPlayer.getCardsPlayer().size(); i++) {
@@ -135,6 +156,10 @@ public class GameUno implements IGameUno {
         return -1;
     }
 
+    /**
+     * Adds a card to the table
+     * @param card The card to add
+     */
     @Override
     public void addCardOnTheTable(Card card){
         this.table.addCardOnTheTable(card);
@@ -183,6 +208,10 @@ public class GameUno implements IGameUno {
         return null;
     }
 
+    /**
+     * Retrieves the player who will be the victim bbased on whose turn it is
+     * @return The victim player
+     */
     public Player getVictimPlayer(){
         if(isMachineTurn){
             this.victimPlayer = humanPlayer;
@@ -192,16 +221,27 @@ public class GameUno implements IGameUno {
         return victimPlayer;
     }
 
+    /**
+     * Retrieves the current turn status to determine if it's the machine's turn
+     * @return true if it is the machine's turn; false otherwise
+     */
     @Override
     public boolean getIsMachineTurn(){
         return isMachineTurn;
     }
 
+    /**
+     * Sets the turn to indicate whether it is the machine's turn or not
+     * @param isMachineTurn true if it is the machine's turn; false otherwise
+     */
     @Override
     public void setIsMachineTurn(boolean isMachineTurn){
         this.isMachineTurn = isMachineTurn;
     }
 
+    /**
+     * Updates the current active player in the game depending on the turn
+     */
     public void updateActualPlayer(){
         if(isMachineTurn){
             this.actualPlayer = machinePlayer;
@@ -210,16 +250,28 @@ public class GameUno implements IGameUno {
         }
     }
 
+    /**
+     * Retrieves the current player whose turn is active in the game
+     * @return The player currently playing
+     */
     @Override
     public Player getActualPlayer(){
         return actualPlayer;
     }
 
+    /**
+     * Checks if a player is currently selecting a color
+     * @return true if a player is selecting a color; false otherwise
+     */
     @Override
     public boolean getIsPlayerSelectingColor(){
         return isPlayerSelectingColor;
     }
 
+    /**
+     * Checks if the game is over by verifying if any player has no cards left
+     * @return true if the game is over; false otherwise.
+     */
     @Override
     public boolean checkIsGameOver(){
         if(humanPlayer.getCardsPlayer().isEmpty()){
@@ -233,6 +285,11 @@ public class GameUno implements IGameUno {
         }
         return false;
     }
+
+    /**
+     * Retrieves the winner of the game once it is over
+     * @return A string indicating the winner
+     */
     @Override
     public String getWinner(){
         return winner;

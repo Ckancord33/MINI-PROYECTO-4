@@ -8,6 +8,10 @@ import org.example.eiscuno.model.card.cardTypes.SpecialCard;
 import org.example.eiscuno.model.card.cardTypes.SpecialColorCard;
 import org.example.eiscuno.model.game.GameUno;
 
+/**
+ * Factory class for creating card instances in the game
+ * Determines the type of card to create based on its value and assigns the appropriate ability
+ */
 public class CardFactory {
     public static Card createCard(String url, String value, String color, GameUno gameUno, GameUnoController gameUnoController) {
         Card card = switch (value) {

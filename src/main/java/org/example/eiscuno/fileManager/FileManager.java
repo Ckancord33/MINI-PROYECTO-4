@@ -7,11 +7,20 @@ import java.util.*;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Manages file operations
+ * This class is used for loading and saving game data, such as character and biome information
+ */
 public class FileManager {
 
     private static final String FILE_PATH = "src/main/resources/org/example/eiscuno/saves/saves.txt"; // Ruta del archivo
 
-    // Método para modificar una línea específica en el archivo
+
+    /**
+     * Updates a specific line in the file with new content.
+     * @param lineNumber the zero based index of the line to update
+     * @param newContent the new content to write to the specified line
+     */
     public static void updateLine(int lineNumber, String newContent) {
         List<String> lines = new ArrayList<>();
 
@@ -45,7 +54,10 @@ public class FileManager {
         }
     }
 
-    // Método para cargar el personaje desde el archivo de texto
+    /**
+     * Loads the character information from the first line of the file
+     * @return the character data as an integer, or -1 if an error occurs or no data is found
+     */
     public static int loadCharacter() {
         int character = -1;
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
@@ -59,11 +71,14 @@ public class FileManager {
         return character;
     }
 
-    // Método para cargar el bioma desde el archivo de texto
+    /**
+     * Loads the biome information from the second line of the file
+     * The first line is skipped as it contains the character data
+     * @return the biome data as an integer, or -1 if an error occurs or no data is found
+     */
     public static int loadBiome() {
         int biome = -1;
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-            // Saltamos la primera línea (personaje)
             reader.readLine();
             String biomeLine = reader.readLine();
             if (biomeLine != null) {
