@@ -72,26 +72,47 @@ public class Card implements ICard {
         return image;
     }
 
+    /**
+     * Gets the value of the card
+     * @return The value of the card
+     */
     @Override
     public String getValue() {
         return value;
     }
 
+    /**
+     * Checks if the current card is playable based on the specified card
+     * @param card the card to compare
+     * @return True if the card is playable, false otherwise
+     */
     @Override
     public boolean isPlayable(ICard card) {
         return false;
     }
 
+    /**
+     * Gets the color of the card
+     * @return The color of the card
+     */
     @Override
     public String getColor() {
         return color;
     }
 
+    /**
+     * Gets the ability of the card
+     * @return The ability of the card
+     */
     @Override
     public ICardAbility getAbility() {
         return ability;
     }
 
+    /**
+     * Sets the color of the card
+     * @param color The new color of the card
+     */
     @Override
     public void setColor(String color) {
     }

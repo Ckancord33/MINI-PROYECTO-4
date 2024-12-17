@@ -60,6 +60,11 @@ public class Player implements IPlayer {
         return cardsPlayer.get(index);
     }
 
+    /**
+     * Retrieves the type of player.
+     *
+     * @return A string representing the type of player.
+     */
     public String getTypePlayer() {
         return typePlayer;
     }

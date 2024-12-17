@@ -42,6 +42,11 @@ public class GameUnoStage extends Stage {
         show(); // Displays the stage
     }
 
+    /**
+     * Gets the controller of GameUno
+     *
+     * @return the controller of GameUno
+     */
     public GameUnoController getGameUnoController() {
         return gameUnoController;
     }
