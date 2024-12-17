@@ -16,10 +16,10 @@ public class DrawTwoAbility extends CardAbility {
     @Override
     public void execute() {
         gameUno.eatCard(gameUno.getVictimPlayer(), 2);
-        Platform.runLater(() -> {
-            gameUnoController.printCardsMachinePlayer();
-            gameUnoController.printCardsHumanPlayer();}
-        );
+        Player player2 = gameUno.getVictimPlayer();
+        Platform.runLater(()->{
+            gameUnoController.eatCardAnimation(player2.getTypePlayer(), 2);
+        });
     }
 
 }

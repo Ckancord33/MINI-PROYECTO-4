@@ -53,7 +53,7 @@ public class MusicPlayer extends Thread {
         if (!isPlaying) {
             isPlaying = true;
             isPaused = false;
-            playTrack(filename, 0.0f);
+            playTrack(filename, -25.0f);
             if(isInterrupted()) {
                 start();  // Iniciar el hilo
             }
@@ -131,7 +131,7 @@ public class MusicPlayer extends Thread {
             float currentVolume = volumeControl.getValue();
             float maxVolume = volumeControl.getMaximum();
             if (currentVolume < maxVolume) {
-                volumeControl.setValue(currentVolume + 2.0f);
+                volumeControl.setValue(currentVolume + 4.0f);
             }
         }
     }
@@ -141,7 +141,7 @@ public class MusicPlayer extends Thread {
             float currentVolume = volumeControl.getValue();
             float minVolume = volumeControl.getMinimum();
             if (currentVolume > minVolume) {
-                volumeControl.setValue(currentVolume - 2.0f);
+                volumeControl.setValue(currentVolume - 4.0f);
             }
         }
     }
