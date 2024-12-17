@@ -2,7 +2,7 @@ package org.example.eiscuno.model.game;
 
 import org.example.eiscuno.cardAbility.AbilityInvoker;
 import org.example.eiscuno.exceptions.StarterSpecialCard;
-import org.example.eiscuno.model.card.Card;
+import org.example.eiscuno.model.card.ACard;
 import org.example.eiscuno.model.deck.Deck;
 import org.example.eiscuno.model.player.Player;
 import org.example.eiscuno.model.table.Table;
@@ -10,6 +10,11 @@ import org.example.eiscuno.model.table.Table;
 /**
  * Represents a game of Uno.
  * This class manages the game logic and interactions between players, deck, and the table.
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzón
+ * @author Fabian Valencia
+ * @version 1.0
  */
 public class GameUno implements IGameUno {
 
@@ -22,7 +27,7 @@ public class GameUno implements IGameUno {
     private Table table;
     private boolean isMachineTurn;
     private AbilityInvoker abilityInvoker;
-    private Card cardPlayed;
+    private ACard cardPlayed;
     private boolean isPlayerSelectingColor;
 
     /**
@@ -65,7 +70,7 @@ public class GameUno implements IGameUno {
      */
     @Override
     public void chooseFirstCard() {
-        Card card;
+        ACard card;
         while (true) {
             try {
                 card = this.deck.takeCard();
@@ -101,7 +106,7 @@ public class GameUno implements IGameUno {
      * @param card The card to be placed on the table.
      */
     @Override
-    public Card playCard(Card card) {
+    public ACard playCard(ACard card) {
         try {
             if(isPlayerSelectingColor){
                 return null;
@@ -156,7 +161,7 @@ public class GameUno implements IGameUno {
      * @return The index of the card in the player's hand, or -1 if not found.
      */
     @Override
-    public Integer findPosCardsHumanPlayer(Card card) {
+    public Integer findPosCardsHumanPlayer(ACard card) {
         for (int i = 0; i < this.actualPlayer.getCardsPlayer().size(); i++) {
             if (this.actualPlayer.getCardsPlayer().get(i).equals(card)) {
                 return i;
@@ -170,7 +175,7 @@ public class GameUno implements IGameUno {
      * @param card The card to add
      */
     @Override
-    public void addCardOnTheTable(Card card){
+    public void addCardOnTheTable(ACard card){
         this.table.addCardOnTheTable(card);
     }
 
@@ -195,10 +200,10 @@ public class GameUno implements IGameUno {
      * @return An array of cards visible to the human player.
      */
     @Override
-    public Card[] getCurrentVisibleCards(int posInitCardToShow, Player player) {
+    public ACard[] getCurrentVisibleCards(int posInitCardToShow, Player player) {
         int totalCards = player.getCardsPlayer().size();
         int numVisibleCards = Math.min(4, totalCards - posInitCardToShow);
-        Card[] cards = new Card[numVisibleCards];
+        ACard[] cards = new ACard[numVisibleCards];
 
         for (int i = 0; i < numVisibleCards; i++) {
             cards[i] = player.getCard(posInitCardToShow + i);

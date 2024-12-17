@@ -2,6 +2,10 @@ package org.example.eiscuno.cardAbility;
 
 /**
  * Represents the interface for card abilities in the game
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzon
+ * @version 1.0
  */
 public interface ICardAbility {
     /**

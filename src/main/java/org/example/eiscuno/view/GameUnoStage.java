@@ -12,6 +12,11 @@ import java.io.IOException;
 /**
  * Represents the main stage of the Uno game application.
  * This stage displays the game interface to the user.
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzón
+ * @author Fabian Valencia
+ * @version 1.0
  */
 public class GameUnoStage extends Stage {
 

@@ -2,7 +2,7 @@ package org.example.eiscuno.model.machine;
 
 import javafx.application.Platform;
 import org.example.eiscuno.controller.GameUnoController;
-import org.example.eiscuno.model.card.Card;
+import org.example.eiscuno.model.card.ACard;
 
 import java.util.ArrayList;
 
@@ -10,10 +10,15 @@ import java.util.ArrayList;
  * Class ThreadSingUNOMachine
  * This class implements a runnable thread that monitors when the players have only
  * one card left. Handles penalties and "protection" states
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzón
+ * @author Fabian Valencia
+ * @version 1.0
  */
 public class ThreadSingUNOMachine implements Runnable{
-    private ArrayList<Card> cardsPlayer;
-    private ArrayList<Card> cardsMachine;
+    private ArrayList<ACard> cardsPlayer;
+    private ArrayList<ACard> cardsMachine;
     private boolean machineRealizedPlayerCards;
     private boolean unoAnnounced;
     private volatile boolean running;
@@ -27,7 +32,7 @@ public class ThreadSingUNOMachine implements Runnable{
      * @param cardsMachine  The list of cards by the machine player.
      * @param controller    The GameUnoController to manage game actions and penalties
      */
-    public ThreadSingUNOMachine(ArrayList<Card> cardsPlayer,ArrayList<Card> cardsMachine, GameUnoController controller) {
+    public ThreadSingUNOMachine(ArrayList<ACard> cardsPlayer, ArrayList<ACard> cardsMachine, GameUnoController controller) {
         this.cardsPlayer = cardsPlayer;
         this.machineRealizedPlayerCards = false;
         this.machineRealizedItsCards = false;
@@ -45,7 +50,7 @@ public class ThreadSingUNOMachine implements Runnable{
     public void run() {
         while (running) {
             try {
-                Thread.sleep((long) (Math.random() * 2000)+2000
+                Thread.sleep((long) (Math.random() * 4000)
                 );
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt(); // Restaurar el estado de interrupción

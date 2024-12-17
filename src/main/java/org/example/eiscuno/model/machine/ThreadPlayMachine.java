@@ -3,7 +3,7 @@ package org.example.eiscuno.model.machine;
 import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 import org.example.eiscuno.controller.GameUnoController;
-import org.example.eiscuno.model.card.Card;
+import org.example.eiscuno.model.card.ACard;
 import org.example.eiscuno.model.game.GameUno;
 import org.example.eiscuno.model.player.Player;
 import org.example.eiscuno.model.table.Table;
@@ -14,6 +14,11 @@ import java.io.IOException;
  * Class ThreadPlayMachine
  * This class represents a thread that automates the machine turn in the Uno game
  * It handles card selection, game state updates, and interactions.
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzón
+ * @author Fabian Valencia
+ * @version 1.0
  */
 public class ThreadPlayMachine extends Thread {
     private Table table;
@@ -70,7 +75,7 @@ public class ThreadPlayMachine extends Thread {
      * If no valid card is found, the machine player draws a card
      */
     private void putCardOnTheTable(){
-        for (Card card : machinePlayer.getCardsPlayer()) {
+        for (ACard card : machinePlayer.getCardsPlayer()) {
             if(gameUno.playCard(card) != null){
                 table.addCardOnTheTable(card);
                 tableImageView.setImage(card.getImage());

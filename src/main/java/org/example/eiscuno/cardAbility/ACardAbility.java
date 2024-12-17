@@ -6,8 +6,12 @@ import org.example.eiscuno.model.game.GameUno;
 /**
  * Represents the base class for card abilities in the game
  * Defines common functionality and attributes shared by all card abilities
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzon
+ * @version 1.0
  */
-public class CardAbility implements ICardAbility{
+public class ACardAbility implements ICardAbility{
     protected GameUnoController gameUnoController;
     protected final GameUno gameUno;
 
@@ -16,7 +20,7 @@ public class CardAbility implements ICardAbility{
      * @param gameUnoController the controller managing the game logic
      * @param gameUno           the current game instance
      */
-    public CardAbility(GameUnoController gameUnoController, GameUno gameUno) {
+    public ACardAbility(GameUnoController gameUnoController, GameUno gameUno) {
         this.gameUnoController = gameUnoController;
         this.gameUno = gameUno;
     }

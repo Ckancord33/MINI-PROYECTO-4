@@ -1,13 +1,17 @@
 package org.example.eiscuno.model.card.cardTypes;
 
 import org.example.eiscuno.cardAbility.ICardAbility;
-import org.example.eiscuno.model.card.Card;
+import org.example.eiscuno.model.card.ACard;
 import org.example.eiscuno.model.card.ICard;
 
 /**
  * Represents a Number Card in the game
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzon
+ * @version 1.0
  */
-public class NumberCard extends Card {
+public class NumberCard extends ACard {
 
     /**
      * Constructs a NumberCard with the specified parameters

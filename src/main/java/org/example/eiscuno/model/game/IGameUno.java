@@ -1,10 +1,15 @@
 package org.example.eiscuno.model.game;
 
-import org.example.eiscuno.model.card.Card;
+import org.example.eiscuno.model.card.ACard;
 import org.example.eiscuno.model.player.Player;
 
 /**
  * Interface representing the Uno game functionality.
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzón
+ * @author Fabian Valencia
+ * @version 1.0
  */
 public interface IGameUno {
 
@@ -28,7 +33,7 @@ public interface IGameUno {
      *
      * @param card the card to be played
      */
-    Card playCard(Card card);
+    ACard playCard(ACard card);
 
     /**
      * Handles the action when a player shouts "Uno".
@@ -43,7 +48,7 @@ public interface IGameUno {
      * @param posInitCardToShow the starting position of the cards to be shown
      * @return an array of cards that are currently visible to the human player
      */
-    Card[] getCurrentVisibleCards(int posInitCardToShow, Player player);
+    ACard[] getCurrentVisibleCards(int posInitCardToShow, Player player);
 
     /**
      * Checks if the game is over.
@@ -115,11 +120,11 @@ public interface IGameUno {
      * @param card The card to find.
      * @return The index position of the card in the player's hand
      */
-    Integer findPosCardsHumanPlayer(Card card);
+    Integer findPosCardsHumanPlayer(ACard card);
 
     /**
      * Adds a specified card to the table.
      * @param card the card to add to the table.
      */
-    void addCardOnTheTable(Card card);
+    void addCardOnTheTable(ACard card);
 }

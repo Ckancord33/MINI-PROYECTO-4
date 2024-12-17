@@ -4,16 +4,21 @@ import org.example.eiscuno.controller.GameUnoController;
 import org.example.eiscuno.model.card.cardFactory.CardFactory;
 import org.example.eiscuno.model.game.GameUno;
 import org.example.eiscuno.model.unoenum.EISCUnoEnum;
-import org.example.eiscuno.model.card.Card;
+import org.example.eiscuno.model.card.ACard;
 
 import java.util.Collections;
 import java.util.Stack;
 
 /**
  * Represents a deck of Uno cards.
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzón
+ * @author Fabian Valencia
+ * @version 1.0
  */
 public class Deck {
-    private Stack<Card> deckOfCards;
+    private Stack<ACard> deckOfCards;
 
     /**
      * Constructs a new deck of Uno cards and initializes it.
@@ -39,11 +44,11 @@ public class Deck {
                         cardEnum.name().equals("WILD")) {
                     if (cardEnum.name().equals("WILD") || cardEnum.name().equals("FOUR_WILD_DRAW")) {
                         for (int i = 0; i < 4; i++) {
-                            Card card = CardFactory.createCard(cardEnum.getFilePath(), getCardValue(cardEnum.name()), getCardColor(cardEnum.name()), gameUno, gameUnoController);
+                            ACard card = CardFactory.createCard(cardEnum.getFilePath(), getCardValue(cardEnum.name()), getCardColor(cardEnum.name()), gameUno, gameUnoController);
                             deckOfCards.push(card);
                         }
                     }
-                    Card card = CardFactory.createCard(cardEnum.getFilePath(), getCardValue(cardEnum.name()), getCardColor(cardEnum.name()), gameUno, gameUnoController);
+                    ACard card = CardFactory.createCard(cardEnum.getFilePath(), getCardValue(cardEnum.name()), getCardColor(cardEnum.name()), gameUno, gameUnoController);
                     deckOfCards.push(card);
                 }
             }
@@ -118,7 +123,7 @@ public class Deck {
      * @return the card from the top of the deck
      * @throws IllegalStateException if the deck is empty
      */
-    public Card takeCard() {
+    public ACard takeCard() {
         if (deckOfCards.isEmpty()) {
             throw new IllegalStateException("No hay más cartas en el mazo.");
         }

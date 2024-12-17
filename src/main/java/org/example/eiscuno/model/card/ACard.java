@@ -6,8 +6,13 @@ import org.example.eiscuno.cardAbility.ICardAbility;
 
 /**
  * Represents a card in the Uno game.
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzon
+ * @author Fabian Valencia
+ * @version 1.0
  */
-public class Card implements ICard {
+public class ACard implements ICard {
     protected String url;
     protected String value;
     protected String color;
@@ -17,8 +22,17 @@ public class Card implements ICard {
 
     private static boolean testMode = false;
 
+    /**
+     * Sets the test mode flag for the card class.
+     * <p>
+     * This method allows enabling or disabling test mode, which can alter certain behaviors
+     * during testing scenarios.
+     * </p>
+     *
+     * @param testMode {@code true} to enable test mode; {@code false} to disable it.
+     */
     public static void setTestMode(boolean testMode) {
-        Card.testMode = testMode;
+        ACard.testMode = testMode;
     }
 
     /**
@@ -27,7 +41,7 @@ public class Card implements ICard {
      * @param url the URL of the card image
      * @param value of the card
      */
-    public Card(String url, String value, String color, ICardAbility ability) {
+    public ACard(String url, String value, String color, ICardAbility ability) {
         if (!testMode) {
             this.url = url;
             this.value = value;

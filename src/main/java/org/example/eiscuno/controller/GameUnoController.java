@@ -1,16 +1,11 @@
 package org.example.eiscuno.controller;
 
 import javafx.animation.*;
-import javafx.animation.PauseTransition;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Glow;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,8 +16,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import org.example.eiscuno.fileManager.FileManager;
-import javafx.util.Duration;
-import org.example.eiscuno.model.card.Card;
+import org.example.eiscuno.model.card.ACard;
 import org.example.eiscuno.model.deck.Deck;
 import org.example.eiscuno.model.game.GameUno;
 import org.example.eiscuno.model.machine.ThreadPlayMachine;
@@ -30,19 +24,13 @@ import org.example.eiscuno.model.machine.ThreadSingUNOMachine;
 import org.example.eiscuno.model.player.Player;
 import org.example.eiscuno.model.table.Table;
 import org.example.eiscuno.model.unoenum.EISCUnoEnum;
-import org.example.eiscuno.threads.MusicPlayer;
 import org.example.eiscuno.view.GameUnoStage;
 import org.example.eiscuno.view.WelcomeUnoStage;
 
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-
-import static java.awt.image.ImageObserver.HEIGHT;
-import static java.awt.image.ImageObserver.WIDTH;
 
 /**
  * Controller class for the Uno game.
@@ -167,7 +155,6 @@ public class GameUnoController {
             "/org/example/eiscuno/images/o3.jpg",
             "/org/example/eiscuno/images/o4.jpg",
             "/org/example/eiscuno/images/o5.jpg"
-
     };
 
 
@@ -203,7 +190,7 @@ public class GameUnoController {
         threadPlayMachine = new ThreadPlayMachine(this.table, this.machinePlayer, this.tableImageView, this, this.gameUno);
         threadPlayMachine.start();
 
-        Card card = deck.takeCard();
+        ACard card = deck.takeCard();
 
         setPlayerImageView(FileManager.loadCharacter());
         machineChange();
@@ -387,10 +374,10 @@ public class GameUnoController {
      */
     public void printCardsHumanPlayer() {
         this.gridPaneCardsPlayer.getChildren().clear();
-        Card[] currentVisibleCardsHumanPlayer = this.gameUno.getCurrentVisibleCards(this.posInitCardToShow, humanPlayer);
+        ACard[] currentVisibleCardsHumanPlayer = this.gameUno.getCurrentVisibleCards(this.posInitCardToShow, humanPlayer);
 
         for (int i = 0; i < currentVisibleCardsHumanPlayer.length; i++) {
-            Card card = currentVisibleCardsHumanPlayer[i];
+            ACard card = currentVisibleCardsHumanPlayer[i];
             ImageView cardImageView = card.getCard();
 
             cardImageView.setOnMouseClicked((MouseEvent event) -> onHandlePlayCard(card));
@@ -441,7 +428,7 @@ public class GameUnoController {
 
 
 
-    public void onHandlePlayCard(Card card){
+    public void onHandlePlayCard(ACard card){
         handleGameOver();
         if(gameUno.getIsMachineTurn() || gameUno.checkIsGameOver()){
             return;
@@ -461,10 +448,10 @@ public class GameUnoController {
     public void printCardsMachinePlayer() {
         this.gridPaneCardsMachine.getChildren().clear();
 
-        Card[] currentVisibleCardsMachinePlayer = this.gameUno.getCurrentVisibleCards(0, machinePlayer);
+        ACard[] currentVisibleCardsMachinePlayer = this.gameUno.getCurrentVisibleCards(0, machinePlayer);
 
         for (int i = 0; i < currentVisibleCardsMachinePlayer.length; i++) {
-            Card card = currentVisibleCardsMachinePlayer[i];
+            ACard card = currentVisibleCardsMachinePlayer[i];
             EISCUnoEnum cardUno = EISCUnoEnum.CARD_UNO;
             ImageView cardImageView = new ImageView(String.valueOf(getClass().getResource(cardUno.getFilePath())));
             cardImageView.setY(16);
@@ -655,19 +642,19 @@ public class GameUnoController {
 
         if(machinePlayer.getCardsPlayer().size() == 1){
             if(!threadSingUNOMachine.getIsMachineProtected()){
-//                ataque a la maquina
+                threadSingUNOMachine.setIsMachineProtected(true);
                 playerAttackMachine();
             }
         }
     }
 
     public void machineAttackPlayer(){
-        TranslateTransition pum = new TranslateTransition(Duration.seconds(1),machineCreeper);
+        TranslateTransition pum = new TranslateTransition(Duration.millis(500),machineCreeper);
         pum.setFromX(0);
         pum.setFromY(0);
         pum.setToX(-1209);
         pum.setToY(660);
-        RotateTransition room = new RotateTransition(Duration.seconds(1),machineCreeper);
+        RotateTransition room = new RotateTransition(Duration.millis(500),machineCreeper);
         room.setFromAngle(0);
         room.setToAngle(720);
         ParallelTransition pam = new ParallelTransition(pum,room);
@@ -683,12 +670,12 @@ public class GameUnoController {
     }
 
     public void playerAttackMachine(){
-        TranslateTransition pum = new TranslateTransition(Duration.seconds(1),playerCreeper);
+        TranslateTransition pum = new TranslateTransition(Duration.millis(500),playerCreeper);
         pum.setFromX(0);
         pum.setFromY(0);
         pum.setToX(1209);
         pum.setToY(-660);
-        RotateTransition room = new RotateTransition(Duration.seconds(1),playerCreeper);
+        RotateTransition room = new RotateTransition(Duration.millis(500),playerCreeper);
         room.setFromAngle(0);
         room.setToAngle(720);
         ParallelTransition pam = new ParallelTransition(pum,room);
@@ -696,7 +683,6 @@ public class GameUnoController {
         pum.setOnFinished(actionEvent -> {
             playSound("src/main/resources/org/example/eiscuno/sounds/explosionSound.wav",0);
             gameUno.eatCard(machinePlayer, 1);
-            threadSingUNOMachine.setIsMachineProtected(true);
             eatCardAnimation("MACHINE_PLAYER", 1);
             createExplosion(1289,108,gamePane);
         });

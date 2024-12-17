@@ -9,6 +9,11 @@ import java.io.IOException;
 
 /**
  * The main class of the EISC Uno application.
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzón
+ * @author Fabian Valencia
+ * @version 1.0
  */
 public class Main extends Application {
 

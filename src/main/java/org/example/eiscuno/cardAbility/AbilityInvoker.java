@@ -2,6 +2,10 @@ package org.example.eiscuno.cardAbility;
 
 /**
  * Invokes the execution of a card ability in the game
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzon
+ * @version 1.0
  */
 public class AbilityInvoker {
     private ICardAbility ability;

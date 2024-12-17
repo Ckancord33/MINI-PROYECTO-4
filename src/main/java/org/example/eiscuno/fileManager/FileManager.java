@@ -10,6 +10,10 @@ import java.util.*;
 /**
  * Manages file operations
  * This class is used for loading and saving game data, such as character and biome information
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzon
+ * @version 1.0
  */
 public class FileManager {
 

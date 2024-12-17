@@ -8,6 +8,8 @@ import java.io.IOException;
  * Class MusicPlayer
  * This class represents a music player that can play, pause, stop, and resume audio tracks.
  * It also allows volume adjustment and track changes. It extends Thread to manage audio playback.
+ * @author Miguel Castillo
+ * @version 1.0
  */
 public class MusicPlayer extends Thread {
     private Clip clip;

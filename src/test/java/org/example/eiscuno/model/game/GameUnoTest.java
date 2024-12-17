@@ -10,6 +10,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests for the GameUno class to verify the game logic and ensure the
+ * game behaves as expected under different conditions.
+ */
 class GameUnoTest {
 
     private Player humanPlayer;

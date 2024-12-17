@@ -1,7 +1,7 @@
 package org.example.eiscuno.cardAbility.AbilityTypes;
 
 import javafx.application.Platform;
-import org.example.eiscuno.cardAbility.CardAbility;
+import org.example.eiscuno.cardAbility.ACardAbility;
 import org.example.eiscuno.controller.GameUnoController;
 import org.example.eiscuno.model.game.GameUno;
 import org.example.eiscuno.model.player.Player;
@@ -9,8 +9,12 @@ import org.example.eiscuno.model.player.Player;
 /**
  * Represents the "Draw Four" ability in the game
  * This ability forces the victim player to draw four cards and then allows the current player to select a color
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzon
+ * @version 1.0
  */
-public class DrawFourAbility extends CardAbility {
+public class DrawFourAbility extends ACardAbility {
 
     public DrawFourAbility(GameUnoController gameUnoController, GameUno gameUno) {
         super(gameUnoController, gameUno);
