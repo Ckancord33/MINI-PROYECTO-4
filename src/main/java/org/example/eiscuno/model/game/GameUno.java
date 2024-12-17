@@ -61,6 +61,8 @@ public class GameUno implements IGameUno {
                 machinePlayer.addCard(this.deck.takeCard());
             }
         }
+        //machinePlayer.addCard(this.deck.takeCard());
+        //humanPlayer.addCard(this.deck.takeCard());
 
     }
 
@@ -223,7 +225,7 @@ public class GameUno implements IGameUno {
     }
 
     /**
-     * Retrieves the player who will be the victim bbased on whose turn it is
+     * Retrieves the player who will be the victim based on whose turn it is
      * @return The victim player
      */
     public Player getVictimPlayer(){

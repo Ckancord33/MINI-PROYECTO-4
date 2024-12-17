@@ -33,7 +33,18 @@ import java.io.IOException;
 import java.util.Random;
 
 /**
- * Controller class for the Uno game.
+ * Controller class for managing the Uno game interface and game logic.
+ * This class is responsible for initializing the game, managing animations,
+ * and handling the player's interactions with the game board.
+ *
+ * <p>It uses JavaFX components to display the game state and update
+ * the UI dynamically as the game progresses. The class also starts background threads
+ * to manage AI behavior and UNO rule validations.</p>
+ *
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzón
+ * @version 1.0
  */
 public class GameUnoController {
 
@@ -160,7 +171,13 @@ public class GameUnoController {
 
 
     /**
-     * Initializes the controller.
+     * Initializes the game controller and sets up the UI components.
+     *
+     * <p>This method configures the game elements such as the background,
+     * decks, cards, and initializes the players and table. It also starts
+     * background threads for AI logic and UNO rule enforcement.</p>
+     *
+     * @throws IOException if there is an error while loading resources.
      */
     @FXML
     public void initialize() throws IOException{
@@ -205,7 +222,10 @@ public class GameUnoController {
     }
 
     /**
-     * Initializes the variables for the game.
+     * Initializes the game variables such as players, deck, and table.
+     *
+     * <p>This method creates instances of the Player, Table, and Deck objects
+     * and configures them for the start of the game.</p>
      */
     private void initVariables() {
         this.humanPlayer = new Player("HUMAN_PLAYER");
@@ -218,7 +238,17 @@ public class GameUnoController {
         this.winLabel.setVisible(false);
     }
 
-
+    /**
+     * Sets the player's character image based on the given selection.
+     *
+     * @param character an integer representing the selected character:
+     *                  <ul>
+     *                  <li>1: Steve</li>
+     *                  <li>2: Chicken</li>
+     *                  <li>3: Enderman</li>
+     *                  <li>4: Piglin</li>
+     *                  </ul>
+     */
     public void setPlayerImageView(int character) {
         if(character == 1) {
             playerChange(c1);
@@ -233,7 +263,17 @@ public class GameUnoController {
         System.out.println(character);
     }
 
-
+    /**
+     * Changes the background image and applies animations based on the selected biome.
+     *
+     * <p>The biome is loaded using the {@link FileManager#loadBiome()} method. Depending on the biome:
+     * <ul>
+     * <li>1: Overworld biome</li>
+     * <li>2: Nether biome</li>
+     * <li>3: End biome</li>
+     * </ul>
+     * Animations include a horizontal transition and zoom effect.</p>
+     */
     public void bgChange() {
 
         if(FileManager.loadBiome() == 2){
@@ -304,7 +344,12 @@ public class GameUnoController {
         }
     }
 
-
+    /**
+     * Updates the player's image by resizing it to fit a circular area and positioning it properly.
+     * The image is clipped to a circle with the same radius as the playerCircle.
+     *
+     * @param image the new Image to display for the player
+     */
     public void playerChange(Image image){
 
         playerImageView.setImage(image);
@@ -336,6 +381,11 @@ public class GameUnoController {
         parent.getChildren().add(circleIndex + 1, playerImageView);
 
     }
+
+    /**
+     * Displays the current visible cards of the human player on the grid pane.
+     * Each card is made interactive with a mouse click event to allow playing the card.
+     */
     public void machineChange(){
 
         machineImageView.setImage(new Image(getClass().getResource("/org/example/eiscuno/images/herobrine.jpg").toExternalForm()));
@@ -388,7 +438,8 @@ public class GameUnoController {
     }
 
     /**
-     * Adds a penalty card to the human player if they do not say "UNO" in time.
+     * Adds a penalty card to the human player for failing to declare "UNO" in time.
+     * This is done by triggering the machine's attack on the player.
      */
     public void penalizeForNotSingingUno() {
         machineAttackPlayer();
@@ -396,11 +447,13 @@ public class GameUnoController {
 
 
     /**
-     * Checks if the human player has one card and starts the UNO timer if necessary.
+     * Creates a visual experience effect with multiple circles that fall from a specified position.
+     * The circles are animated with a random size, speed, and lateral movement.
+     *
+     * @param pane   the Pane where the effect will be added
+     * @param startX the starting X coordinate for the effect
+     * @param startY the starting Y coordinate for the effect
      */
-
-
-
     private void createExperience(Pane pane, double startX, double startY) {
         for(int i = 0; i < 500; i++) {
             Random random = new Random();
@@ -425,8 +478,12 @@ public class GameUnoController {
         }
     }
 
-
-
+    /**
+     * Handles the event when a player attempts to play a card.
+     * It validates the card, updates the game state, and triggers visual effects.
+     *
+     * @param card the card the player is attempting to play
+     */
     public void onHandlePlayCard(ACard card){
         handleGameOver();
         if(gameUno.getIsMachineTurn() || gameUno.checkIsGameOver()){
@@ -442,8 +499,10 @@ public class GameUnoController {
         }
     }
 
-
-
+    /**
+     * Displays the machine player's current visible cards on the grid pane.
+     * Card images are added but are not interactive for the user.
+     */
     public void printCardsMachinePlayer() {
         this.gridPaneCardsMachine.getChildren().clear();
 
@@ -461,12 +520,20 @@ public class GameUnoController {
         }
     }
 
+    /**
+     * Sets the visibility of the color selection buttons group.
+     *
+     * @param visible true to make the color buttons visible, false to hide them
+     */
     public void colorButtonsVisible(boolean visible){
         group.setVisible(visible);
         c.setVisible(false);
     }
 
-
+    /**
+     * Initializes the color selection buttons with event handlers for selecting a color.
+     * Also hides the buttons initially.
+     */
     void startColorVBoxButtons(){
         redButton.setOnMousePressed(event -> chooseColor("RED"));
         redButton.setOnMouseEntered(mouseEvent -> redButton.toFront());
@@ -480,6 +547,11 @@ public class GameUnoController {
 
     }
 
+    /**
+     * Applies a visual effect (drop shadow) to the table based on the specified color.
+     *
+     * @param color the color to apply as a drop shadow effect (RED, BLUE, GREEN, YELLOW, TRANSPARENT)
+     */
     public void tableEffect(String color){
         if(color.equals("RED")){
 
@@ -499,6 +571,12 @@ public class GameUnoController {
         }
     }
 
+    /**
+     * Handles the "Back" button action to show the previous set of cards in the player's hand.
+     * A transition animation is used to move between card sets.
+     *
+     * @param event the ActionEvent triggered by the "Back" button
+     */
     public void chooseColor(String color){
         gameUno.setColorToCardPlayed(color);
         colorButtonsVisible(false);
@@ -649,6 +727,13 @@ public class GameUnoController {
         }
     }
 
+    /**
+     * Displays an armor animation using scaling and fading effects at the specified position.
+     * Plays a sound effect during the animation and removes the image after it completes.
+     *
+     * @param x The x-coordinate where the animation will start.
+     * @param y The y-coordinate where the animation will start.
+     */
     public void armorAnimation(double x, double y){
         // Crear una instancia de ImageView con la imagen proporcionada
         ImageView imageView = new ImageView(new Image(getClass().getResource("/org/example/eiscuno/pecheraMinecraft.png").toExternalForm()));
@@ -680,6 +765,11 @@ public class GameUnoController {
         parallelTransition.play();
     }
 
+    /**
+     * Animates the machine's attack on the player using translation and rotation effects.
+     * Plays an explosion sound, triggers an explosion animation, and penalizes the player
+     * by adding a card if they did not declare UNO in time.
+     */
     public void machineAttackPlayer(){
         TranslateTransition pum = new TranslateTransition(Duration.millis(1000),machineCreeper);
         pum.setFromX(0);
@@ -701,6 +791,11 @@ public class GameUnoController {
         });
     }
 
+    /**
+     * Animates the player's attack on the machine using a TranslateTransition and RotateTransition.
+     * Plays a sound effect and triggers an explosion animation upon finishing the attack animation.
+     * The machine player receives a penalty card.
+     */
     public void playerAttackMachine(){
         TranslateTransition pum = new TranslateTransition(Duration.millis(1000),playerCreeper);
         pum.setFromX(0);
@@ -720,6 +815,13 @@ public class GameUnoController {
         });
     }
 
+    /**
+     * Creates an explosion effect with multiple colored squares that fade out and scale up.
+     *
+     * @param x    the X coordinate of the explosion
+     * @param y    the Y coordinate of the explosion
+     * @param pane the Pane where the explosion will be displayed
+     */
     public static void createExplosion(double x, double y, Pane pane) {
         Random random = new Random();
         int numSquares = 500; // Número de cuadrados en la explosión
@@ -752,7 +854,12 @@ public class GameUnoController {
         }
     }
 
-
+    /**
+     * Handles the action of exiting the game and returning to the main menu.
+     *
+     * @param event the action event
+     * @throws IOException if there is an error while loading resources
+     */
     @FXML
     void onHandleExitButton(ActionEvent event)throws IOException {
         WelcomeUnoStage.getInstance();
@@ -761,6 +868,11 @@ public class GameUnoController {
         threadSingUNOMachine.stop();
     }
 
+    /**
+     * Handles the game over logic by checking if the game has ended.
+     * Displays the appropriate message, updates the UI, and triggers sound effects based on the winner.
+     * Stops the game threads and enables the exit button for the player to exit.
+     */
     public void handleGameOver(){
         if(gameUno.checkIsGameOver()) {
             winLabel.setVisible(true);
@@ -790,6 +902,13 @@ public class GameUnoController {
 
     }
 
+    /**
+     * Animates the movement of a card from the deck to the player (human or machine).
+     * Depending on the player type, the card moves to a specific location on the screen.
+     *
+     * @param typePlayer  the type of player receiving the card ("HUMAN_PLAYER" or "MACHINE_PLAYER")
+     * @param cardsNumber the number of cards being animated
+     */
     public void eatCardAnimation(String typePlayer, int cardsNumber) {
         if(typePlayer.equals("HUMAN_PLAYER")) {
             TranslateTransition deckMove = new TranslateTransition(Duration.millis(250), deckCard);
@@ -812,6 +931,12 @@ public class GameUnoController {
         }
     }
 
+    /**
+     * Animates the card rotation and movement when a player takes a card.
+     *
+     * @param cardsNumber the number of cards to animate
+     * @param deckMove    the TranslateTransition object for moving the deck card
+     */
     private void rotateCardAnimation(int cardsNumber, TranslateTransition deckMove) {
         RotateTransition rotation = new RotateTransition(Duration.millis(250), deckCard);
         rotation.setFromAngle(0);
@@ -827,6 +952,12 @@ public class GameUnoController {
     }
 
 
+    /**
+     * Plays a sound effect from a file with the specified volume.
+     *
+     * @param nombreSonido the name of the sound file to play
+     * @param volumen      the volume level for the sound effect
+     */
     public void playSound(String nombreSonido, float volumen){
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(nombreSonido).getAbsoluteFile());
