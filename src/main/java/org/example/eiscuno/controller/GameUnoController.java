@@ -6,6 +6,8 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
@@ -35,7 +37,12 @@ import org.example.eiscuno.view.WelcomeUnoStage;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import static java.awt.image.ImageObserver.HEIGHT;
+import static java.awt.image.ImageObserver.WIDTH;
 
 /**
  * Controller class for the Uno game.
@@ -113,6 +120,12 @@ public class GameUnoController {
     private Label winLabel1;
     @FXML
     private Button exitButton1;
+    @FXML
+    private ImageView playerCreeper;
+    @FXML
+    private ImageView machineCreeper;
+
+
 
     int indice = 0;
     private Player humanPlayer;
@@ -391,10 +404,8 @@ public class GameUnoController {
      * Adds a penalty card to the human player if they do not say "UNO" in time.
      */
     public void penalizeForNotSingingUno() {
-        System.out.println("El jugador no cantó UNO a tiempo. Comiendo una carta...");
-        gameUno.eatCard(humanPlayer, 1);
-        eatCardAnimation("HUMAN_PLAYER", 1);
-        printCardsHumanPlayer();
+
+        machineAttackPlayer();
     }
 
 
@@ -636,17 +647,93 @@ public class GameUnoController {
      */
     @FXML
     void onHandleUno(ActionEvent event) {
+//        proteccion de la persona
         if (humanPlayer.getCardsPlayer().size() == 1) {
             threadSingUNOMachine.setUnoAnnounced(true);
+
         }
+
         if(machinePlayer.getCardsPlayer().size() == 1){
             if(!threadSingUNOMachine.getIsMachineProtected()){
-                gameUno.eatCard(machinePlayer, 1);
-                threadSingUNOMachine.setIsMachineProtected(true);
-                eatCardAnimation("MACHINE_PLAYER", 1);
+//                ataque a la maquina
+                playerAttackMachine();
             }
         }
     }
+
+    public void machineAttackPlayer(){
+        TranslateTransition pum = new TranslateTransition(Duration.seconds(1),machineCreeper);
+        pum.setFromX(0);
+        pum.setFromY(0);
+        pum.setToX(-1209);
+        pum.setToY(660);
+        RotateTransition room = new RotateTransition(Duration.seconds(1),machineCreeper);
+        room.setFromAngle(0);
+        room.setToAngle(720);
+        ParallelTransition pam = new ParallelTransition(pum,room);
+        pam.play();
+        pum.setOnFinished(actionEvent -> {
+            playSound("src/main/resources/org/example/eiscuno/sounds/explosionSound.wav",0);
+            createExplosion(91,703,gamePane);
+            System.out.println("El jugador no cantó UNO a tiempo. Comiendo una carta...");
+            gameUno.eatCard(humanPlayer, 1);
+            eatCardAnimation("HUMAN_PLAYER", 1);
+            printCardsHumanPlayer();
+        });
+    }
+
+    public void playerAttackMachine(){
+        TranslateTransition pum = new TranslateTransition(Duration.seconds(1),playerCreeper);
+        pum.setFromX(0);
+        pum.setFromY(0);
+        pum.setToX(1209);
+        pum.setToY(-660);
+        RotateTransition room = new RotateTransition(Duration.seconds(1),playerCreeper);
+        room.setFromAngle(0);
+        room.setToAngle(720);
+        ParallelTransition pam = new ParallelTransition(pum,room);
+        pam.play();
+        pum.setOnFinished(actionEvent -> {
+            playSound("src/main/resources/org/example/eiscuno/sounds/explosionSound.wav",0);
+            gameUno.eatCard(machinePlayer, 1);
+            threadSingUNOMachine.setIsMachineProtected(true);
+            eatCardAnimation("MACHINE_PLAYER", 1);
+            createExplosion(1289,108,gamePane);
+        });
+    }
+
+    public static void createExplosion(double x, double y, Pane pane) {
+        Random random = new Random();
+        int numSquares = 500; // Número de cuadrados en la explosión
+
+        for (int i = 0; i < numSquares; i++) {
+            // Crear un cuadrado con tamaño aleatorio
+            double size = random.nextDouble() * 20 + 10; // Tamaño entre 10 y 30
+            Rectangle square = new Rectangle(size, size);
+            square.setFill(Color.color(random.nextDouble(), random.nextDouble(), random.nextDouble()));
+            square.setX(x - size / 2);
+            square.setY(y - size / 2);
+
+            // Añadir el cuadrado al Pane
+            pane.getChildren().add(square);
+
+            // Crear una transición de escala
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(1), square);
+            scaleTransition.setToX(10 + random.nextDouble() * 2); // Escalar entre 2 y 4 veces
+            scaleTransition.setToY(10 + random.nextDouble() * 2);
+
+            // Crear una transición de desvanecimiento
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), square);
+            fadeTransition.setFromValue(1.0);
+            fadeTransition.setToValue(0.0);
+
+            // Ejecutar ambas transiciones simultáneamente
+            scaleTransition.setOnFinished(e -> pane.getChildren().remove(square)); // Eliminar el cuadrado después de la animación
+            scaleTransition.play();
+            fadeTransition.play();
+        }
+    }
+
 
     @FXML
     void onHandleExitButton(ActionEvent event)throws IOException {

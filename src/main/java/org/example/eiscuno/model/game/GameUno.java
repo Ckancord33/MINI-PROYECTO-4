@@ -52,10 +52,10 @@ public class GameUno implements IGameUno {
             if (i < 5) {
                 humanPlayer.addCard(this.deck.takeCard());
             } else {
-                //machinePlayer.addCard(this.deck.takeCard());
+                machinePlayer.addCard(this.deck.takeCard());
             }
         }
-        machinePlayer.addCard(this.deck.takeCard());
+
     }
 
     @Override

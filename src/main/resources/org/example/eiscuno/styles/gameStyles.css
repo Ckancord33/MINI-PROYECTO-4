@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 
-.button{
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
+.button:hover{
+    -fx-cursor: hand;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-effect: dropshadow(gaussian, rgba(255, 241, 216, 0.5), 15, 0.7, 0, 0);
 }
-
 .deckCards{
     -fx-background-size: 118,164;
     -fx-background-image: url('../cards-uno/card_uno.png');
@@ -16,6 +17,8 @@
     -fx-background-image: url('../cards-uno/card_uno.png');
     -fx-background-position: center;
     -fx-background-color: transparent;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
     /*-fx-effect: dropshadow(gaussian, rgba(255, 241, 216, 0.5), 15, 0.7, 0,0);*/
 }
 .c1:hover{
@@ -44,12 +47,7 @@
  #backButton{
      -fx-background-image: url('../images/back.png');
  }
- .button:hover{
-     -fx-cursor: hand;
-     -fx-scale-x: 1.1;
-     -fx-scale-y: 1.1;
-     -fx-effect: dropshadow(gaussian, rgba(255, 241, 216, 0.5), 15, 0.7, 0, 0);
- }
+
 #turnLabel{
     -fx-font-size: 36;
     -fx-font-family: 'VT323', monospace;
@@ -70,4 +68,8 @@
  }
  #exitButton1{
      -fx-background-image: url('../images/exit2.png');
+ }
+ #unoButton{
+    -fx-background-color: transparent;
+     -fx-border-color: transparent;
  }

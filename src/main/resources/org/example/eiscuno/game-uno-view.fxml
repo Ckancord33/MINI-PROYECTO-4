@@ -15,9 +15,19 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gamePane" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.eiscuno.controller.GameUnoController">
+<AnchorPane fx:id="gamePane" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.eiscuno.controller.GameUnoController">
    <children>
       <ImageView fx:id="bg" fitHeight="900.0" fitWidth="1600.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="machineCreeper" fitHeight="125.0" fitWidth="126.0" layoutX="1289.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" rotate="-123.7">
+         <image>
+            <Image url="@images/creeper.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="playerCreeper" fitHeight="131.0" fitWidth="141.0" layoutX="91.0" layoutY="703.0" pickOnBounds="true" preserveRatio="true" rotate="51.3">
+         <image>
+            <Image url="@images/creeper.png" />
+         </image>
+      </ImageView>
       <HBox alignment="CENTER" prefHeight="284.0" prefWidth="1600.0" spacing="10.0">
          <children>
             <Label text="UNO!" textFill="RED">
@@ -57,7 +67,14 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button layoutX="1421.0" layoutY="429.0" mnemonicParsing="false" onAction="#onHandleUno" prefHeight="50.0" prefWidth="100.0" text="UNO" />
+      <Button fx:id="unoButton" layoutX="1037.0" layoutY="499.0" mnemonicParsing="false" onAction="#onHandleUno" prefHeight="180.0" prefWidth="200.0">
+         <graphic>
+            <ImageView fx:id="unoImage" fitHeight="228.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@favicon3.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
       <HBox alignment="CENTER" layoutX="-1.0" layoutY="638.0" prefHeight="262.0" prefWidth="1600.0">
          <children>
             <Circle fx:id="playerCircle" fill="#1f93ff00" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
