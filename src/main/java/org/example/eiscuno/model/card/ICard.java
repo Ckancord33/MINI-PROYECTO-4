@@ -2,7 +2,7 @@ package org.example.eiscuno.model.card;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import org.example.eiscuno.cardAbility.ICardAbility;
+import org.example.eiscuno.model.cardAbility.ICardAbility;
 
 /**
  * Interface representing the common behaviors of a card in the UNO card game.

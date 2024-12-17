@@ -1,11 +1,11 @@
 package org.example.eiscuno.model.card.cardFactory;
 
-import org.example.eiscuno.cardAbility.AbilityTypes.*;
 import org.example.eiscuno.controller.GameUnoController;
 import org.example.eiscuno.model.card.ACard;
 import org.example.eiscuno.model.card.cardTypes.NumberCard;
 import org.example.eiscuno.model.card.cardTypes.SpecialCard;
 import org.example.eiscuno.model.card.cardTypes.SpecialColorCard;
+import org.example.eiscuno.model.cardAbility.AbilityTypes.*;
 import org.example.eiscuno.model.game.GameUno;
 
 /**

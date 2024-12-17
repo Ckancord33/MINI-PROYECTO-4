@@ -1,4 +1,4 @@
-package org.example.eiscuno.cardAbility;
+package org.example.eiscuno.model.cardAbility;
 
 /**
  * Represents the interface for card abilities in the game
