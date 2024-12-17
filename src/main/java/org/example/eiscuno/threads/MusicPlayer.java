@@ -53,7 +53,7 @@ public class MusicPlayer extends Thread {
         if (!isPlaying) {
             isPlaying = true;
             isPaused = false;
-            playTrack(filename, 0.0f);
+            playTrack(filename, -25.0f);
             if(isInterrupted()) {
                 start();  // Iniciar el hilo
             }
