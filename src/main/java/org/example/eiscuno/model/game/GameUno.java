@@ -1,7 +1,8 @@
 package org.example.eiscuno.model.game;
 
 import org.example.eiscuno.cardAbility.AbilityInvoker;
-import org.example.eiscuno.model.card.Card;
+import org.example.eiscuno.exceptions.StarterSpecialCard;
+import org.example.eiscuno.model.card.ACard;
 import org.example.eiscuno.model.deck.Deck;
 import org.example.eiscuno.model.player.Player;
 import org.example.eiscuno.model.table.Table;
@@ -9,6 +10,11 @@ import org.example.eiscuno.model.table.Table;
 /**
  * Represents a game of Uno.
  * This class manages the game logic and interactions between players, deck, and the table.
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzón
+ * @author Fabian Valencia
+ * @version 1.0
  */
 public class GameUno implements IGameUno {
 
@@ -21,7 +27,7 @@ public class GameUno implements IGameUno {
     private Table table;
     private boolean isMachineTurn;
     private AbilityInvoker abilityInvoker;
-    private Card cardPlayed;
+    private ACard cardPlayed;
     private boolean isPlayerSelectingColor;
 
     /**
@@ -55,6 +61,29 @@ public class GameUno implements IGameUno {
                 machinePlayer.addCard(this.deck.takeCard());
             }
         }
+
+    }
+
+    /**
+     * Chooses the first card to be placed on the table at the beginning of the game
+     * Ensures that the chosen card is not a Wild or Wild Draw Four card
+     */
+    @Override
+    public void chooseFirstCard() {
+        ACard card;
+        while (true) {
+            try {
+                card = this.deck.takeCard();
+                if(card.getValue().equals("WILD") || card.getValue().equals("FOUR_WILD_DRAW")){
+                    throw new StarterSpecialCard("The first card can't be a special card");
+                }
+                break;
+            }catch(StarterSpecialCard e){
+                System.out.println(e.getMessage());
+                this.deck.takeCard();
+            }
+        }
+        this.table.addCardOnTheTable(card);
     }
 
     /**
@@ -67,6 +96,7 @@ public class GameUno implements IGameUno {
     public void eatCard(Player player, int numberOfCards) {
         for (int i = 0; i < numberOfCards; i++) {
             player.addCard(this.deck.takeCard());
+
         }
     }
 
@@ -76,7 +106,7 @@ public class GameUno implements IGameUno {
      * @param card The card to be placed on the table.
      */
     @Override
-    public Card playCard(Card card) {
+    public ACard playCard(ACard card) {
         try {
             if(isPlayerSelectingColor){
                 return null;
@@ -97,20 +127,41 @@ public class GameUno implements IGameUno {
 
     }
 
+    /**
+     * Sets the color of a played card when it's a Wild or Wild Draw Four card
+     * @param color The color to assign
+     */
+    @Override
     public void setColorToCardPlayed(String color){
         cardPlayed.setColor(color);
         isPlayerSelectingColor = false;
     }
 
+    /**
+     * Allows the player to select a color when playing a Wild card.
+     * @param isPlayerSelectingColor true if the player is selecting a color; false otherwise.
+     */
+    @Override
     public void setIsPlayerSelectingColor(boolean isPlayerSelectingColor){
         this.isPlayerSelectingColor = isPlayerSelectingColor;
     }
 
+    /**
+     * Changes the turn between both players
+     * Updates the current player to the next turn
+     */
+    @Override
     public void changeTurn(){
         isMachineTurn = !isMachineTurn;
     }
 
-    public Integer findPosCardsHumanPlayer(Card card) {
+    /**
+     * Finds the position of a specific card in the current player's hand.
+     * @param card The card to find
+     * @return The index of the card in the player's hand, or -1 if not found.
+     */
+    @Override
+    public Integer findPosCardsHumanPlayer(ACard card) {
         for (int i = 0; i < this.actualPlayer.getCardsPlayer().size(); i++) {
             if (this.actualPlayer.getCardsPlayer().get(i).equals(card)) {
                 return i;
@@ -119,7 +170,12 @@ public class GameUno implements IGameUno {
         return -1;
     }
 
-    public void addCardOnTheTable(Card card){
+    /**
+     * Adds a card to the table
+     * @param card The card to add
+     */
+    @Override
+    public void addCardOnTheTable(ACard card){
         this.table.addCardOnTheTable(card);
     }
 
@@ -144,10 +200,10 @@ public class GameUno implements IGameUno {
      * @return An array of cards visible to the human player.
      */
     @Override
-    public Card[] getCurrentVisibleCards(int posInitCardToShow, Player player) {
+    public ACard[] getCurrentVisibleCards(int posInitCardToShow, Player player) {
         int totalCards = player.getCardsPlayer().size();
         int numVisibleCards = Math.min(4, totalCards - posInitCardToShow);
-        Card[] cards = new Card[numVisibleCards];
+        ACard[] cards = new ACard[numVisibleCards];
 
         for (int i = 0; i < numVisibleCards; i++) {
             cards[i] = player.getCard(posInitCardToShow + i);
@@ -166,6 +222,10 @@ public class GameUno implements IGameUno {
         return null;
     }
 
+    /**
+     * Retrieves the player who will be the victim bbased on whose turn it is
+     * @return The victim player
+     */
     public Player getVictimPlayer(){
         if(isMachineTurn){
             this.victimPlayer = humanPlayer;
@@ -175,14 +235,27 @@ public class GameUno implements IGameUno {
         return victimPlayer;
     }
 
+    /**
+     * Retrieves the current turn status to determine if it's the machine's turn
+     * @return true if it is the machine's turn; false otherwise
+     */
+    @Override
     public boolean getIsMachineTurn(){
         return isMachineTurn;
     }
 
+    /**
+     * Sets the turn to indicate whether it is the machine's turn or not
+     * @param isMachineTurn true if it is the machine's turn; false otherwise
+     */
+    @Override
     public void setIsMachineTurn(boolean isMachineTurn){
         this.isMachineTurn = isMachineTurn;
     }
 
+    /**
+     * Updates the current active player in the game depending on the turn
+     */
     public void updateActualPlayer(){
         if(isMachineTurn){
             this.actualPlayer = machinePlayer;
@@ -191,26 +264,47 @@ public class GameUno implements IGameUno {
         }
     }
 
+    /**
+     * Retrieves the current player whose turn is active in the game
+     * @return The player currently playing
+     */
+    @Override
     public Player getActualPlayer(){
         return actualPlayer;
     }
 
+    /**
+     * Checks if a player is currently selecting a color
+     * @return true if a player is selecting a color; false otherwise
+     */
+    @Override
     public boolean getIsPlayerSelectingColor(){
         return isPlayerSelectingColor;
     }
 
+    /**
+     * Checks if the game is over by verifying if any player has no cards left
+     * @return true if the game is over; false otherwise.
+     */
+    @Override
     public boolean checkIsGameOver(){
-        if(humanPlayer.getCardsPlayer().size() == 0){
+        if(humanPlayer.getCardsPlayer().isEmpty()){
             System.out.println("Human player wins");
             winner = "HUMAN_PLAYER";
             return true;
-        }else if(machinePlayer.getCardsPlayer().size() == 0){
+        }else if(machinePlayer.getCardsPlayer().isEmpty()){
             System.out.println("Machine player wins");
             winner = "MACHINE_PLAYER";
             return true;
         }
         return false;
     }
+
+    /**
+     * Retrieves the winner of the game once it is over
+     * @return A string indicating the winner
+     */
+    @Override
     public String getWinner(){
         return winner;
     }

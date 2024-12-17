@@ -2,8 +2,10 @@ package org.example.eiscuno.model.unoenum;
 
 /**
  * Enum EISCUnoEnum
- *
+ * <p>
  * This enum represents the various file paths for the images used in the EISC Uno game.
+ * @author Fabian Valencia
+ * @version 1.0
  */
 public enum EISCUnoEnum {
     FAVICON("favicon.png"),

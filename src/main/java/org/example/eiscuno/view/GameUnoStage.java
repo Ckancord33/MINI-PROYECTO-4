@@ -12,6 +12,11 @@ import java.io.IOException;
 /**
  * Represents the main stage of the Uno game application.
  * This stage displays the game interface to the user.
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzón
+ * @author Fabian Valencia
+ * @version 1.0
  */
 public class GameUnoStage extends Stage {
 
@@ -38,9 +43,15 @@ public class GameUnoStage extends Stage {
         setScene(scene); // Sets the scene for the stage
         setResizable(false); // Disallows resizing of the stage
         getIcons().add(new Image(getClass().getResourceAsStream("/org/example/eiscuno/favicon3.png")));
+        scene.getStylesheets().add(getClass().getResource("/org/example/eiscuno/styles/gameStyles.css").toExternalForm());
         show(); // Displays the stage
     }
 
+    /**
+     * Gets the controller of GameUno
+     *
+     * @return the controller of GameUno
+     */
     public GameUnoController getGameUnoController() {
         return gameUnoController;
     }

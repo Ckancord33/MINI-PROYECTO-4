@@ -5,9 +5,23 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.example.eiscuno.controller.GameUnoController;
 
 import java.io.IOException;
 
+/**
+ * Represents the welcome screen of the UNO game, displayed at the start of the application.
+ * <p>
+ * This stage is responsible for displaying the initial screen layout, including the game title,
+ * logo, and style. It is implemented using the Singleton pattern to ensure only one instance
+ * of the welcome stage exists.
+ * </p>
+ *
+ * @author Nicolás Córdoba
+ * @author Miguel Castillo
+ * @author Camilo Pinzón
+ * @version 1.0
+ */
 public class WelcomeUnoStage extends Stage {
 
     /**
@@ -16,6 +30,7 @@ public class WelcomeUnoStage extends Stage {
      * window title, and icon.
      *
      * @throws IOException If the FXML file cannot be loaded.
+     *
      */
     public WelcomeUnoStage() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/eiscuno/welcome-uno-view.fxml"));

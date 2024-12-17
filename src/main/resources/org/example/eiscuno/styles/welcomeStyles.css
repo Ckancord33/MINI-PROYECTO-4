@@ -107,6 +107,26 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
+.button10{
+    -fx-background-image: url('../biomeButton.png');
+    -fx-cursor: pointer;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-padding: 0;
+    -fx-background-size: 408,74;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+.button11{
+    -fx-background-image: url('../characterButton.png');
+    -fx-cursor: pointer;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-padding: 0;
+    -fx-background-size: 408,74;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
 
 
 #subtitle{
@@ -138,4 +158,51 @@
     -fx-font-size: 12;
     -fx-font-family: 'VT323', monospace;
     -fx-text-fill: white;
+}
+#biomeLabel{
+    -fx-font-size: 36;
+    -fx-font-family: 'VT323', monospace;
+    -fx-text-fill: black;
+}
+#biomeLabel2{
+    -fx-font-size: 36;
+    -fx-font-family: 'VT323', monospace;
+    -fx-text-fill: white;
+}#characterLabel{
+    -fx-font-size: 36;
+    -fx-font-family: 'VT323', monospace;
+     -fx-text-fill: white;
+}
+#characterLabel2{
+    -fx-font-size: 36;
+    -fx-font-family: 'VT323', monospace;
+    -fx-text-fill: black;
+}
+#characterCircle{
+    -fx-background-image: url('../images/steve.png');
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.imageView1:hover{
+    -fx-cursor: hand;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-effect: dropshadow(gaussian, rgba(143, 32, 32, 0.75), 10, 0.5, 4, 4);
+}
+
+#creditsLabel{
+    -fx-font-size: 45;
+    -fx-font-family: 'VT323', monospace;
+    -fx-text-fill: linear-gradient(
+            to right,
+            red,
+            orange,
+            yellow,
+            green,
+            #277aff,
+            #e82fdb,
+            #ffb6ff
+    );
+    -fx-background-clip: text;
 }
