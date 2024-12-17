@@ -70,8 +70,9 @@ public class ThreadSingUNOMachine implements Runnable{
             machineRealizedItsCards = false;
             isMachineProtected = false;
             System.out.println("LA MAQUINA YA NO ESTA PROTEGIDA");
-        }else if(cardsMachine.size() == 1 && machineRealizedItsCards){
+        }else if(cardsMachine.size() == 1 && machineRealizedItsCards && !isMachineProtected){
             isMachineProtected = true;
+            Platform.runLater(() -> controller.armorAnimation(1289,108));
             System.out.println("LA MAQUINA ESTA PROTEGIDA");
         }else if (cardsMachine.size() == 1 && !machineRealizedItsCards) {
             System.out.println("LA MAQUINA SE DIO CUENTA QUE LE QUEDA UNA CARTA");
@@ -127,5 +128,9 @@ public class ThreadSingUNOMachine implements Runnable{
      */
     public void stop() {
         running = false;
+    }
+
+    public boolean getIsUnoAnnounced() {
+        return unoAnnounced;
     }
 }

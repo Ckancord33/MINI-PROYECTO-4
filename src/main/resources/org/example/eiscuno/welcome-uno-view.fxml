@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.eiscuno.controller.WelcomeUnoController">
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.eiscuno.controller.WelcomeUnoController">
    <children>
       <ImageView fx:id="bgImageView" fitHeight="900.0" fitWidth="1600.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="playButton" layoutX="379.0" layoutY="403.0" mnemonicParsing="false" onAction="#onHandlePlayButton" onMouseEntered="#hoverSound" onMousePressed="#clickSound" prefHeight="78.0" prefWidth="820.0" styleClass="buttonPlay">
@@ -80,5 +80,10 @@
       </Label>
       <Label fx:id="musicLabel" alignment="CENTER" layoutX="666.0" layoutY="812.0" prefHeight="48.0" prefWidth="279.0" text="HAZ CLIC EN CUALQUIER PARTE PARA VOLVER" />
       <HBox fx:id="hBox" layoutX="91.0" layoutY="209.0" prefHeight="513.0" prefWidth="1414.0" />
+      <Label fx:id="creditsLabel" alignment="CENTER" layoutX="-1.0" layoutY="1.0" prefHeight="893.0" prefWidth="1599.0" text="Label">
+         <font>
+            <Font size="61.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

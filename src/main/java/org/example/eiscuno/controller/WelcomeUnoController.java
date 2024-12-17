@@ -57,6 +57,10 @@ public class WelcomeUnoController {
     private Circle characterCircle;
     @FXML
     private HBox hBox;
+    @FXML
+    private Label creditsLabel;
+
+
     int controlSonido = 0;
     int character = 1;
     int biome = 1;
@@ -125,6 +129,7 @@ public class WelcomeUnoController {
         }
 
 
+        creditsLabel.setMouseTransparent(true);
         hBox.setMouseTransparent(true);
         hBox.setVisible(false);
 
@@ -499,6 +504,8 @@ public class WelcomeUnoController {
         if(controlSonido > 0) {
             clickSound();
         }
+        creditsLabel.setVisible(false);
+
         controlSonido++;
         optionsLabel.setVisible(false);
 
@@ -652,8 +659,16 @@ public class WelcomeUnoController {
         optionsLabel.setVisible(true);
         optionsLabel.setText("CRÉDITOS");
         optionsLabel2.setVisible(true);
+        creditsLabel.setText("Nicolás Córdoba - 2343576 \nMiguel Castillo - 2341975\nCamilo Pinzón - 2179921");
         optionsLabel2.setText("CRÉDITOS");
         musicLabel.setVisible(true);
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1),creditsLabel);
+        transition.setFromY(optionsImageView.getFitHeight()/2);
+        transition.setToY(0);
+        transition.play();
+
+        creditsLabel.setVisible(true);
+
     }
 
 }

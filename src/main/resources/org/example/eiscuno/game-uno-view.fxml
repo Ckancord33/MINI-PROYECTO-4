@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gamePane" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.eiscuno.controller.GameUnoController">
+<AnchorPane fx:id="gamePane" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.eiscuno.controller.GameUnoController">
    <children>
       <ImageView fx:id="bg" fitHeight="900.0" fitWidth="1600.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="machineCreeper" fitHeight="125.0" fitWidth="126.0" layoutX="1289.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" rotate="-123.7">
@@ -30,7 +30,7 @@
       </ImageView>
       <HBox alignment="CENTER" prefHeight="284.0" prefWidth="1600.0" spacing="10.0">
          <children>
-            <Label text="UNO!" textFill="RED">
+            <Label textFill="RED">
                <font>
                   <Font name="Berlin Sans FB Bold" size="18.0" />
                </font>

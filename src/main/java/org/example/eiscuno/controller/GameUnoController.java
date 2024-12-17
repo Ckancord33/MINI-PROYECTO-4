@@ -391,7 +391,6 @@ public class GameUnoController {
      * Adds a penalty card to the human player if they do not say "UNO" in time.
      */
     public void penalizeForNotSingingUno() {
-
         machineAttackPlayer();
     }
 
@@ -412,7 +411,7 @@ public class GameUnoController {
             experience.setStroke(Color.GREENYELLOW);
             experience.setStrokeWidth(2);
             experience.setFill(Color.LIMEGREEN);
-
+            experience.setMouseTransparent(true);
             pane.getChildren().add(experience);
 
             double paneHeight = pane.getHeight();
@@ -635,26 +634,59 @@ public class GameUnoController {
     @FXML
     void onHandleUno(ActionEvent event) {
 //        proteccion de la persona
-        if (humanPlayer.getCardsPlayer().size() == 1) {
+        if (humanPlayer.getCardsPlayer().size() == 1 && !threadSingUNOMachine.getIsUnoAnnounced()) {
             threadSingUNOMachine.setUnoAnnounced(true);
-
+            armorAnimation(91,708);
+            System.out.println("El jugador se protegio");
         }
 
         if(machinePlayer.getCardsPlayer().size() == 1){
             if(!threadSingUNOMachine.getIsMachineProtected()){
+                System.out.println("La maquina no canto UNO a tiempo. Comiendo una carta...");
                 threadSingUNOMachine.setIsMachineProtected(true);
                 playerAttackMachine();
             }
         }
     }
 
+    public void armorAnimation(double x, double y){
+        // Crear una instancia de ImageView con la imagen proporcionada
+        ImageView imageView = new ImageView(new Image(getClass().getResource("/org/example/eiscuno/pecheraMinecraft.png").toExternalForm()));
+        imageView.setFitWidth(50); // Tamaño inicial pequeño
+        imageView.setFitHeight(50);
+        imageView.setPreserveRatio(true);
+
+        // Crear una transición de escala para agrandar la ImageView
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(2), imageView);
+        scaleTransition.setFromX(1.0);
+        scaleTransition.setFromY(1.0);
+        scaleTransition.setToX(10.0); // Tamaño final grande
+        scaleTransition.setToY(10.0);
+
+        imageView.setLayoutX(x);
+        imageView.setLayoutY(y);
+
+        // Crear una transición de desvanecimiento para hacer que la ImageView se vuelva transparente
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), imageView);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+
+        // Combinar ambas transiciones en una transición paralela
+        ParallelTransition parallelTransition = new ParallelTransition(scaleTransition, fadeTransition);
+        parallelTransition.setOnFinished(event -> gamePane.getChildren().remove(imageView));
+        playSound("src/main/resources/org/example/eiscuno/sounds/sonidoArmadura.wav",0);
+        // Agregar la ImageView al Pane
+        gamePane.getChildren().add(imageView);
+        parallelTransition.play();
+    }
+
     public void machineAttackPlayer(){
-        TranslateTransition pum = new TranslateTransition(Duration.millis(500),machineCreeper);
+        TranslateTransition pum = new TranslateTransition(Duration.millis(1000),machineCreeper);
         pum.setFromX(0);
         pum.setFromY(0);
         pum.setToX(-1209);
         pum.setToY(660);
-        RotateTransition room = new RotateTransition(Duration.millis(500),machineCreeper);
+        RotateTransition room = new RotateTransition(Duration.millis(1000),machineCreeper);
         room.setFromAngle(0);
         room.setToAngle(720);
         ParallelTransition pam = new ParallelTransition(pum,room);
@@ -670,12 +702,12 @@ public class GameUnoController {
     }
 
     public void playerAttackMachine(){
-        TranslateTransition pum = new TranslateTransition(Duration.millis(500),playerCreeper);
+        TranslateTransition pum = new TranslateTransition(Duration.millis(1000),playerCreeper);
         pum.setFromX(0);
         pum.setFromY(0);
         pum.setToX(1209);
         pum.setToY(-660);
-        RotateTransition room = new RotateTransition(Duration.millis(500),playerCreeper);
+        RotateTransition room = new RotateTransition(Duration.millis(1000),playerCreeper);
         room.setFromAngle(0);
         room.setToAngle(720);
         ParallelTransition pam = new ParallelTransition(pum,room);
@@ -745,6 +777,7 @@ public class GameUnoController {
             }else {
                 winLabel.setText("PLAYER WAS SLAYED BY HEROBRINE");
                 winLabel1.setText("PLAYER WAS SLAYED BY HEROBRINE");
+                playSound("src/main/resources/org/example/eiscuno/sounds/classic_hurt.wav",0);
                 rect.setVisible(true);
                 rect.setMouseTransparent(false);
                 exitButton1.setDisable(false);

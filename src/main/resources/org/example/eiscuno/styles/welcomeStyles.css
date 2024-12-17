@@ -190,3 +190,19 @@
     -fx-scale-y: 1.1;
     -fx-effect: dropshadow(gaussian, rgba(143, 32, 32, 0.75), 10, 0.5, 4, 4);
 }
+
+#creditsLabel{
+    -fx-font-size: 45;
+    -fx-font-family: 'VT323', monospace;
+    -fx-text-fill: linear-gradient(
+            to right,
+            red,
+            orange,
+            yellow,
+            green,
+            #277aff,
+            #e82fdb,
+            #ffb6ff
+    );
+    -fx-background-clip: text;
+}
