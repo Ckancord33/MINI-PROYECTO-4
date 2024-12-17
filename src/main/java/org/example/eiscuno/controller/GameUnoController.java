@@ -572,10 +572,10 @@ public class GameUnoController {
     }
 
     /**
-     * Handles the "Back" button action to show the previous set of cards in the player's hand.
-     * A transition animation is used to move between card sets.
+     * Handles the color selection for the card played and applies the corresponding visual effect.
+     * This method updates the table's visual effect based on the selected color and refreshes the player's and machine's cards.
      *
-     * @param event the ActionEvent triggered by the "Back" button
+     * @param color The color to be applied to the played card ("RED", "BLUE", "GREEN", "YELLOW").
      */
     public void chooseColor(String color){
         gameUno.setColorToCardPlayed(color);

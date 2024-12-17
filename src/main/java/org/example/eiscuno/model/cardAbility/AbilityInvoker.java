@@ -1,4 +1,4 @@
-package org.example.eiscuno.cardAbility;
+package org.example.eiscuno.model.cardAbility;
 
 /**
  * Invokes the execution of a card ability in the game

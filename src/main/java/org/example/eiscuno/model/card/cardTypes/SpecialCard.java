@@ -1,6 +1,6 @@
 package org.example.eiscuno.model.card.cardTypes;
 
-import org.example.eiscuno.cardAbility.ICardAbility;
+import org.example.eiscuno.model.cardAbility.ICardAbility;
 import org.example.eiscuno.model.card.ACard;
 import org.example.eiscuno.model.card.ICard;
 

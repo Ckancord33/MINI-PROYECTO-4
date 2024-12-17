@@ -1,7 +1,7 @@
 package org.example.eiscuno.model.game;
 
-import org.example.eiscuno.cardAbility.AbilityInvoker;
-import org.example.eiscuno.exceptions.StarterSpecialCard;
+import org.example.eiscuno.model.cardAbility.AbilityInvoker;
+import org.example.eiscuno.model.exceptions.StarterSpecialCard;
 import org.example.eiscuno.model.card.ACard;
 import org.example.eiscuno.model.deck.Deck;
 import org.example.eiscuno.model.player.Player;

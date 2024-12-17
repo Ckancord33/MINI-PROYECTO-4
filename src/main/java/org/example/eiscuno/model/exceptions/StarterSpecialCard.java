@@ -1,4 +1,4 @@
-package org.example.eiscuno.exceptions;
+package org.example.eiscuno.model.exceptions;
 /**
  * Exception thrown when a special card is improperly used or encountered
  * at the start of the game in the UNO card game logic.

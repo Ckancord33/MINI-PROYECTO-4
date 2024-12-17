@@ -4,10 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ee8ff40-bbdd-4aec-a3d2-cf5cc45130ec" name="Changes" comment="Aplicacion Finalizada, ultimos detalles">
+    <list default="true" id="1ee8ff40-bbdd-4aec-a3d2-cf5cc45130ec" name="Changes" comment="Mas documentacion">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/ACardAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/cardAbility/ACardAbility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityInvoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/cardAbility/AbilityInvoker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/DrawFourAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/cardAbility/AbilityTypes/DrawFourAbility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/DrawTwoAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/cardAbility/AbilityTypes/DrawTwoAbility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/NumberCardAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/cardAbility/AbilityTypes/NumberCardAbility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/SkipAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/cardAbility/AbilityTypes/SkipAbility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/AbilityTypes/WildAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/cardAbility/AbilityTypes/WildAbility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/cardAbility/ICardAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/cardAbility/ICardAbility.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/controller/GameUnoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/controller/GameUnoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/controller/WelcomeUnoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/controller/WelcomeUnoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/exceptions/StarterSpecialCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/exceptions/StarterSpecialCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/ACard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/ACard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/ICard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/ICard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardFactory/CardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardFactory/CardFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/NumberCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/NumberCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/SpecialCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/SpecialCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/SpecialColorCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/card/cardTypes/SpecialColorCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/game/GameUno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/model/game/GameUno.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/threads/MusicPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/eiscuno/musicThread/MusicPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/saves/saves.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/eiscuno/saves/saves.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -211,7 +228,7 @@
       <workItem from="1734213973750" duration="3764000" />
       <workItem from="1734287851709" duration="16633000" />
       <workItem from="1734457299079" duration="1504000" />
-      <workItem from="1734463153088" duration="1685000" />
+      <workItem from="1734463153088" duration="2909000" />
     </task>
     <task id="LOCAL-00001" summary="Merge codigo de miguel con el de pinzon">
       <option name="closed" value="true" />
@@ -253,7 +270,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734456520969</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Mas documentacion">
+      <option name="closed" value="true" />
+      <created>1734464956398</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1734464956398</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,8 +299,8 @@
     <MESSAGE value="Merge codigo de miguel con el de pinzon" />
     <MESSAGE value="Avance (tengo miedo de que se me valla la luz)" />
     <MESSAGE value="se implemento el boton de uno y que la maquina se pueda proteger, asi como el jugador cuando le queda una carta" />
-    <MESSAGE value="Mas documentacion" />
     <MESSAGE value="Aplicacion Finalizada, ultimos detalles" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aplicacion Finalizada, ultimos detalles" />
+    <MESSAGE value="Mas documentacion" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mas documentacion" />
   </component>
 </project>

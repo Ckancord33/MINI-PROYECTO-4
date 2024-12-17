@@ -1,6 +1,6 @@
-package org.example.eiscuno.cardAbility.AbilityTypes;
+package org.example.eiscuno.model.cardAbility.AbilityTypes;
 
-import org.example.eiscuno.cardAbility.ACardAbility;
+import org.example.eiscuno.model.cardAbility.ACardAbility;
 import org.example.eiscuno.controller.GameUnoController;
 import org.example.eiscuno.model.game.GameUno;
 import org.example.eiscuno.model.player.Player;

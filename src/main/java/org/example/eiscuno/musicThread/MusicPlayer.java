@@ -1,4 +1,4 @@
-package org.example.eiscuno.threads;
+package org.example.eiscuno.musicThread;
 
 import javax.sound.sampled.*;
 import java.io.File;

@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -13,7 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import org.example.eiscuno.fileManager.FileManager;
-import org.example.eiscuno.threads.MusicPlayer;
+import org.example.eiscuno.musicThread.MusicPlayer;
 import org.example.eiscuno.view.GameUnoStage;
 import org.example.eiscuno.view.WelcomeUnoStage;
 

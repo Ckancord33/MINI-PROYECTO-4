@@ -1,4 +1,4 @@
-package org.example.eiscuno.cardAbility;
+package org.example.eiscuno.model.cardAbility;
 
 import org.example.eiscuno.controller.GameUnoController;
 import org.example.eiscuno.model.game.GameUno;
