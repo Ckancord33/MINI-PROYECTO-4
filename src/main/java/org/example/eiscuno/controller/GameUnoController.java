@@ -174,6 +174,8 @@ public class GameUnoController {
         bgChange();
         deckCard.setImage(new Image(getClass().getResource("/org/example/eiscuno/cards-uno/card_uno.png").toExternalForm()));
         initVariables();
+        gameUno.chooseFirstCard();
+        tableImageView.setImage(table.getCurrentCardOnTheTable().getImage());
 
         this.gameUno.startGame();
         printCardsHumanPlayer();
@@ -181,7 +183,7 @@ public class GameUnoController {
         startColorVBoxButtons();
         updateTurnLabel();
 
-        threadSingUNOMachine = new ThreadSingUNOMachine(this.humanPlayer.getCardsPlayer(), this);
+        threadSingUNOMachine = new ThreadSingUNOMachine(this.humanPlayer.getCardsPlayer(),this.machinePlayer.getCardsPlayer(), this);
         Thread t = new Thread(threadSingUNOMachine, "ThreadSingUNO");
         t.start();
 
@@ -189,9 +191,6 @@ public class GameUnoController {
         threadPlayMachine.start();
 
         Card card = deck.takeCard();
-        table.addCardOnTheTable(card);
-        tableImageView.setImage(card.getImage());
-
 
         setPlayerImageView(FileManager.loadCharacter());
         machineChange();
@@ -394,8 +393,8 @@ public class GameUnoController {
     public void penalizeForNotSingingUno() {
         System.out.println("El jugador no cantó UNO a tiempo. Comiendo una carta...");
         gameUno.eatCard(humanPlayer, 1);
+        eatCardAnimation("HUMAN_PLAYER", 1);
         printCardsHumanPlayer();
-        unoAnnuncedAnimation();
     }
 
 
@@ -527,7 +526,7 @@ public class GameUnoController {
     @FXML
     void onHandleBack(ActionEvent event) {
         if (this.posInitCardToShow > 0) {
-            TranslateTransition back = new TranslateTransition(Duration.millis(500),deckCard2);
+            TranslateTransition back = new TranslateTransition(Duration.millis(250),deckCard2);
             backButton.setDisable(true);
             deckCard2.setImage(new Image(getClass().getResource("/org/example/eiscuno/cards-uno/card_uno.png").toExternalForm()));
             back.setToX(0);
@@ -561,7 +560,7 @@ public class GameUnoController {
     void onHandleNext(ActionEvent event) {
         if (this.posInitCardToShow < this.humanPlayer.getCardsPlayer().size() - 4) {
             if(posInitCardToShow !=humanPlayer.getCardsPlayer().size() || posInitCardToShow != humanPlayer.getCardsPlayer().size()-1|| posInitCardToShow != humanPlayer.getCardsPlayer().size()-2|| posInitCardToShow != humanPlayer.getCardsPlayer().size()-3){
-                TranslateTransition next = new TranslateTransition(Duration.millis(500),deckCard2);
+                TranslateTransition next = new TranslateTransition(Duration.millis(250),deckCard2);
                 nextButton.setDisable(true);
                 deckCard2.setImage(new Image(getClass().getResource("/org/example/eiscuno/cards-uno/card_uno.png").toExternalForm()));
                 next.setFromX(0);
@@ -588,24 +587,24 @@ public class GameUnoController {
         if(gameUno.getIsMachineTurn() || gameUno.getIsPlayerSelectingColor() || gameUno.checkIsGameOver()){
             return;
         }
-        TranslateTransition deckMove = new TranslateTransition(Duration.millis(500), deckCard);
+        gameUno.setIsMachineTurn(true);
+        gameUno.eatCard(humanPlayer, 1);
+        updateTurnLabel();
+        TranslateTransition deckMove = new TranslateTransition(Duration.millis(250), deckCard);
 
         deckMove.setFromX(0);
         deckMove.setFromY(0);
 
         deckMove.setToX(1241);
         deckMove.setToY(300);
-        RotateTransition rotation = new RotateTransition(Duration.millis(500), deckCard);
+        RotateTransition rotation = new RotateTransition(Duration.millis(250), deckCard);
         rotation.setFromAngle(0);
         rotation.setToAngle(720);
 
         ParallelTransition parallel = new ParallelTransition(deckMove,rotation);
         parallel.play();
         deckMove.setOnFinished(actionEvent -> {
-            gameUno.eatCard(humanPlayer, 1);
             printCardsHumanPlayer();
-            gameUno.setIsMachineTurn(true);
-            updateTurnLabel();
         deckCard1.setImage(new Image(getClass().getResource("/org/example/eiscuno/cards-uno/card_uno.png").toExternalForm()));
         });
 
@@ -639,7 +638,13 @@ public class GameUnoController {
     void onHandleUno(ActionEvent event) {
         if (humanPlayer.getCardsPlayer().size() == 1) {
             threadSingUNOMachine.setUnoAnnounced(true);
-            unoAnnuncedAnimation();
+        }
+        if(machinePlayer.getCardsPlayer().size() == 1){
+            if(!threadSingUNOMachine.getIsMachineProtected()){
+                gameUno.eatCard(machinePlayer, 1);
+                threadSingUNOMachine.setIsMachineProtected(true);
+                eatCardAnimation("MACHINE_PLAYER", 1);
+            }
         }
     }
 
@@ -647,6 +652,8 @@ public class GameUnoController {
     void onHandleExitButton(ActionEvent event)throws IOException {
         WelcomeUnoStage.getInstance();
         GameUnoStage.deleteInstance();
+        threadPlayMachine.interrupt();
+        threadSingUNOMachine.stop();
     }
 
     public void handleGameOver(){
@@ -672,42 +679,45 @@ public class GameUnoController {
             }
             turnLabel.setText("");
             threadPlayMachine.interrupt();
+            threadSingUNOMachine.stop();
         }
 
     }
 
     public void eatCardAnimation(String typePlayer, int cardsNumber) {
-        if(typePlayer == "HUMAN_PLAYER") {
-            TranslateTransition deckMove = new TranslateTransition(Duration.millis(500), deckCard);
+        if(typePlayer.equals("HUMAN_PLAYER")) {
+            TranslateTransition deckMove = new TranslateTransition(Duration.millis(250), deckCard);
 
             deckMove.setFromX(0);
             deckMove.setFromY(0);
 
             deckMove.setToX(1241);
             deckMove.setToY(300);
-            RotateTransition rotation = new RotateTransition(Duration.millis(500), deckCard);
-            rotation.setFromAngle(0);
-            rotation.setToAngle(720);
-
-            ParallelTransition parallel = new ParallelTransition(deckMove, rotation);
-            parallel.setCycleCount(cardsNumber);
-            parallel.play();
-        } else if (typePlayer == "MACHINE_PLAYER") {
-            TranslateTransition deckMove = new TranslateTransition(Duration.millis(500), deckCard);
+            rotateCardAnimation(cardsNumber, deckMove);
+        } else if (typePlayer.equals("MACHINE_PLAYER")) {
+            TranslateTransition deckMove = new TranslateTransition(Duration.millis(250), deckCard);
 
             deckMove.setFromX(0);
             deckMove.setFromY(0);
 
             deckMove.setToX(-125);
             deckMove.setToY(-310);
-            RotateTransition rotation = new RotateTransition(Duration.millis(500), deckCard);
-            rotation.setFromAngle(0);
-            rotation.setToAngle(720);
-
-            ParallelTransition parallel = new ParallelTransition(deckMove, rotation);
-            parallel.setCycleCount(cardsNumber);
-            parallel.play();
+            rotateCardAnimation(cardsNumber, deckMove);
         }
+    }
+
+    private void rotateCardAnimation(int cardsNumber, TranslateTransition deckMove) {
+        RotateTransition rotation = new RotateTransition(Duration.millis(250), deckCard);
+        rotation.setFromAngle(0);
+        rotation.setToAngle(720);
+
+        ParallelTransition parallel = new ParallelTransition(deckMove, rotation);
+        parallel.setCycleCount(cardsNumber);
+        parallel.setOnFinished(actionEvent -> {
+            printCardsHumanPlayer();
+            printCardsMachinePlayer();
+        });
+        parallel.play();
     }
 
 
@@ -727,32 +737,5 @@ public class GameUnoController {
         } catch(UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
             System.out.println("Error al reproducir el sonido.");
         }
-    }
-
-    public void unoAnnuncedAnimation(){
-        Image image = new Image(getClass().getResource("/org/example/eiscuno/favicon3.png").toExternalForm());
-        ImageView unoAnuncedImageView = new ImageView(image);
-        unoAnuncedImageView.setFitWidth(200);
-        unoAnuncedImageView.setFitHeight(200);
-        unoAnuncedImageView.setPreserveRatio(true);
-        unoAnuncedImageView.setLayoutX((gamePane.getWidth() - unoAnuncedImageView.getFitWidth()) / 2);
-        unoAnuncedImageView.setLayoutY((gamePane.getHeight() - unoAnuncedImageView.getFitHeight()) / 2);
-
-        // Crear una transición de escala para agrandar la ImageView
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(2), unoAnuncedImageView);
-        scaleTransition.setFromX(1.0);
-        scaleTransition.setFromY(1.0);
-        scaleTransition.setToX(1.2);
-        scaleTransition.setToY(1.2);
-
-        // Crear una transición de desvanecimiento para hacer que la ImageView se vuelva transparente
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), unoAnuncedImageView);
-        fadeTransition.setFromValue(1.0);
-        fadeTransition.setToValue(0.0);
-
-        // Combinar ambas transiciones en una transición paralela
-        ParallelTransition parallelTransition = new ParallelTransition(scaleTransition, fadeTransition);
-        parallelTransition.setOnFinished(event -> gamePane.getChildren().remove(unoAnuncedImageView));
-        parallelTransition.play();
     }
 }

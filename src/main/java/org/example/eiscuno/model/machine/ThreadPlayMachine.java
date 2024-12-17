@@ -40,7 +40,6 @@ public class ThreadPlayMachine extends Thread {
                 }
                 putCardOnTheTable();
                 Platform.runLater(() ->{
-                    controller.printCardsMachinePlayer();
                     controller.updateTurnLabel();
                     controller.handleGameOver();
                 });
@@ -57,11 +56,15 @@ public class ThreadPlayMachine extends Thread {
                     String color = colors[(int)(Math.random() * 4)];
                     gameUno.setColorToCardPlayed(color);
                 }
-                Platform.runLater(() -> controller.tableEffect(card.getColor()));
+                Platform.runLater(() ->{
+                    controller.tableEffect(card.getColor());
+                    controller.printCardsMachinePlayer();
+                });
                 return;
             }
         }
         gameUno.eatCard(machinePlayer, 1);
+        controller.eatCardAnimation("MACHINE_PLAYER", 1);
         gameUno.setIsMachineTurn(false);
 
     }

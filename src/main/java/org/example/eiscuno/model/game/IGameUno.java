@@ -13,6 +13,8 @@ public interface IGameUno {
      */
     void startGame();
 
+    void chooseFirstCard();
+
     /**
      * Makes a player draw a specified number of cards from the deck.
      *
@@ -49,4 +51,28 @@ public interface IGameUno {
      * @return true if the game is over, false otherwise
      */
     Boolean isGameOver();
+
+    boolean getIsMachineTurn();
+
+    void setIsMachineTurn(boolean isMachineTurn);
+
+    void updateActualPlayer();
+
+    Player getActualPlayer();
+
+    boolean getIsPlayerSelectingColor();
+
+    boolean checkIsGameOver();;
+
+    String getWinner();
+
+    void setColorToCardPlayed(String color);
+
+    void setIsPlayerSelectingColor(boolean isPlayerSelectingColor);
+
+    void changeTurn();
+
+    Integer findPosCardsHumanPlayer(Card card);
+
+    void addCardOnTheTable(Card card);
 }

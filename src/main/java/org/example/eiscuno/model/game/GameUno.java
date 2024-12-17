@@ -57,6 +57,16 @@ public class GameUno implements IGameUno {
         }
     }
 
+    @Override
+    public void chooseFirstCard() {
+        Card card = this.deck.takeCard();
+        while (card.getValue().equals("WILD") || card.getValue().equals("WILD_DRAW_FOUR")) {
+            this.deck.takeCard();
+            card = this.deck.takeCard();
+        }
+        this.table.addCardOnTheTable(card);
+    }
+
     /**
      * Allows a player to draw a specified number of cards from the deck.
      *
@@ -98,19 +108,23 @@ public class GameUno implements IGameUno {
 
     }
 
+    @Override
     public void setColorToCardPlayed(String color){
         cardPlayed.setColor(color);
         isPlayerSelectingColor = false;
     }
 
+    @Override
     public void setIsPlayerSelectingColor(boolean isPlayerSelectingColor){
         this.isPlayerSelectingColor = isPlayerSelectingColor;
     }
 
+    @Override
     public void changeTurn(){
         isMachineTurn = !isMachineTurn;
     }
 
+    @Override
     public Integer findPosCardsHumanPlayer(Card card) {
         for (int i = 0; i < this.actualPlayer.getCardsPlayer().size(); i++) {
             if (this.actualPlayer.getCardsPlayer().get(i).equals(card)) {
@@ -120,6 +134,7 @@ public class GameUno implements IGameUno {
         return -1;
     }
 
+    @Override
     public void addCardOnTheTable(Card card){
         this.table.addCardOnTheTable(card);
     }
@@ -176,10 +191,12 @@ public class GameUno implements IGameUno {
         return victimPlayer;
     }
 
+    @Override
     public boolean getIsMachineTurn(){
         return isMachineTurn;
     }
 
+    @Override
     public void setIsMachineTurn(boolean isMachineTurn){
         this.isMachineTurn = isMachineTurn;
     }
@@ -192,26 +209,30 @@ public class GameUno implements IGameUno {
         }
     }
 
+    @Override
     public Player getActualPlayer(){
         return actualPlayer;
     }
 
+    @Override
     public boolean getIsPlayerSelectingColor(){
         return isPlayerSelectingColor;
     }
 
+    @Override
     public boolean checkIsGameOver(){
-        if(humanPlayer.getCardsPlayer().size() == 0){
+        if(humanPlayer.getCardsPlayer().isEmpty()){
             System.out.println("Human player wins");
             winner = "HUMAN_PLAYER";
             return true;
-        }else if(machinePlayer.getCardsPlayer().size() == 0){
+        }else if(machinePlayer.getCardsPlayer().isEmpty()){
             System.out.println("Machine player wins");
             winner = "MACHINE_PLAYER";
             return true;
         }
         return false;
     }
+    @Override
     public String getWinner(){
         return winner;
     }

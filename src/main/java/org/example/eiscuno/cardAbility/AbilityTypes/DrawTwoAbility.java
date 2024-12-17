@@ -20,10 +20,6 @@ public class DrawTwoAbility extends CardAbility {
         Platform.runLater(()->{
             gameUnoController.eatCardAnimation(player2.getTypePlayer(), 2);
         });
-        Platform.runLater(() -> {
-            gameUnoController.printCardsMachinePlayer();
-            gameUnoController.printCardsHumanPlayer();}
-        );
     }
 
 }
