@@ -4,6 +4,11 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Class MusicPlayer
+ * This class represents a music player that can play, pause, stop, and resume audio tracks.
+ * It also allows volume adjustment and track changes. It extends Thread to manage audio playback.
+ */
 public class MusicPlayer extends Thread {
     private Clip clip;
     private boolean isPlaying;
@@ -22,18 +27,31 @@ public class MusicPlayer extends Thread {
 
     public MusicPlayer() {}
 
+    /**
+     * Returns the singleton instance of the MusicPlayer.
+     *
+     * @return MusicPlayer instance
+     */
     public static MusicPlayer getInstance() {
         if (instance == null) {
             instance = new MusicPlayer();
         }
         return instance;
     }
+
+    /**
+     * Deletes the singleton instance of the MusicPlayer and stops any music playing.
+     */
     public static void deleteInstance() {
         if (instance != null) {
             instance.stopMusic();  // Detiene la música antes de eliminar la instancia
             instance = null;
         }
     }
+
+    /**
+     * Starts the music player thread and manages music playback lifecycle.
+     */
     @Override
     public void run() {
         while (running) {
@@ -49,6 +67,11 @@ public class MusicPlayer extends Thread {
         }
     }
 
+    /**
+     * Starts playing music from the specified file.
+     *
+     * @param filename Path to the music file
+     */
     public synchronized void startMusic(String filename) {
         if (!isPlaying) {
             isPlaying = true;
@@ -60,6 +83,9 @@ public class MusicPlayer extends Thread {
         }
     }
 
+    /**
+     * Stops the currently playing music and resets the state.
+     */
     public synchronized void stopMusic() {
         if (isPlaying) {
             isPlaying = false;
@@ -69,6 +95,9 @@ public class MusicPlayer extends Thread {
         }
     }
 
+    /**
+     * Pauses the currently playing music and saves the frame position.
+     */
     public synchronized void pauseMusic() {
         if (isPlaying && !isPaused) {
             pausePosition = clip.getFramePosition();
@@ -77,6 +106,9 @@ public class MusicPlayer extends Thread {
         }
     }
 
+    /**
+     * Resumes the music from the last paused position.
+     */
     public synchronized void resumeMusic() {
         if (isPaused) {
             clip.setFramePosition(pausePosition);
@@ -85,12 +117,30 @@ public class MusicPlayer extends Thread {
             notify();  // Reanuda el hilo
         }
     }
+
+    /**
+     * Sets the current track number.
+     *
+     * @param track Track number to be set
+     */
     public void setTrack(int track){
         this.track = track;
     }
+
+    /**
+     * Returns the current track number.
+     *
+     * @return Track number
+     */
     public int getTrack(){
         return track;
     }
+
+    /**
+     * Changes the current track and starts playing the selected track.
+     *
+     * @param track Track number to change to
+     */
     public void changeTrack(int track){
         stopMusic();
         if(track == 0){
@@ -106,6 +156,12 @@ public class MusicPlayer extends Thread {
         }
     }
 
+    /**
+     * Plays the specified track with the given volume.
+     *
+     * @param nombreSonido Path to the music file
+     * @param volumen Desired volume
+     */
     public void playTrack(String nombreSonido, float volumen){
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(nombreSonido).getAbsoluteFile());
@@ -125,7 +181,9 @@ public class MusicPlayer extends Thread {
         }
     }
 
-    // Método para aumentar el volumen
+    /**
+     * Increases the volume by a predefined step.
+     */
     public void increaseVolume() {
         if (volumeControl != null) {
             float currentVolume = volumeControl.getValue();
@@ -135,7 +193,10 @@ public class MusicPlayer extends Thread {
             }
         }
     }
-    // Método para disminuir el volumen
+
+    /**
+     * Decreases the volume by a predefined step.
+     */
     public void decreaseVolume() {
         if (volumeControl != null) {
             float currentVolume = volumeControl.getValue();
@@ -145,15 +206,17 @@ public class MusicPlayer extends Thread {
             }
         }
     }
-    // Método para obtener el volumen actual
+
+    /**
+     * Returns the current volume level.
+     *
+     * @return Current volume as a float value
+     */
     public float getCurrentVolume() {
         if (volumeControl != null) {
             return volumeControl.getValue();
         }
         return 0.0f;  // Si no hay control de volumen, devolver 0
     }
-
-
-
 
 }
